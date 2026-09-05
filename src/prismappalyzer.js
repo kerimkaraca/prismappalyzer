@@ -4,6 +4,46 @@ function toArray(value) {
   return Array.isArray(value) ? value : [value]
 }
 
+function truncateField(value, max = 250) {
+  if (value == null) {
+    return null
+  }
+
+  const string = String(value)
+
+  return string.length <= max ? value : null
+}
+
+function patternUrl(type, value) {
+  if (type === 'scriptSrc' || type === 'url') {
+    return value
+  }
+
+  if (
+    type === 'dom' &&
+    typeof value === 'string' &&
+    /^https?:\/\//i.test(value)
+  ) {
+    return value
+  }
+
+  return undefined
+}
+
+function serializePattern(pattern = {}) {
+  return {
+    type: pattern.type || null,
+    regex: pattern.regex
+      ? typeof pattern.regex === 'string'
+        ? pattern.regex
+        : pattern.regex.source
+      : null,
+    value: truncateField(pattern.value),
+    url: pattern.url || null,
+    match: truncateField(pattern.match),
+  }
+}
+
 const benchmarkEnabled =
   typeof process !== 'undefined' ? !!process.env.WAPPALYZER_BENCHMARK : false
 
@@ -105,6 +145,7 @@ const Wappalyzer = {
         let version = ''
         let confidence = 0
         let rootPath
+        let pattern
 
         detections
           .filter(
@@ -114,11 +155,11 @@ const Wappalyzer = {
           .forEach(
             ({
               technology: { name },
-              pattern,
+              pattern: _pattern,
               version: _version = '',
               rootPath: _rootPath,
             }) => {
-              confidence = Math.min(100, confidence + pattern.confidence)
+              confidence = Math.min(100, confidence + _pattern.confidence)
               version =
                 _version.length > version.length &&
                 _version.length <= 15 &&
@@ -126,10 +167,22 @@ const Wappalyzer = {
                   ? _version
                   : version
               rootPath = rootPath || _rootPath || undefined
+
+              // Prefer a detection that includes a URL when available
+              if (!pattern || (!pattern.url && _pattern.url)) {
+                pattern = _pattern
+              }
             }
           )
 
-        resolved.push({ technology, confidence, version, rootPath, lastUrl })
+        resolved.push({
+          technology,
+          confidence,
+          version,
+          rootPath,
+          lastUrl,
+          pattern,
+        })
       }
 
       return resolved
@@ -162,6 +215,7 @@ const Wappalyzer = {
           version,
           rootPath,
           lastUrl,
+          pattern,
         }) => ({
           name,
           description,
@@ -175,6 +229,7 @@ const Wappalyzer = {
           cpe,
           rootPath,
           lastUrl,
+          ...serializePattern(pattern),
         })
       )
   },
@@ -260,7 +315,7 @@ const Wappalyzer = {
     do {
       done = true
 
-      resolved.forEach(({ technology, confidence, lastUrl }) => {
+      resolved.forEach(({ technology, confidence, lastUrl, pattern }) => {
         technology.implies.forEach(
           ({ name, confidence: _confidence, version }) => {
             const implied = Wappalyzer.getTechnology(name)
@@ -279,6 +334,16 @@ const Wappalyzer = {
                 confidence: Math.min(confidence, _confidence),
                 version: version || '',
                 lastUrl,
+                pattern: {
+                  type: 'implied',
+                  // Value identifies the technology that implies this one
+                  value: technology.name,
+                  // Regex / match / url inherited from the parent detection
+                  regex: pattern && pattern.regex,
+                  match: pattern && pattern.match,
+                  url: pattern && pattern.url,
+                  confidence: Math.min(confidence, _confidence),
+                },
               })
 
               done = false
@@ -584,6 +649,8 @@ const Wappalyzer = {
       const matches = pattern.regex.exec(value)
 
       if (matches) {
+        const url = patternUrl(type, value)
+
         technologies.push({
           technology,
           pattern: {
@@ -591,6 +658,7 @@ const Wappalyzer = {
             type,
             value,
             match: matches[0],
+            ...(url ? { url } : {}),
           },
           version: Wappalyzer.resolveVersion(pattern, value),
         })
@@ -618,6 +686,8 @@ const Wappalyzer = {
         const matches = pattern.regex.exec(value)
 
         if (matches) {
+          const url = patternUrl(type, value)
+
           technologies.push({
             technology,
             pattern: {
@@ -625,6 +695,7 @@ const Wappalyzer = {
               type,
               value,
               match: matches[0],
+              ...(url ? { url } : {}),
             },
             version: Wappalyzer.resolveVersion(pattern, value),
           })
@@ -662,6 +733,8 @@ const Wappalyzer = {
           const matches = pattern.regex.exec(value)
 
           if (matches) {
+            const url = patternUrl(type, value)
+
             technologies.push({
               technology,
               pattern: {
@@ -669,6 +742,7 @@ const Wappalyzer = {
                 type,
                 value,
                 match: matches[0],
+                ...(url ? { url } : {}),
               },
               version: Wappalyzer.resolveVersion(pattern, value),
             })

@@ -25,12 +25,39 @@ yarn install
 yarn run link
 ```
 
+## Install on a server (CLI)
+
+Requires [Node.js](https://nodejs.org) 16+ (Puppeteer will pull Chromium on install).
+
+```sh
+git clone <repository-url>
+cd prismappalyzer
+yarn install
+yarn run link
+cd src/drivers/npm
+npm install -g .
+```
+
+That registers the global command `prismappalyzer`. Then:
+
+```sh
+prismappalyzer https://example.com
+prismappalyzer https://example.com -P -e
+prismappalyzer --help
+```
+
+Without a global install you can still run:
+
+```sh
+node src/drivers/npm/cli.js https://example.com
+```
+
 ## Usage
 
 ### Command line
 
 ```sh
-node src/drivers/npm/cli.js https://example.com
+prismappalyzer https://example.com
 ```
 
 ### Chrome extension

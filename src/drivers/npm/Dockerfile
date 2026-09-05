@@ -23,7 +23,7 @@ COPY \
   categories.json \
   driver.js \
   package.json \
-  wappalyzer.js \
+  prismappalyzer.js \
   yarn.lock ./
 
 RUN yarn install

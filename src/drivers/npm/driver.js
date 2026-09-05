@@ -4,7 +4,7 @@ const path = require('path')
 const http = require('http')
 const https = require('https')
 const puppeteer = require('puppeteer')
-const Wappalyzer = require('./wappalyzer')
+const Wappalyzer = require('./prismappalyzer')
 
 const { setTechnologies, setCategories, analyze, analyzeManyToMany, resolve } =
   Wappalyzer
@@ -662,7 +662,18 @@ class Site {
         ) {
           const scripts = await response.text()
 
-          await this.onDetect(response.url(), analyze({ scripts }))
+          const scriptUrl = response.url()
+
+          await this.onDetect(
+            scriptUrl,
+            analyze({ scripts }).map((detection) => ({
+              ...detection,
+              pattern: {
+                ...detection.pattern,
+                url: scriptUrl,
+              },
+            }))
+          )
         }
       } catch (error) {
         if (error.constructor.name !== 'ProtocolError') {
@@ -1148,7 +1159,7 @@ class Site {
             patterns,
             {
               technology: { name, implies, excludes },
-              pattern: { regex, value, match, confidence, type, version },
+              pattern: { regex, value, match, confidence, type, version, url },
             }
           ) => {
             patterns[name] = patterns[name] || []
@@ -1157,7 +1168,9 @@ class Site {
               type,
               regex: regex.source,
               value: String(value).length <= 250 ? value : null,
-              match: match.length <= 250 ? match : null,
+              match:
+                match && String(match).length <= 250 ? match : null,
+              url: url || null,
               confidence,
               version,
               implies: implies.map(({ name }) => name),
@@ -1184,6 +1197,11 @@ class Site {
           cpe,
           categories,
           rootPath,
+          type,
+          regex,
+          value,
+          url,
+          match,
         }) => ({
           slug,
           name,
@@ -1199,6 +1217,11 @@ class Site {
             name,
           })),
           rootPath,
+          type,
+          regex,
+          value,
+          url,
+          match,
         })
       ),
       patterns,

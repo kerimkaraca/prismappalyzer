@@ -14,7 +14,7 @@ $ npm i wappalyzer-core
 #!/usr/bin/env node
 
 const fs = require('fs')
-const Wappalyzer = require('./wappalyzer')
+const Wappalyzer = require('./prismappalyzer')
 
 // See https://www.wappalyzer.com/docs/dev/specification or use
 // https://raw.githubusercontent.com/wappalyzer/wappalyzer/master/src/technologies

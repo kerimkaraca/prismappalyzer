@@ -63,15 +63,23 @@ const Driver = {
             detections: hostnameCache[hostname].detections.map(
               ({
                 technology: name,
-                pattern: { regex, confidence },
+                pattern: { regex, confidence, type, value, match, url },
                 version,
+                rootPath,
+                lastUrl,
               }) => ({
                 technology: getTechnology(name, true),
                 pattern: {
                   regex: new RegExp(regex, 'i'),
                   confidence,
+                  type,
+                  value,
+                  match,
+                  url,
                 },
                 version,
+                rootPath,
+                lastUrl,
               })
             ),
           },
@@ -438,7 +446,16 @@ const Driver = {
 
     const scripts = (await response.text()).slice(0, 500000)
 
-    Driver.onDetect(initiatorUrl, analyze({ scripts })).catch(Driver.error)
+    Driver.onDetect(
+      initiatorUrl,
+      analyze({ scripts }).map((detection) => ({
+        ...detection,
+        pattern: {
+          ...detection.pattern,
+          url: request.url,
+        },
+      }))
+    ).catch(Driver.error)
   },
 
   /**
@@ -687,7 +704,7 @@ const Driver = {
               .map(
                 ({
                   technology: { name: technology },
-                  pattern: { regex, confidence },
+                  pattern: { regex, confidence, type, value, match, url },
                   version,
                   rootPath,
                   lastUrl,
@@ -696,6 +713,10 @@ const Driver = {
                   pattern: {
                     regex: regex.source,
                     confidence,
+                    type,
+                    value,
+                    match,
+                    url,
                   },
                   version,
                   rootPath,
