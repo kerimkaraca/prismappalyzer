@@ -1,17 +1,14 @@
-[![Validate](https://github.com/wappalyzer/wappalyzer/actions/workflows/validate.yml/badge.svg)](https://github.com/wappalyzer/wappalyzer/actions/workflows/validate.yml)
-[![wappalyzer NPM](https://img.shields.io/badge/npm-wappalyzer-blue)](https://www.npmjs.com/package/wappalyzer)
-[![wappalyzer-core NPM](https://img.shields.io/badge/npm-wappalyzer--core-blue)](https://www.npmjs.com/package/wappalyzer-core)
-[![Github Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/AliasIO)](https://github.com/sponsors/AliasIO)
+# Prismappalyzer
 
-<a href="https://www.wappalyzer.com/?utm_source=readme&utm_medium=github&utm_campaign=wappalyzer"><img src="https://www.wappalyzer.com/images/logo/icon_192.png" height="72" alt="Wappalyzer" align="left" /></a>
+<p align="center">
+  <img src="prism.png" alt="Prismappalyzer" width="200">
+</p>
 
-# Wappalyzer
+[![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://opensource.org/license/gpl-3-0/)
 
-<br>
+> This project is a fork of the [Wappalyzer](https://github.com/wappalyzer/wappalyzer) project.
 
-**[Wappalyzer](https://www.wappalyzer.com) identifies technologies on websites, such as CMS, web frameworks, ecommerce platforms, JavaScript libraries, analytics tools and [more](https://www.wappalyzer.com/technologies).**
-
-If you don't have time to configure, host, debug and maintain your own infrastructure to analyse websites at scale, we offer a SaaS solution that has all the same capabilities and a lot more. Our [apps](https://www.wappalyzer.com/apps/) and [APIs](https://www.wappalyzer.com/api/) not only reveal the technology stack a website uses but also company and contact details, social media profiles, keywords and metadata.
+Prismappalyzer identifies technologies on websites, such as CMS, web frameworks, ecommerce platforms, JavaScript libraries, analytics tools and more.
 
 ## Prerequisites
 
@@ -22,8 +19,8 @@ If you don't have time to configure, host, debug and maintain your own infrastru
 ## Quick start
 
 ```sh
-git clone https://github.com/wappalyzer/wappalyzer.git
-cd wappalyzer
+git clone <repository-url>
+cd prismappalyzer
 yarn install
 yarn run link
 ```
@@ -51,9 +48,9 @@ node src/drivers/npm/cli.js https://example.com
 
 ## Specification
 
-A long list of [regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) is used to identify technologies on web pages. Wappalyzer inspects HTML code, as well as JavaScript variables, response headers and more.
+A long list of [regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) is used to identify technologies on web pages. Prismappalyzer inspects HTML code, as well as JavaScript variables, response headers and more.
 
-Patterns (regular expressions) are kept in [`src/technologies/`](https://github.com/wappalyzer/wappalyzer/blob/master/src/technologies). The following is an example of an application fingerprint.
+Patterns (regular expressions) are kept in [`src/technologies/`](src/technologies). The following is an example of an application fingerprint.
 
 #### Example
 
@@ -116,7 +113,7 @@ Patterns (regular expressions) are kept in [`src/technologies/`](https://github.
 
 ## JSON fields
 
-Find the JSON schema at [`schema.json`](https://github.com/wappalyzer/wappalyzer/blob/master/schema.json).
+Find the JSON schema at [`schema.json`](schema.json).
 
 ### Required properties
 
