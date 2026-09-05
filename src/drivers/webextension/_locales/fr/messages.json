@@ -210,5 +210,6 @@
 	"categoryName108":                      { "message": "Frontends d'ecommerce " },
 	"categoryName109":                      { "message": "Domain parking" },
 	"categoryName110":                      { "message": "Constructeurs de formulaires" },
-	"categoryName111":                      { "message": "Collecte de fonds et dons" }
+	"categoryName111":                      { "message": "Collecte de fonds et dons" },
+	"categoryName112":                 { "message": "Artificial Intelligence" }
 }

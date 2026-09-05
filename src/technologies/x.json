@@ -16,6 +16,18 @@
     "oss": true,
     "website": "https://kb.x-cart.com"
   },
+  "X-Clacks-Overhead": {
+    "cats": [
+      19
+    ],
+    "description": "X-Clacks-Overhead is a non-standard HTTP header used to transmit tribute messages within server responses.",
+    "headers": {
+      "X-Clacks-Overhead": "^GNU Terry Pratchett$"
+    },
+    "icon": "XClacksOverhead.svg",
+    "saas": true,
+    "website": "https://xclacksoverhead.org/home/about"
+  },
   "X.ai": {
     "cats": [
       72
@@ -34,6 +46,14 @@
     "scriptSrc": "(?:cdn)?x\\.ai/.*/xdotai-embed\\.js",
     "website": "https://x.ai"
   },
+  "Xajax": {
+    "cats": [
+      59
+    ],
+    "icon": "Xajax.png",
+    "scriptSrc": "xajax_core.*\\.js",
+    "website": "http://xajax-project.org"
+  },
   "XAMPP": {
     "cats": [
       22
@@ -51,89 +71,6 @@
     },
     "website": "http://www.apachefriends.org/en/xampp.html"
   },
-  "XGen Ai": {
-    "cats": [
-      76
-    ],
-    "description": "XGen Ai is a cloud-based customer journey mapping tool that helps businesses manage product recommendations via artificial intelligence (AI).",
-    "icon": "XGen Ai.svg",
-    "pricing": [
-      "poa"
-    ],
-    "saas": true,
-    "scriptSrc": "//assets\\.xgen\\.dev/",
-    "website": "https://xgen.ai"
-  },
-  "XMB": {
-    "cats": [
-      2
-    ],
-    "html": "<!-- Powered by XMB",
-    "icon": "XMB.png",
-    "website": "http://www.xmbforum.com"
-  },
-  "XOOPS": {
-    "cats": [
-      1
-    ],
-    "icon": "XOOPS.png",
-    "implies": "PHP",
-    "js": {
-      "xoops": ""
-    },
-    "meta": {
-      "generator": "XOOPS"
-    },
-    "website": "http://xoops.org"
-  },
-  "XRegExp": {
-    "cats": [
-      59
-    ],
-    "icon": "XRegExp.png",
-    "js": {
-      "XRegExp.version": "^(.+)$\\;version:\\1"
-    },
-    "scriptSrc": [
-      "xregexp[.-]([\\d.]*\\d)[^/]*\\.js\\;version:\\1",
-      "/([\\d.]+)/xregexp(?:\\.min)?\\.js\\;version:\\1",
-      "xregexp.*\\.js"
-    ],
-    "website": "http://xregexp.com"
-  },
-  "XSLT": {
-    "cats": [
-      27
-    ],
-    "description": "XSLT is designed for use as part of XSL, which is a stylesheet language for XML.",
-    "html": "<xsl[^>]* version=\"(.+)\"\\;version:\\1",
-    "icon": "W3C.png",
-    "website": "https://www.w3.org/TR/xslt-10"
-  },
-  "XWiki": {
-    "cats": [
-      8
-    ],
-    "description": "XWiki is a free wiki software platform written in Java.",
-    "excludes": "MediaWiki",
-    "html": [
-      "<html[^>]data-xwiki-[^>]>"
-    ],
-    "icon": "xwiki.png",
-    "implies": "Java\\;confidence:99",
-    "meta": {
-      "wiki": "xwiki"
-    },
-    "website": "http://www.xwiki.org"
-  },
-  "Xajax": {
-    "cats": [
-      59
-    ],
-    "icon": "Xajax.png",
-    "scriptSrc": "xajax_core.*\\.js",
-    "website": "http://xajax-project.org"
-  },
   "Xanario": {
     "cats": [
       6
@@ -143,6 +80,37 @@
       "generator": "xanario shopsoftware"
     },
     "website": "http://xanario.de"
+  },
+  "Xano": {
+    "cats": [
+      3
+    ],
+    "description": "Xano is a no-code backend development platform that allows users to build and manage databases, APIs, and server-side logic without writing code.",
+    "icon": "Xano.svg",
+    "js": {
+      "XanoBaseStorage": "",
+      "XanoClient": "",
+      "XanoCookieStorage": ""
+    },
+    "pricing": [
+      "freemium",
+      "mid",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://www.xano.com"
+  },
+  "xCharts": {
+    "cats": [
+      25
+    ],
+    "html": "<link[^>]* href=\"[^\"]*xcharts(?:\\.min)?\\.css",
+    "implies": "D3",
+    "js": {
+      "xChart": ""
+    },
+    "scriptSrc": "xcharts\\.js",
+    "website": "https://tenxer.github.io/xcharts/"
   },
   "XenForo": {
     "cats": [
@@ -167,6 +135,45 @@
     },
     "website": "http://xenforo.com"
   },
+  "Xenioo": {
+    "cats": [
+      52
+    ],
+    "description": "Xenioo is an omnichannel chatbot platform designed to create, manage, and deploy conversational agents across multiple messaging channels.",
+    "icon": "Xenioo.svg",
+    "js": {
+      "Xenioo": ""
+    },
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "static\\.xenioo\\.com"
+    ],
+    "website": "https://www.xenioo.com"
+  },
+  "Xeno Chat": {
+    "cats": [
+      52
+    ],
+    "description": "Xeno Chat is a messaging app that enables live responses to support customer attraction, conversion, and retention.",
+    "icon": "Xeno.svg",
+    "js": {
+      "_xeno._Utils": "",
+      "_xenoLoader": ""
+    },
+    "pricing": [
+      "mid",
+      "recurring",
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "cdn\\.xeno\\.app"
+    ],
+    "website": "https://xenoapp.com"
+  },
   "Xeora": {
     "cats": [
       18
@@ -181,6 +188,19 @@
     "scriptSrc": "/_bi_sps_v.+\\.js",
     "website": "http://www.xeora.org"
   },
+  "XGen Ai": {
+    "cats": [
+      76
+    ],
+    "description": "XGen Ai is a cloud-based customer journey mapping tool that helps businesses manage product recommendations via artificial intelligence (AI).",
+    "icon": "XGen Ai.svg",
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": "//assets\\.xgen\\.dev/",
+    "website": "https://xgen.ai"
+  },
   "Xitami": {
     "cats": [
       22
@@ -190,6 +210,31 @@
     },
     "icon": "Xitami.png",
     "website": "http://xitami.com"
+  },
+  "Xiuno BBS": {
+    "cats": [
+      1,
+      2
+    ],
+    "cpe": "cpe:2.3:a:xiuno:xiunobbs:*:*:*:*:*:*:*:*",
+    "description": "Xiunobbs is an open-source, lightweight forum software designed for easy community management and customization.",
+    "icon": "Xiuno BBS.svg",
+    "implies": [
+      "PHP"
+    ],
+    "meta": {
+      "author": "XiunoBBS\\s([\\d\\.]+)\\;version:\\1"
+    },
+    "oss": true,
+    "website": "https://xiunobbs.cn"
+  },
+  "XMB": {
+    "cats": [
+      2
+    ],
+    "html": "<!-- Powered by XMB",
+    "icon": "XMB.png",
+    "website": "http://www.xmbforum.com"
   },
   "Xonic": {
     "cats": [
@@ -204,6 +249,20 @@
     },
     "scriptSrc": "core/jslib/jquery\\.xonic\\.js\\.php",
     "website": "http://www.xonic-solutions.de"
+  },
+  "XOOPS": {
+    "cats": [
+      1
+    ],
+    "icon": "XOOPS.png",
+    "implies": "PHP",
+    "js": {
+      "xoops": ""
+    },
+    "meta": {
+      "generator": "XOOPS"
+    },
+    "website": "http://xoops.org"
   },
   "XpressEngine": {
     "cats": [
@@ -235,6 +294,21 @@
     "scriptSrc": "apps\\.xpresslane\\.in/",
     "website": "https://www.xpresslane.in"
   },
+  "XRegExp": {
+    "cats": [
+      59
+    ],
+    "icon": "XRegExp.png",
+    "js": {
+      "XRegExp.version": "^(.+)$\\;version:\\1"
+    },
+    "scriptSrc": [
+      "xregexp[.-]([\\d.]*\\d)[^/]*\\.js\\;version:\\1",
+      "/([\\d.]+)/xregexp(?:\\.min)?\\.js\\;version:\\1",
+      "xregexp.*\\.js"
+    ],
+    "website": "http://xregexp.com"
+  },
   "Xretail": {
     "cats": [
       6
@@ -264,6 +338,66 @@
       "recurring"
     ],
     "website": "https://www.xserver.ne.jp"
+  },
+  "XSLT": {
+    "cats": [
+      27
+    ],
+    "description": "XSLT is designed for use as part of XSL, which is a stylesheet language for XML.",
+    "html": "<xsl[^>]* version=\"(.+)\"\\;version:\\1",
+    "icon": "W3C.png",
+    "website": "https://www.w3.org/TR/xslt-10"
+  },
+  "Xsolla": {
+    "cats": [
+      41
+    ],
+    "description": "Xsolla is a video game business system offering payment solutions and store management.",
+    "icon": "Xsolla.svg",
+    "saas": true,
+    "scriptSrc": [
+      "\\.xsolla\\.(com|net)"
+    ],
+    "website": "https://xsolla.com"
+  },
+  "xtCommerce": {
+    "cats": [
+      6
+    ],
+    "html": "<div class=\"copyright\">[^<]+<a[^>]+>xt:Commerce",
+    "icon": "xtCommerce.png",
+    "meta": {
+      "generator": "xt:Commerce"
+    },
+    "website": "https://www.xt-commerce.com"
+  },
+  "Xtime": {
+    "cats": [
+      72
+    ],
+    "description": "Xtime is a company that provides automotive service scheduling and management solutions primarily for car dealerships and automotive service centers.",
+    "dom": [
+      "a[data-modified-by='xtime']",
+      "iframe[src*='xtime.net.au']",
+      "iframe[src*='x-time']"
+    ],
+    "headers": {
+      "Access-Control-Allow-Origin": "\\.xtime\\.net"
+    },
+    "icon": "Xtime.svg",
+    "js": {
+      "xtime": ""
+    },
+    "pricing": [
+      "poa"
+    ],
+    "scriptSrc": [
+      "\\.xtime\\.com/scheduling"
+    ],
+    "website": "https://xtime.com",
+    "xhr": [
+      "xtime\\.net\\.au"
+    ]
   },
   "Xtra": {
     "cats": [
@@ -297,27 +431,95 @@
     },
     "website": "https://xtremepush.com"
   },
-  "xCharts": {
+  "XtrixUI": {
+    "cats": [
+      66
+    ],
+    "description": "XtrixUI is a CrossFramework UI library designed for building WebApps, regardless of design experience.",
+    "icon": "XtrixUI.svg",
+    "oss": true,
+    "scripts": [
+      "XtrixUI"
+    ],
+    "website": "https://xtrixui.vercel.app"
+  },
+  "Xverify": {
+    "cats": [
+      75
+    ],
+    "description": "Xverify is an intelligent email verification system that helps marketers eliminate hard bounces, reduce spam complaints, and minimize fraud to improve inbox deliverability.",
+    "icon": "Xverify.svg",
+    "js": {
+      "user_xverify_my_domain": ""
+    },
+    "pricing": [
+      "payg"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "www\\.xverify\\.com"
+    ],
+    "website": "https://www.xverify.com"
+  },
+  "XWiki": {
+    "cats": [
+      8
+    ],
+    "description": "XWiki is a free wiki software platform written in Java.",
+    "excludes": "MediaWiki",
+    "html": [
+      "<html[^>]data-xwiki-[^>]>"
+    ],
+    "icon": "xwiki.png",
+    "implies": "Java\\;confidence:99",
+    "meta": {
+      "wiki": "xwiki"
+    },
+    "website": "http://www.xwiki.org"
+  },
+  "XYZScripts": {
+    "cats": [
+      87
+    ],
+    "description": "XYZScripts is a provider of PHP clone scripts and WordPress plugins. It offers top-quality PHP and MySQL scripts to help build online businesses, with ready-to-deploy solutions that enable website setup.",
+    "dom": [
+      "a[href*='xyzscripts.com/'] + a[href*='www.xyzscripts.com']"
+    ],
+    "icon": "XYZScripts.svg",
+    "saas": true,
+    "website": "https://xyzscripts.com"
+  },
+  "Xzero Analytics": {
+    "cats": [
+      10
+    ],
+    "description": "Xzero Analytics is a tool for monitoring user journeys, analysing visitor sessions, gathering heatmaps, and more, enabling the observation and evolution of site traffic.",
+    "icon": "XZeroAnalytics.png",
+    "js": {
+      "xzero-analytics": ""
+    },
+    "pricing": [
+      "low",
+      "freemium"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "analytics\\.xzero\\.co\\.uk"
+    ],
+    "website": "https://analytics.xzero.co.uk"
+  },
+  "Xzero JS": {
     "cats": [
       25
     ],
-    "html": "<link[^>]* href=\"[^\"]*xcharts(?:\\.min)?\\.css",
-    "implies": "D3",
-    "js": {
-      "xChart": ""
-    },
-    "scriptSrc": "xcharts\\.js",
-    "website": "https://tenxer.github.io/xcharts/"
-  },
-  "xtCommerce": {
-    "cats": [
-      6
+    "description": "Xzero JS is a JavaScript library (ES6 module) for displaying 3D models, scenes and 360° panoramas on the web.",
+    "icon": "XzeroJS.svg",
+    "pricing": [
+      "freemium"
     ],
-    "html": "<div class=\"copyright\">[^<]+<a[^>]+>xt:Commerce",
-    "icon": "xtCommerce.png",
-    "meta": {
-      "generator": "xt:Commerce"
-    },
-    "website": "https://www.xt-commerce.com"
+    "scriptSrc": [
+      "xzero-js@([\\d.]+)/xzero\\.min\\.js.*\\;version:\\1"
+    ],
+    "website": "https://xzerojs.org"
   }
 }

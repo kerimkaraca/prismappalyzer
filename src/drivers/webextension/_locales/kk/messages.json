@@ -208,5 +208,6 @@
 	"categoryName108":                 { "message": "Электрондық коммерция - фронттары" },
 	"categoryName109":                 { "message": "Домен тұрағы" },
 	"categoryName110":                 { "message": "Пішін құрылысшылары" },
-	"categoryName111":                 { "message": "Қаражат жинау және қайырымдылық" }
+	"categoryName111":                 { "message": "Қаражат жинау және қайырымдылық" },
+	"categoryName112":                 { "message": "Artificial Intelligence" }
 }

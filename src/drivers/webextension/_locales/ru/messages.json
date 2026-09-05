@@ -208,5 +208,6 @@
 	"categoryName108":                 { "message": "Фронтенд для ecommerce платформ" },
 	"categoryName109":                 { "message": "Парковка домена" },
 	"categoryName110":                 { "message": "Конструкторы форм" },
-	"categoryName111":                 { "message": "Сбор средств и пожертвования" }
+	"categoryName111":                 { "message": "Сбор средств и пожертвования" },
+	"categoryName112":                 { "message": "Artificial Intelligence" }
 }
