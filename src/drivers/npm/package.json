@@ -1,5 +1,5 @@
 {
-  "name": "wappalyzer",
+  "name": "prismappalyzer",
   "description": "Identify technology on websites",
   "keywords": [
     "analyze",
@@ -32,10 +32,10 @@
     "driver.js",
     "index.js",
     "technologies/*",
-    "wappalyzer.js"
+    "prismappalyzer.js"
   ],
   "bin": {
-    "wappalyzer": "./cli.js"
+    "prismappalyzer": "./cli.js"
   },
   "dependencies": {
     "puppeteer": "~19.7.0"

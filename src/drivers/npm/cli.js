@@ -64,12 +64,11 @@ while (true) {
 
 if (!url || options.help) {
   process.stdout.write(`Usage:
-  wappalyzer <url> [options]
+  prismappalyzer <url> [options]
 
 Examples:
-  wappalyzer https://www.example.com
+  prismappalyzer https://www.example.com
   node cli.js https://www.example.com -r -D 3 -m 50 -H "Cookie: username=admin"
-  docker wappalyzer/cli https://www.example.com --pretty
 
 Options:
   -b, --batch-size=...       Process links in batches

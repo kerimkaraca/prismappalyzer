@@ -1,21 +1,24 @@
-# Wappalyzer
+# Prismappalyzer
 
-[Wappalyzer](https://www.wappalyzer.com/) indentifies technologies on websites. 
-
-*Note:* The [wappalyzer-core](https://www.npmjs.com/package/wappalyzer-core) package provides a low-level API without dependencies.
+Prismappalyzer identifies technologies on websites (fork of [Wappalyzer](https://www.wappalyzer.com/)).
 
 ## Command line
 
 ### Installation
 
+From this repository (on a server):
+
 ```shell
-$ npm i -g wappalyzer
+# from repo root
+yarn install && yarn run link
+cd src/drivers/npm
+npm install -g .
 ```
 
 ### Usage
 
 ```
-wappalyzer <url> [options]
+prismappalyzer <url> [options]
 ```
 
 #### Options
@@ -51,15 +54,15 @@ wappalyzer <url> [options]
 ### Installation
 
 ```shell
-$ npm i wappalyzer
+$ npm i /path/to/prismappalyzer/src/drivers/npm
 ```
 
 ### Usage
 
 ```javascript
-const Wappalyzer = require('wappalyzer')
+const Wappalyzer = require('prismappalyzer')
 
-const url = 'https://www.wappalyzer.com'
+const url = 'https://www.example.com'
 
 const options = {
   debug: false,
@@ -112,9 +115,9 @@ const wappalyzer = new Wappalyzer(options)
 Multiple URLs can be processed in parallel:
 
 ```javascript
-const Wappalyzer = require('wappalyzer');
+const Wappalyzer = require('prismappalyzer');
 
-const urls = ['https://www.wappalyzer.com', 'https://www.example.com']
+const urls = ['https://www.example.com', 'https://www.example.org']
 
 const wappalyzer = new Wappalyzer()
 
