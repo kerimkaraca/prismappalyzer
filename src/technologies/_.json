@@ -1,63 +1,4 @@
 {
-  "_hyperscript": {
-    "cats": [
-      59
-    ],
-    "description": "_hyperscript is a scripting language for adding interactivity to the front-end.",
-    "icon": "_hyperscript.png",
-    "js": {
-      "_hyperscript": ""
-    },
-    "oss": true,
-    "scriptSrc": [
-      "//unpkg\\.com/hyperscript\\.org@([\\d\\.]+)\\;version:\\1"
-    ],
-    "website": "https://hyperscript.org"
-  },
-  "_hyperscript ": {
-    "cats": [
-      59
-    ],
-    "description": "_​hyperscript is a scripting language for adding interactivity to the front-end.",
-    "icon": "_hyperscript.png",
-    "js": {
-      "_hyperscript": ""
-    },
-    "oss": true,
-    "scriptSrc": "//unpkg\\.com/hyperscript\\.org@([\\d\\.]+)\\;version:\\1",
-    "website": "https://hyperscript.org"
-  },
-  "@sulu/web": {
-    "cats": [
-      59
-    ],
-    "icon": "Sulu.svg",
-    "js": {
-      "web.startComponents": ""
-    },
-    "website": "https://github.com/sulu/web-js"
-  },
-  "<model-viewer>": {
-    "cats": [
-      105
-    ],
-    "description": "<model-viewer> is an open-source web component developed by Google and maintained through GitHub. <model-viewer> aims at putting 3D content on the web easily with a few lines of HTML code. This was first introduced with Chrome 72 in July 2019 and enables users to view 3D in the browser and mobile devices.",
-    "dom": "model-viewer",
-    "icon": "model-viewer.svg",
-    "oss": true,
-    "scriptSrc": "/model-viewer/dist/model-viewer\\.min\\.js",
-    "website": "https://modelviewer.dev"
-  },
-  "|related| Natív Hirdetés Kft": {
-    "cats": [
-      36
-    ],
-    "icon": "related.png",
-    "scripts": [
-      "//related\\.hu"
-    ],
-    "website": "https://related.hu"
-  },
   "10to8": {
     "cats": [
       72
@@ -381,6 +322,24 @@
     "scriptSrc": "\\.5centscdn\\.com/",
     "website": "https://www.5centscdn.net"
   },
+  "6Valley eCommerce CMS": {
+    "cats": [
+      1,
+      6
+    ],
+    "cookies": {
+      "6valley_session": ""
+    },
+    "description": "6Valley eCommerce CMS is a multi-vendor platform designed to facilitate business launches by providing tools for managing vendors, products, and transactions within an ecommerce ecosystem.",
+    "icon": "6ValleyEcommerceCMS.svg",
+    "pricing": [
+      "onetime"
+    ],
+    "scripts": [
+      "6valley_cookie_consent"
+    ],
+    "website": "https://6valley.app"
+  },
   "6sense": {
     "cats": [
       32,
@@ -400,37 +359,6 @@
     "scriptSrc": "\\.6sc\\.co/",
     "website": "https://6sense.com"
   },
-  "6Valley eCommerce CMS": {
-    "cats": [
-      1,
-      6
-    ],
-    "cookies": {
-      "6valley_session": ""
-    },
-    "description": "6Valley eCommerce CMS is a multi-vendor platform designed to facilitate business launches by providing tools for managing vendors, products, and transactions within an ecommerce ecosystem.",
-    "icon": "6ValleyEcommerceCMS.svg",
-    "pricing": [
-      "onetime"
-    ],
-    "scripts": [
-      "6valley_cookie_consent"
-    ],
-    "website": "https://6valley.app"
-  },
-  "7moor": {
-    "cats": [
-      32,
-      53
-    ],
-    "description": "7moor is an integrated customer service marketing solution that combines communication, customer support, and marketing tools.",
-    "icon": "7moor.svg",
-    "js": {
-      "moor7Source": ""
-    },
-    "saas": true,
-    "website": "https://www.7moor.com"
-  },
   "7Shifts": {
     "cats": [
       101
@@ -447,6 +375,19 @@
     ],
     "saas": true,
     "website": "https://www.7shifts.com"
+  },
+  "7moor": {
+    "cats": [
+      32,
+      53
+    ],
+    "description": "7moor is an integrated customer service marketing solution that combines communication, customer support, and marketing tools.",
+    "icon": "7moor.svg",
+    "js": {
+      "moor7Source": ""
+    },
+    "saas": true,
+    "website": "https://www.7moor.com"
   },
   "8base": {
     "cats": [
@@ -511,5 +452,64 @@
       "\\.99minds\\.io"
     ],
     "website": "https://www.99minds.io"
+  },
+  "<model-viewer>": {
+    "cats": [
+      105
+    ],
+    "description": "<model-viewer> is an open-source web component developed by Google and maintained through GitHub. <model-viewer> aims at putting 3D content on the web easily with a few lines of HTML code. This was first introduced with Chrome 72 in July 2019 and enables users to view 3D in the browser and mobile devices.",
+    "dom": "model-viewer",
+    "icon": "model-viewer.svg",
+    "oss": true,
+    "scriptSrc": "/model-viewer/dist/model-viewer\\.min\\.js",
+    "website": "https://modelviewer.dev"
+  },
+  "@sulu/web": {
+    "cats": [
+      59
+    ],
+    "icon": "Sulu.svg",
+    "js": {
+      "web.startComponents": ""
+    },
+    "website": "https://github.com/sulu/web-js"
+  },
+  "_hyperscript": {
+    "cats": [
+      59
+    ],
+    "description": "_hyperscript is a scripting language for adding interactivity to the front-end.",
+    "icon": "_hyperscript.png",
+    "js": {
+      "_hyperscript": ""
+    },
+    "oss": true,
+    "scriptSrc": [
+      "//unpkg\\.com/hyperscript\\.org@([\\d\\.]+)\\;version:\\1"
+    ],
+    "website": "https://hyperscript.org"
+  },
+  "_hyperscript ": {
+    "cats": [
+      59
+    ],
+    "description": "_​hyperscript is a scripting language for adding interactivity to the front-end.",
+    "icon": "_hyperscript.png",
+    "js": {
+      "_hyperscript": ""
+    },
+    "oss": true,
+    "scriptSrc": "//unpkg\\.com/hyperscript\\.org@([\\d\\.]+)\\;version:\\1",
+    "website": "https://hyperscript.org"
+  },
+  "|related| Natív Hirdetés Kft": {
+    "cats": [
+      36
+    ],
+    "icon": "related.png",
+    "scripts": [
+      "//related\\.hu"
+    ],
+    "website": "https://related.hu"
   }
 }

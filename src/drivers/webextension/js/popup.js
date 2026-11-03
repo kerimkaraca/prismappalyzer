@@ -2,91 +2,15 @@
 /* eslint-env browser */
 /* globals chrome, Utils */
 
-const { agent, open, i18n, getOption, setOption, promisify, sendMessage } =
-  Utils
-
-const baseUrl = 'https://www.wappalyzer.com'
-const utm = '?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer'
+const { open, i18n, getOption, setOption, promisify, sendMessage } = Utils
 
 const footers = [
   {
-    heading: 'Generate sales leads',
-    body: 'Find new prospects by the technologies they use. Reach out to customers of Shopify, Magento, Salesforce and others.',
-    buttonText: 'Create a lead list',
-    buttonLink: `${baseUrl}/lists/${utm}`,
+    heading: 'Prismappalyzer CLI',
+    body: 'Run the same technology detection from the command line, in scripts or in CI.',
+    buttonText: 'View on GitHub',
+    buttonLink: 'https://github.com/kerimkaraca/prismappalyzer',
   },
-  {
-    heading: 'Connect Wappalyzer to your CRM',
-    body: 'See the technology stacks of your leads without leaving your CRM. Connect to HubSpot, Pipedrive and many others.',
-    buttonText: 'See all apps',
-    buttonLink: `${baseUrl}/apps/${utm}`,
-  },
-  {
-    heading: 'Enrich your data with tech stacks',
-    body: 'Upload a list of websites to get a report of the technologies in use, such as CMS or ecommerce platforms.',
-    buttonText: 'Upload a list',
-    buttonLink: `${baseUrl}/lookup/${utm}#bulk`,
-  },
-  {
-    heading: 'Automate technology lookups',
-    body: 'Our APIs provide instant access to website technology stacks, contact details and social media profiles.',
-    buttonText: 'Compare APIs',
-    buttonLink: `${baseUrl}/api/${utm}`,
-  },
-  {
-    heading: 'Wappalyzer for businesses',
-    body: 'Sign up for a plan to get monthly credits to spend on any product, including lead lists and technology lookups.',
-    buttonText: 'Compare plans',
-    buttonLink: `${baseUrl}/pricing/${utm}`,
-  },
-]
-
-const attributeKeys = [
-  'phone',
-  'skype',
-  'whatsapp',
-  'email',
-  'verifiedEmail',
-  'safeEmail',
-  'twitter',
-  'facebook',
-  'instagram',
-  'github',
-  'tiktok',
-  'youtube',
-  'pinterest',
-  'linkedin',
-  'owler',
-  'title',
-  'description',
-  'copyright',
-  'copyrightYear',
-  'responsive',
-  'schemaOrgTypes',
-  'certInfo.subjectOrg',
-  'certInfo.subjectCountry',
-  'certInfo.subjectState',
-  'certInfo.subjectLocality',
-  'certInfo.issuer',
-  'certInfo.protocol',
-  'certInfo.validTo',
-  'dns.spf',
-  'dns.dmarc',
-  'https',
-  'trackerGoogleAnalytics',
-  'trackerGoogleAdSense',
-  'trackerMedianet',
-  'trackerFacebook',
-  'trackerOptimizely',
-  'companyName',
-  'inferredCompanyName',
-  'industry',
-  'about',
-  'locations',
-  'companySize',
-  'companyType',
-  'companyFounded',
-  'employees',
 ]
 
 function setDisabledDomain(enabled) {
@@ -128,18 +52,11 @@ function getCsv() {
     ...Popup.cache.categories.map(({ id }) =>
       chrome.i18n.getMessage(`categoryName${id}`)
     ),
-    ...attributeKeys.map((key) =>
-      chrome.i18n.getMessage(
-        `attribute${
-          key.charAt(0).toUpperCase() + key.slice(1).replace('.', '_')
-        }`
-      )
-    ),
   ]
 
   const csv = [`"${columns.join('","')}"`]
 
-  const filename = `wappalyzer${
+  const filename = `prismappalyzer${
     hostname ? `_${hostname.replace('.', '-')}` : ''
   }.csv`
 
@@ -148,20 +65,18 @@ function getCsv() {
   row.push(
     ...Popup.cache.categories.reduce((categories, { id }) => {
       categories.push(
-        Popup.cache.detections
-          .filter(({ categories }) =>
-            categories.some(({ id: _id }) => _id === id)
-          )
-          .map(({ name }) => name)
-          .join(' ; ')
+        csvEscape(
+          Popup.cache.detections
+            .filter(({ categories }) =>
+              categories.some(({ id: _id }) => _id === id)
+            )
+            .map(({ name }) => name)
+            .join(' ; ')
+        )
       )
 
       return categories
     }, [])
-  )
-
-  row.push(
-    ...attributeKeys.map((key) => csvEscape(Popup.cache.attributeValues[key]))
   )
 
   csv.push(`"${row.join('","')}"`)
@@ -193,42 +108,6 @@ function csvEscape(value = '') {
   return String(value).replace(/"/g, '""')
 }
 
-function parseEmail(fullEmail) {
-  const email = fullEmail.replace(/^[^<]*<([^>]+)>/, '$1')
-
-  const [name, title] = fullEmail.replace(/ <([^>]+)>$/, '').split(' -- ')
-
-  return { email, name, title }
-}
-
-function getTechnologySpend(technologies) {
-  const totals = technologies.reduce(
-    (totals, { pricing }) => {
-      pricing.forEach((price) => totals[price]++)
-
-      return totals
-    },
-    { low: 0, poa: 0, mid: 0, high: 0 }
-  )
-
-  totals.mid += Math.floor(totals.low / 3)
-  totals.high += Math.floor(totals.poa / 2)
-  totals.high += Math.floor(totals.mid / 3)
-  totals.xhigh = Math.floor(totals.high / 3)
-
-  const spend = totals.xhigh
-    ? 'Very high'
-    : totals.high
-    ? 'High'
-    : totals.mid
-    ? 'Medium'
-    : totals.low
-    ? 'Low'
-    : 'Very low'
-
-  return spend
-}
-
 const Popup = {
   /**
    * Initialise popup
@@ -238,7 +117,6 @@ const Popup = {
       url: '',
       categories: [],
       detections: [],
-      attributeValues: {},
     }
 
     const el = {
@@ -254,14 +132,6 @@ const Popup = {
         '.plus-download__button .button__link'
       ),
       playGame: document.querySelector('.empty__play-game'),
-      plusConfigureApiKey: document.querySelector('.plus-configure__apikey'),
-      plusConfigureSave: document.querySelector('.plus-configure__save'),
-      plusDownload: document.querySelector('.plus-download'),
-      tabPlus: document.querySelector('.tab--plus'),
-      terms: document.querySelector('.terms'),
-      termsButtonAccept: document.querySelector('.terms__button--accept'),
-      termsButtonDecline: document.querySelector('.terms__button--decline'),
-      credits: document.querySelector('.credits'),
       footerButtonLink: document.querySelector('.footer .button__link'),
       footerButtonText: document.querySelector('.footer .button__text'),
       footerContentBody: document.querySelector('.footer__content-body'),
@@ -274,8 +144,8 @@ const Popup = {
       headerThemeLight: document.querySelector('.header__theme--light'),
       headerThemes: document.querySelectorAll('.header__theme'),
       issue: document.querySelector('.issue'),
-      tabItems: document.querySelectorAll('.tab-item'),
       tabs: document.querySelectorAll('.tab'),
+      tabItems: document.querySelectorAll('.tab-item'),
       templates: document.querySelectorAll('[data-template]'),
     }
 
@@ -307,44 +177,7 @@ const Popup = {
       el.headerThemeDark.classList.add('header__icon--hidden')
     }
 
-    // Terms
-    const termsAccepted =
-      agent === 'chrome' || (await getOption('termsAccepted', false))
-
-    if (termsAccepted) {
-      el.terms.classList.add('terms--hidden')
-
-      Popup.driver('getDetections').then(Popup.onGetDetections.bind(this))
-    } else {
-      el.terms.classList.remove('terms--hidden')
-      el.empty.classList.add('empty--hidden')
-      el.detections.classList.add('detections--hidden')
-      el.issue.classList.add('issue--hidden')
-      el.footer.classList.add('footer--hidden')
-      el.tabPlus.classList.add('tab--disabled')
-
-      el.termsButtonAccept.addEventListener('click', async () => {
-        await setOption('termsAccepted', true)
-        await setOption('tracking', true)
-
-        el.terms.classList.add('terms--hidden')
-        el.footer.classList.remove('footer--hidden')
-        el.tabPlus.classList.remove('tab--disabled')
-
-        Popup.driver('getDetections').then(Popup.onGetDetections.bind(this))
-      })
-
-      el.termsButtonDecline.addEventListener('click', async () => {
-        await setOption('termsAccepted', true)
-        await setOption('tracking', false)
-
-        el.terms.classList.add('terms--hidden')
-        el.footer.classList.remove('footer--hidden')
-        el.tabPlus.classList.remove('tab--disabled')
-
-        Popup.driver('getDetections').then(Popup.onGetDetections.bind(this))
-      })
-    }
+    Popup.driver('getDetections').then(Popup.onGetDetections.bind(this))
 
     let url
 
@@ -388,19 +221,8 @@ const Popup = {
         for (const headerSwitch of el.headerSwitches) {
           headerSwitch.classList.add('header__switch--hidden')
         }
-
-        el.tabPlus.classList.add('tab--disabled')
       }
     }
-
-    // Plus configuration
-    el.plusConfigureApiKey.value = await getOption('apiKey', '')
-
-    el.plusConfigureSave.addEventListener('click', async (event) => {
-      await setOption('apiKey', el.plusConfigureApiKey.value)
-
-      await Popup.getPlus(url)
-    })
 
     // Header
     el.headerSettings.addEventListener('click', () =>
@@ -427,22 +249,20 @@ const Popup = {
 
     // Tabs
     el.tabs.forEach((tab, index) => {
-      tab.addEventListener('click', async () => {
+      tab.addEventListener('click', () => {
         el.tabs.forEach((tab) => tab.classList.remove('tab--active'))
         el.tabItems.forEach((item) => item.classList.add('tab-item--hidden'))
 
         tab.classList.add('tab--active')
         el.tabItems[index].classList.remove('tab-item--hidden')
 
-        el.credits.classList.add('credits--hidden')
-        el.plusDownload.classList.remove('plus-download--hidden')
-        el.footer.classList.remove('footer--hidden')
-
-        if (tab.classList.contains('tab--plus')) {
-          await Popup.getPlus(url)
-        }
+        // Export, Report and the footer only apply to the Technologies tab
+        el.body.classList[index ? 'add' : 'remove']('secondary-tab-active')
       })
     })
+
+    // Automation
+    await Popup.initAutomation()
 
     // Download
     el.plusDownloadLink.addEventListener('click', Popup.downloadCsv)
@@ -489,7 +309,11 @@ const Popup = {
 
         const { version } = chrome.runtime.getManifest()
 
-        open(a.href.replace(/__URL__/g, url).replace(/__VERSION__/g, version))
+        open(
+          a.href
+            .replace(/__URL__/g, encodeURIComponent(url))
+            .replace(/__VERSION__/g, version)
+        )
 
         return false
       })
@@ -508,6 +332,344 @@ const Popup = {
     i18n()
 
     Popup.cache.categories = await Popup.driver('getCategories')
+  },
+
+  /**
+   * Automation and Settings tabs, and the Report button
+   */
+  async initAutomation() {
+    const el = {
+      toggle: document.querySelector('.automation__toggle'),
+      automation: document.querySelector('.automation'),
+      modes: Array.from(document.querySelectorAll('.automation__mode')),
+      urlList: document.querySelector('.automation__url-list'),
+      urlMessage: document.querySelector(
+        '.automation__urls .automation__error'
+      ),
+      progress: document.querySelector('.automation__progress'),
+      reportBrowsing: document.querySelector('.automation__report-browsing'),
+      settings: document.querySelector('.settings'),
+      serviceUrl: document.querySelector('.settings__service-url'),
+      apiKey: document.querySelector('.settings__api-key'),
+      zone: document.querySelector('.settings__zone'),
+      settingsMessage: document.querySelector('.settings__message'),
+      report: document.querySelector('.report__button'),
+      reportMessage: document.querySelector('.report-message'),
+    }
+
+    const config = await getOption('automation', {})
+
+    el.serviceUrl.value = config.serviceUrl || ''
+    el.apiKey.value = config.apiKey || ''
+    el.zone.value = config.zone || ''
+    el.reportBrowsing.checked = !!config.reportBrowsing
+    el.urlList.value =
+      (await getOption('automationQueue', {})).urls?.join('\n') || ''
+
+    // Merge changes into the stored configuration
+    const update = async (changes) =>
+      setOption('automation', {
+        ...(await getOption('automation', {})),
+        ...changes,
+      })
+
+    const showMessage = (node, message, error = false) => {
+      node.textContent = message
+      node.classList[message ? 'remove' : 'add'](`${node.classList[0]}--hidden`)
+      node.classList[error ? 'add' : 'remove'](`${node.classList[0]}--error`)
+    }
+
+    // Settings
+    el.settings.addEventListener('submit', async (event) => {
+      event.preventDefault()
+
+      const serviceUrl = el.serviceUrl.value.trim()
+      const apiKey = el.apiKey.value.trim()
+      const zone = el.zone.value.trim()
+
+      if (serviceUrl && !/^https?:\/\/[^/]+/i.test(serviceUrl)) {
+        return showMessage(
+          el.settingsMessage,
+          'Service URL must start with http:// or https://',
+          true
+        )
+      }
+
+      if (zone && !/^\w+$/.test(zone)) {
+        return showMessage(
+          el.settingsMessage,
+          'Zone may only contain letters, digits and _',
+          true
+        )
+      }
+
+      await update({ serviceUrl, apiKey, zone })
+
+      showMessage(el.settingsMessage, 'Saved')
+    })
+
+    el.settings.addEventListener('input', () =>
+      showMessage(el.settingsMessage, '')
+    )
+
+    // URL list, one website per line. Saving a different list restarts it
+    // from the first website.
+    const saveUrls = async () => {
+      const lines = el.urlList.value
+        .split('\n')
+        .map((line) => line.trim())
+        .filter(Boolean)
+
+      const invalid = lines.find((line) => {
+        try {
+          const { protocol, hostname } = new URL(
+            /^[a-z][a-z\d+.-]*:\/\//i.test(line) ? line : `https://${line}`
+          )
+
+          return (
+            /\s/.test(line) ||
+            !/^https?:$/.test(protocol) ||
+            !/^([a-z\d-]+\.)*[a-z\d-]+$|^\[[\da-f:.]+\]$/i.test(hostname)
+          )
+        } catch (error) {
+          return true
+        }
+      })
+
+      if (invalid) {
+        showMessage(el.urlMessage, `Not a website URL: ${invalid}`, true)
+
+        return null
+      }
+
+      showMessage(el.urlMessage, '')
+
+      const urls = [...new Set(lines)]
+
+      const queue = await getOption('automationQueue', {})
+
+      if ((queue.urls || []).join('\n') !== urls.join('\n')) {
+        await setOption('automationQueue', { urls, index: 0 })
+      }
+
+      return urls
+    }
+
+    el.urlList.addEventListener('change', saveUrls)
+
+    el.urlList.addEventListener('input', () => showMessage(el.urlMessage, ''))
+
+    el.modes.forEach((input) =>
+      input.addEventListener('change', () => update({ mode: input.value }))
+    )
+
+    // Automation
+    el.toggle.addEventListener('click', async () => {
+      const config = await getOption('automation', {})
+
+      if (!config.enabled && config.mode === 'urls') {
+        const urls = await saveUrls()
+
+        if (!urls) {
+          return
+        }
+
+        if (!urls.length) {
+          return showMessage(el.urlMessage, 'Enter at least one URL', true)
+        }
+
+        // Scan the list again once it was finished
+        const queue = await getOption('automationQueue', {})
+
+        if ((queue.index || 0) >= urls.length) {
+          await setOption('automationQueue', { urls, index: 0 })
+        }
+      }
+
+      await update({ enabled: !config.enabled })
+    })
+
+    el.reportBrowsing.addEventListener('change', () =>
+      update({ reportBrowsing: el.reportBrowsing.checked })
+    )
+
+    // Report
+    el.report.addEventListener('click', async () => {
+      if (el.report.classList.contains('report__button--busy')) {
+        return
+      }
+
+      el.report.classList.add('report__button--busy')
+
+      showMessage(el.reportMessage, 'Sending…')
+
+      try {
+        const { error, origin, count, matched } = await Popup.driver(
+          'reportWebsite',
+          Popup.cache.url
+        )
+
+        if (error) {
+          showMessage(el.reportMessage, `Not sent: ${error}`, true)
+        } else {
+          showMessage(
+            el.reportMessage,
+            matched
+              ? `Sent ${count} technologies for ${origin}`
+              : `Sent ${count} technologies, but ${origin} is not a website in ASM, so nothing was recorded`,
+            !matched
+          )
+        }
+      } catch (error) {
+        showMessage(el.reportMessage, `Not sent: ${error.message}`, true)
+      }
+
+      el.report.classList.remove('report__button--busy')
+    })
+
+    const render = async () => {
+      const config = await getOption('automation', {})
+
+      const configured = !!(config.serviceUrl && config.apiKey && config.zone)
+
+      el.toggle.textContent = chrome.i18n.getMessage(
+        config.enabled ? 'automationStop' : 'automationStart'
+      )
+      el.toggle.disabled = !configured && !config.enabled
+
+      const mode = config.mode === 'urls' ? 'urls' : 'tasks'
+
+      el.automation.classList.remove('automation--tasks', 'automation--urls')
+      el.automation.classList.add(`automation--${mode}`)
+
+      el.modes.forEach((input) => {
+        input.checked = input.value === mode
+        input.disabled = !!config.enabled
+      })
+
+      el.urlList.disabled = !!config.enabled
+
+      el.report.classList[configured ? 'remove' : 'add'](
+        'report__button--hidden'
+      )
+    }
+
+    await render()
+
+    Popup.onAutomationStatus(await getOption('automationStatus', {}))
+    Popup.onBrowsingStatus(await getOption('automationBrowsingStatus', {}))
+    Popup.onAutomationHistory(await getOption('automationHistory', []))
+    Popup.onAutomationQueue(await getOption('automationQueue', {}))
+
+    chrome.storage.onChanged.addListener((changes, area) => {
+      if (area !== 'local') {
+        return
+      }
+
+      if (changes.automation) {
+        render()
+      }
+
+      if (changes.automationStatus) {
+        Popup.onAutomationStatus(changes.automationStatus.newValue || {})
+      }
+
+      if (changes.automationBrowsingStatus) {
+        Popup.onBrowsingStatus(changes.automationBrowsingStatus.newValue || {})
+      }
+
+      if (changes.automationQueue) {
+        Popup.onAutomationQueue(changes.automationQueue.newValue || {})
+      }
+
+      if (changes.automationHistory) {
+        Popup.onAutomationHistory(changes.automationHistory.newValue || [])
+      }
+    })
+  },
+
+  onAutomationQueue({ urls = [], index = 0 }) {
+    document.querySelector('.automation__progress').textContent = urls.length
+      ? `Scanned ${Math.min(index, urls.length)} of ${urls.length} websites`
+      : ''
+  },
+
+  onAutomationStatus({ state = 'unconfigured', message }) {
+    const el = {
+      status: document.querySelector('.automation-status'),
+      text: document.querySelector('.automation-status__text'),
+      message: document.querySelector('.automation-status__message'),
+    }
+
+    const states = {
+      unconfigured: 'Off: complete the Settings tab first',
+      stopped: 'Off',
+      idle: 'On: waiting for the next task',
+      polling: 'On: fetching a task',
+      scanning: 'On: scanning',
+      sending: 'On: sending results',
+      error: 'On: last attempt failed',
+    }
+
+    const off = state === 'stopped' || state === 'unconfigured'
+
+    el.status.dataset.state = off ? 'stopped' : state
+    el.text.textContent = states[state] || state
+    el.message.textContent = off ? '' : message || ''
+  },
+
+  onBrowsingStatus({
+    count,
+    lastWebsite,
+    lastCount,
+    lastMatched,
+    lastReported,
+  }) {
+    document.querySelector('.automation-status__browsing').textContent = count
+      ? `Browsed websites sent: ${count} · Last: ${lastWebsite} (${lastCount} technologies${
+          lastMatched ? '' : ', not in ASM'
+        }, ${new Date(lastReported).toLocaleTimeString()})`
+      : ''
+  },
+
+  onAutomationHistory(history) {
+    const el = {
+      table: document.querySelector('.automation-history'),
+      body: document.querySelector('.automation-history tbody'),
+      empty: document.querySelector('.automation-history__empty'),
+    }
+
+    el.table.classList[history.length ? 'remove' : 'add'](
+      'automation-history--hidden'
+    )
+    el.empty.classList[history.length ? 'add' : 'remove'](
+      'automation-history__empty--hidden'
+    )
+
+    el.body.replaceChildren(
+      ...history.map(({ url, finished, count, matched }) => {
+        const row = document.createElement('tr')
+
+        const date = new Date(finished)
+
+        ;[
+          url,
+          date.toDateString() === new Date().toDateString()
+            ? date.toLocaleTimeString()
+            : date.toLocaleString(),
+          matched === false ? `${count}, not in ASM` : String(count),
+        ].forEach((text) => {
+          const cell = document.createElement('td')
+
+          cell.textContent = text
+          cell.title = text
+
+          row.appendChild(cell)
+        })
+
+        return row
+      })
+    )
   },
 
   driver(func, args) {
@@ -589,7 +751,7 @@ const Popup = {
 
     const categorised = Popup.categorise(detections)
 
-    categorised.forEach(({ id, name, slug: categorySlug, technologies }) => {
+    categorised.forEach(({ id, name, technologies }) => {
       const categoryNode = Popup.templates.category.cloneNode(true)
 
       const el = {
@@ -599,7 +761,6 @@ const Popup = {
         pinsActive: document.querySelectorAll('.category__pin--active'),
       }
 
-      el.link.href = `https://www.wappalyzer.com/technologies/${categorySlug}/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer`
       el.link.dataset.i18n = `categoryName${id}`
 
       if (pinnedCategory === id) {
@@ -624,39 +785,37 @@ const Popup = {
         })
       )
 
-      technologies.forEach(
-        ({ name, slug, confidence, version, icon, website }) => {
-          const technologyNode = Popup.templates.technology.cloneNode(true)
+      technologies.forEach(({ name, confidence, version, icon, website }) => {
+        const technologyNode = Popup.templates.technology.cloneNode(true)
 
-          const el = {
-            technologies: categoryNode.querySelector('.technologies'),
-            iconImage: technologyNode.querySelector('.technology__icon img'),
-            link: technologyNode.querySelector('.technology__link'),
-            name: technologyNode.querySelector('.technology__name'),
-            version: technologyNode.querySelector('.technology__version'),
-            confidence: technologyNode.querySelector('.technology__confidence'),
-          }
-
-          el.iconImage.src = `../images/icons/${icon}`
-
-          el.link.href = `https://www.wappalyzer.com/technologies/${categorySlug}/${slug}/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer`
-          el.name.textContent = name
-
-          if (confidence < 100) {
-            el.confidence.textContent = `${confidence}% sure`
-          } else {
-            el.confidence.remove()
-          }
-
-          if (version) {
-            el.version.textContent = version
-          } else {
-            el.version.remove()
-          }
-
-          el.technologies.appendChild(technologyNode)
+        const el = {
+          technologies: categoryNode.querySelector('.technologies'),
+          iconImage: technologyNode.querySelector('.technology__icon img'),
+          link: technologyNode.querySelector('.technology__link'),
+          name: technologyNode.querySelector('.technology__name'),
+          version: technologyNode.querySelector('.technology__version'),
+          confidence: technologyNode.querySelector('.technology__confidence'),
         }
-      )
+
+        el.iconImage.src = `../images/icons/${icon}`
+
+        el.link.href = website || '#'
+        el.name.textContent = name
+
+        if (confidence < 100) {
+          el.confidence.textContent = `${confidence}% sure`
+        } else {
+          el.confidence.remove()
+        }
+
+        if (version) {
+          el.version.textContent = version
+        } else {
+          el.version.remove()
+        }
+
+        el.technologies.appendChild(technologyNode)
+      })
 
       el.detections.appendChild(categoryNode)
     })
@@ -670,298 +829,9 @@ const Popup = {
         event.preventDefault()
         event.stopImmediatePropagation()
 
-        open(a.href)
-
-        return false
-      })
-    )
-
-    i18n()
-  },
-
-  /**
-   * Show company and contact details
-   * @param {String} url
-   */
-  async getPlus(url) {
-    const apiKey = await getOption('apiKey', '')
-
-    const el = {
-      loading: document.querySelector('.loading'),
-      panels: document.querySelector('.panels'),
-      empty: document.querySelector('.plus-empty'),
-      crawl: document.querySelector('.plus-crawl'),
-      error: document.querySelector('.plus-error'),
-      download: document.querySelector('.plus-download'),
-      errorMessage: document.querySelector('.plus-error__message'),
-      configure: document.querySelector('.plus-configure'),
-      credits: document.querySelector('.credits'),
-      creditsRemaining: document.querySelector('.credits__remaining'),
-      footer: document.querySelector('.footer'),
-    }
-
-    el.error.classList.add('plus-error--hidden')
-    el.download.classList.add('plus-download--hidden')
-
-    if (apiKey) {
-      el.loading.classList.remove('loading--hidden')
-      el.configure.classList.add('plus-configure--hidden')
-      el.footer.classList.remove('footer--hidden')
-    } else {
-      el.loading.classList.add('loading--hidden')
-      el.configure.classList.remove('plus-configure--hidden')
-      el.footer.classList.add('footer--hidden')
-
-      return
-    }
-
-    el.panels.classList.add('panels--hidden')
-    el.empty.classList.add('plus-empty--hidden')
-    el.crawl.classList.add('plus-crawl--hidden')
-    el.error.classList.add('plus-error--hidden')
-
-    while (el.panels.lastElementChild) {
-      el.panels.removeChild(el.panels.lastElementChild)
-    }
-
-    try {
-      const response = await fetch(
-        `https://api.wappalyzer.com/v2/plus/${encodeURIComponent(url)}`,
-        {
-          method: 'GET',
-          headers: {
-            'x-api-key': apiKey,
-          },
+        if (/^https?:/.test(a.href)) {
+          open(a.href)
         }
-      )
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        const error = new Error()
-
-        error.data = data
-        error.response = response
-
-        throw error
-      }
-
-      const { attributes, creditsRemaining, crawl } = data
-
-      if (Popup.cache.detections.length) {
-        attributes.signals = attributes.signals || []
-
-        attributes.signals.technologySpend = getTechnologySpend(
-          Popup.cache.detections
-        )
-      }
-
-      el.creditsRemaining.textContent = parseInt(
-        creditsRemaining || 0,
-        10
-      ).toLocaleString()
-
-      el.loading.classList.add('loading--hidden')
-      el.credits.classList.remove('credits--hidden')
-
-      if (crawl) {
-        document
-          .querySelector('.plus-crawl')
-          .classList.remove('plus-crawl--hidden')
-
-        return
-      }
-
-      if (!Object.keys(attributes).length) {
-        el.empty.classList.remove('plus-empty--hidden')
-        el.download.classList.remove('plus-download--hidden')
-
-        return
-      }
-
-      const attributeValues = {}
-
-      Object.keys(attributes).forEach((set) => {
-        const panel = document.createElement('div')
-        const header = document.createElement('div')
-        const content = document.createElement('div')
-        const table = document.createElement('table')
-
-        panel.classList.add('panel')
-        header.classList.add('panel__header')
-        content.classList.add('panel__content')
-
-        header.setAttribute(
-          'data-i18n',
-          `set${set.charAt(0).toUpperCase() + set.slice(1)}`
-        )
-
-        Object.keys(attributes[set]).forEach((key) => {
-          const value = attributes[set][key]
-
-          const tr = document.createElement('tr')
-
-          const th = document.createElement('th')
-          const td = document.createElement('td')
-
-          th.setAttribute(
-            'data-i18n',
-            `attribute${
-              key.charAt(0).toUpperCase() + key.slice(1).replace('.', '_')
-            }`
-          )
-
-          attributeValues[key] = []
-
-          if (Array.isArray(value)) {
-            value.forEach((value) => {
-              const div = document.createElement('div')
-
-              if (typeof value === 'object') {
-                attributeValues[key].push(value.text)
-
-                const a = document.createElement('a')
-
-                a.href = value.to
-                a.textContent = value.text
-
-                if (key === 'keywords') {
-                  a.style = 'padding-right: .3rem;'
-
-                  const space = document.createTextNode(' ')
-
-                  td.append(a, space)
-                } else if (
-                  ['email', 'verifiedEmail', 'safeEmail'].includes(key)
-                ) {
-                  const { email, name, title } = parseEmail(value.text)
-
-                  a.textContent = email
-
-                  const div = document.createElement('div')
-                  const elName = document.createElement('span')
-                  const elTitle = document.createElement('span')
-                  const elBreak1 = document.createElement('br')
-                  const elBreak2 = document.createElement('br')
-
-                  elName.textContent = name
-                  elTitle.textContent = `${title}`
-
-                  elTitle.className = 'light-text'
-
-                  div.append(a)
-
-                  if (name && name !== email) {
-                    div.appendChild(elBreak1)
-                    div.appendChild(elName)
-
-                    if (title) {
-                      div.appendChild(elBreak2)
-                      div.appendChild(elTitle)
-                    }
-                  }
-
-                  td.append(div)
-                } else {
-                  div.appendChild(a)
-                  td.appendChild(div)
-                }
-              } else if (key === 'employees') {
-                attributeValues[key].push(value)
-
-                const [name, title] = value.split(' -- ')
-
-                const elName = document.createElement('span')
-                const elTitle = document.createElement('span')
-                const elBreak = document.createElement('br')
-
-                elTitle.className = 'light-text'
-
-                elName.textContent = name
-                elTitle.textContent = title
-
-                div.appendChild(elName)
-                div.appendChild(elBreak)
-                div.appendChild(elTitle)
-                td.appendChild(div)
-              } else {
-                attributeValues[key].push(value)
-
-                div.textContent = value
-                td.appendChild(div)
-              }
-            })
-          } else if (key === 'companyName') {
-            attributeValues[key].push(value)
-
-            const strong = document.createElement('strong')
-
-            strong.textContent = value
-
-            td.appendChild(strong)
-          } else {
-            attributeValues[key].push(value)
-
-            td.textContent = value
-          }
-
-          if (key !== 'keywords') {
-            tr.appendChild(th)
-          }
-
-          tr.appendChild(td)
-          table.appendChild(tr)
-        })
-
-        content.appendChild(table)
-
-        panel.appendChild(header)
-        panel.appendChild(content)
-        el.panels.appendChild(panel)
-      })
-
-      Popup.cache.attributeValues = attributeValues
-
-      el.panels.classList.remove('panels--hidden')
-      el.download.classList.remove('plus-download--hidden')
-    } catch (error) {
-      Popup.log(error.data)
-
-      // eslint-disable-next-line
-      console.log(error)
-
-      el.errorMessage.textContent = `Sorry, something went wrong${
-        error.response ? ` (${error.response.status})` : ''
-      }. Please try again later.`
-
-      if (error.response) {
-        if (error.response.status === 403) {
-          el.errorMessage.textContent =
-            typeof error.data === 'string'
-              ? error.data
-              : 'No access. Please check your API key.'
-
-          el.configure.classList.remove('plus-configure--hidden')
-        } else if (error.response.status === 429) {
-          el.errorMessage.textContent =
-            'Too many requests. Please try again in a few seconds.'
-        } else if (
-          error.response.status === 400 &&
-          typeof error.data === 'string'
-        ) {
-          el.errorMessage.textContent = error.data
-        }
-      }
-
-      el.loading.classList.add('loading--hidden')
-      el.error.classList.remove('plus-error--hidden')
-    }
-
-    Array.from(document.querySelectorAll('.panels a')).forEach((a) =>
-      a.addEventListener('click', (event) => {
-        event.preventDefault()
-
-        open(a.href)
 
         return false
       })

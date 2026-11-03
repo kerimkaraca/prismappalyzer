@@ -1168,8 +1168,7 @@ class Site {
               type,
               regex: regex.source,
               value: String(value).length <= 250 ? value : null,
-              match:
-                match && String(match).length <= 250 ? match : null,
+              match: match && String(match).length <= 250 ? match : null,
               url: url || null,
               confidence,
               version,

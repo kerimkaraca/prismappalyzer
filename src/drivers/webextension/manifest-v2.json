@@ -1,10 +1,10 @@
 {
-  "name": "Wappalyzer - Technology profiler",
-  "short_name": "Wappalyzer",
-  "author": "Wappalyzer",
-  "homepage_url": "https://www.wappalyzer.com/",
+  "name": "Prismappalyzer - Technology profiler",
+  "short_name": "Prismappalyzer",
+  "author": "Prismappalyzer",
+  "homepage_url": "https://github.com/kerimkaraca/prismappalyzer",
   "description": "Identify web technologies",
-  "version": "6.10.62",
+  "version": "1.0.4",
   "default_locale": "en",
   "manifest_version": 2,
   "icons": {
@@ -30,7 +30,7 @@
       "512": "images/icon_512.png",
       "1024": "images/icon_1024.png"
     },
-    "default_title": "Wappalyzer",
+    "default_title": "Prismappalyzer",
     "default_popup": "html/popup.html"
   },
   "background": {
@@ -46,17 +46,6 @@
         "js/content.js"
       ],
       "run_at": "document_idle"
-    },
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "js/lib/iframe.js"
-      ],
-      "run_at": "document_start",
-      "all_frames": true
     }
   ],
   "web_accessible_resources": [
@@ -68,11 +57,11 @@
     "open_in_tab": false
   },
   "permissions": [
+    "alarms",
     "cookies",
     "storage",
     "tabs",
     "webRequest",
-    "webNavigation",
     "http://*/*",
     "https://*/*"
   ],

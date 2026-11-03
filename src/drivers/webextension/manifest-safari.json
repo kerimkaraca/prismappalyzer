@@ -1,8 +1,8 @@
 {
-  "name": "Wappalyzer",
-  "short_name": "Wappalyzer",
-  "author": "Wappalyzer",
-  "homepage_url": "https://www.wappalyzer.com/",
+  "name": "Prismappalyzer",
+  "short_name": "Prismappalyzer",
+  "author": "Prismappalyzer",
+  "homepage_url": "https://github.com/kerimkaraca/prismappalyzer",
   "description": "Identify web technologies",
   "version": "6.8.15",
   "default_locale": "en",
@@ -30,7 +30,7 @@
       "512": "images/safari.svg",
       "1024": "images/safari.svg"
     },
-    "default_title": "Wappalyzer",
+    "default_title": "Prismappalyzer",
     "default_popup": "html/popup.html"
   },
   "background": {
@@ -46,17 +46,6 @@
         "js/content.js"
       ],
       "run_at": "document_idle"
-    },
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "js/lib/iframe.js"
-      ],
-      "run_at": "document_start",
-      "all_frames": true
     }
   ],
   "web_accessible_resources": [
@@ -71,7 +60,6 @@
     "storage",
     "tabs",
     "webRequest",
-    "webNavigation",
     "http://*/*",
     "https://*/*"
   ],

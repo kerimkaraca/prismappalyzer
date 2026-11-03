@@ -1,4 +1,9 @@
 {
+  "name": "prismappalyzer-repo",
+  "private": true,
+  "workspaces": [
+    "src/drivers/npm"
+  ],
   "dependencies": {
     "@prantlf/jsonlint": "^10.2.0",
     "adm-zip": "^0.4.16",
@@ -18,6 +23,9 @@
   },
   "scripts": {
     "link": "node ./bin/link.js; node ./bin/manifest.js v3",
+    "setup": "yarn install && yarn run link",
+    "prismappalyzer": "node ./src/drivers/npm/cli.js",
+    "cli:install": "yarn run setup && yarn workspace prismappalyzer link",
     "lint": "eslint src/**/*.{js,json}",
     "lint:fix": "eslint --fix src/**/*.{js,json}",
     "validate": "yarn run lint && jsonlint -qV ./schema.json ./src/technologies/ && node ./bin/validate.js",

@@ -14,6 +14,360 @@
     "saas": true,
     "website": "https://maak-code.ir"
   },
+  "MAJIN": {
+    "cats": [
+      32
+    ],
+    "description": "MAJIN reads the hearts and minds of each customer using real-world data to automate optimal marketing processes.",
+    "icon": "MAJIN.png",
+    "js": {
+      "ma.Touch": ""
+    },
+    "pricing": [
+      "high",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://ma-jin.jp"
+  },
+  "MATORI.NET": {
+    "cats": [
+      64
+    ],
+    "description": "MATORI.NET is a fully managed reverse proxy.",
+    "headers": {
+      "X-Powered-By": "MATORI.NET"
+    },
+    "implies": "OpenResty",
+    "website": "http://matori.net"
+  },
+  "MDBootstrap": {
+    "cats": [
+      66
+    ],
+    "description": "MDBootstrap (Material Design for Bootstrap) is a complete UI package that can be integrated with other frameworks such as Angular, React, Vue, etc. It is used to design a fully responsive and mobile-friendly layout using various components, plugins, animation.",
+    "icon": "MDBootstrap.png",
+    "implies": "Bootstrap",
+    "js": {
+      "mdb.ScrollSpy": ""
+    },
+    "oss": true,
+    "scriptSrc": "(?:/mdbootstrap/([\\d\\.]+)/)?js/mdb\\.min\\.js\\;version:\\1",
+    "website": "https://mdbootstrap.com"
+  },
+  "MDBootstrap WP theme": {
+    "cats": [
+      80
+    ],
+    "description": "MDBootstrap WP theme is a WordPress theme built on top of the MDBootstrap front-end UI library. It provides a set of pre-designed layouts, widgets, and components that can be easily customised and integrated into WordPress websites.",
+    "dom": {
+      "link[href*='/wp-content/themes/mdbootstrap']": {
+        "attributes": {
+          "href": "/wp-content/themes/mdbootstrap(?:\\d+)?/.+\\.css(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1"
+        }
+      }
+    },
+    "icon": "MDBootstrap.png",
+    "implies": "MDBootstrap",
+    "requires": "WordPress",
+    "website": "https://mdbgo.com/docs/projects/wordpress/"
+  },
+  "MDS Brand": {
+    "cats": [
+      53
+    ],
+    "description": "MDS Brand is a provider of website, CRM, vrtual BDC, SEO, PPC, and live chat solutions for Marine, RV, Powersports, and automotive industries.",
+    "dom": "a[href*='mdsbrand.com/']",
+    "icon": "MDS Brand.png",
+    "pricing": [
+      "poa"
+    ],
+    "requires": [
+      "Nginx",
+      "UserWay"
+    ],
+    "website": "https://mdsbrand.com"
+  },
+  "MDUI": {
+    "cats": [
+      66
+    ],
+    "description": "MDUI is a CSS Framework based on material design.",
+    "icon": "MDUI.png",
+    "js": {
+      "_mduiEventId": "",
+      "mdui.Drawer": ""
+    },
+    "oss": true,
+    "website": "https://www.mdui.org"
+  },
+  "MDirector": {
+    "cats": [
+      32
+    ],
+    "description": "MDirector is an all-in-one digital marketing platform that centralizes email, SMS, and automation tools to manage campaigns and analyze audience engagement.",
+    "icon": "MDirector.svg",
+    "pricing": [
+      "freemium",
+      "low",
+      "recurring"
+    ],
+    "requires": [
+      "WordPress"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "/wp-content/plugins/mdirector-newsletter/public/js/mdirector-newsletter-public\\.js"
+    ],
+    "scripts": [
+      "app\\.mdirector\\.com"
+    ],
+    "website": "https://www.mdirector.com"
+  },
+  "MGID": {
+    "cats": [
+      36
+    ],
+    "description": "MGID is a programmatic advertising platform frequently used by misinformation websites.",
+    "icon": "MGID.png",
+    "js": {
+      "MgSensor.mgqWorker": ""
+    },
+    "pricing": [
+      "payg"
+    ],
+    "saas": true,
+    "scriptSrc": "\\.mgid\\.com/",
+    "website": "https://www.mgid.com"
+  },
+  "MGPanel": {
+    "cats": [
+      1
+    ],
+    "description": "MGPanel has it all, a content management system that gives programmers the freedom to create professional web pages from scratch, also providing their clients with a self-managing platform.",
+    "icon": "MGPanel.png",
+    "implies": "MySQL",
+    "pricing": [
+      "poa"
+    ],
+    "requires": "PHP",
+    "saas": true,
+    "scriptSrc": "\\.mgpanel\\.org/",
+    "website": "https://mgpanel.org"
+  },
+  "MICE Operations": {
+    "cats": [
+      5
+    ],
+    "description": "MICE Operations is a software solution tailored for event venues, catering, and hospitality businesses, streamlining operational processes, sales, and client relationship management.",
+    "icon": "MICEOperations.svg",
+    "js": {
+      "miceWidgetSettings": ""
+    },
+    "pricing": [
+      "freemium",
+      "mid",
+      "recurring",
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "app\\.miceoperations\\.com/widget/widget\\.js\\?ver=([\\d\\.]+)\\;version:\\1"
+    ],
+    "website": "https://www.miceoperations.com"
+  },
+  "MIYN Online Appointment": {
+    "cats": [
+      72
+    ],
+    "description": "MIYN Online Appointment is an advanced cloud-based online appointment scheduling software.",
+    "icon": "MIYN.svg",
+    "js": {
+      "MIYNLive.settings": ""
+    },
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://miyn.app/online-appointment"
+  },
+  "MNTN": {
+    "cats": [
+      36,
+      77
+    ],
+    "description": "MNTN (formerly SteelHouse) is a marketing technology company that provides a platform for digital advertising, including tools for programmatic advertising, creative management, and campaign optimization.",
+    "icon": "mntn.svg",
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "\\.steelhousemedia\\.com/(?:spx\\?dxver=([\\d.]+))?\\;version:\\1"
+    ],
+    "website": "https://mountain.com"
+  },
+  "MODX": {
+    "cats": [
+      1
+    ],
+    "cpe": "cpe:2.3:a:modx:modx_revolution:*:*:*:*:*:*:*:*",
+    "description": "MODX (originally MODx) is an open source content management system and web application framework for publishing content on the World Wide Web and intranets.",
+    "headers": {
+      "X-Powered-By": "^MODX"
+    },
+    "html": [
+      "<a[^>]+>Powered by MODX</a>",
+      "<!-- Modx process time debug info -->",
+      "<(?:link|script)[^>]+assets/snippets/\\;confidence:20",
+      "<form[^>]+id=\"ajaxSearch_form\\;confidence:20",
+      "<input[^>]+id=\"ajaxSearch_input\\;confidence:20"
+    ],
+    "icon": "MODX.svg",
+    "implies": "PHP",
+    "js": {
+      "MODX": "",
+      "MODX_MEDIA_PATH": ""
+    },
+    "meta": {
+      "generator": "MODX[^\\d.]*([\\d.]+)?\\;version:\\1"
+    },
+    "oss": true,
+    "pricing": [
+      "low"
+    ],
+    "saas": true,
+    "scriptSrc": "/assets/components/templates/\\;confidence:50",
+    "website": "https://modx.com/content-management-framework"
+  },
+  "MRI Box and Dice": {
+    "cats": [
+      53
+    ],
+    "description": "MRI Box and Dice is a CRM platform designed for real estate agencies, providing tools for managing client relationships, property listings, and transactions.",
+    "icon": "MRISoftware.svg",
+    "saas": true,
+    "scriptSrc": [
+      "assets\\.boxdice\\.com\\.au"
+    ],
+    "website": "https://www.mrisoftware.com/au/products/box-and-dice/"
+  },
+  "MRI Eagle": {
+    "cats": [
+      53
+    ],
+    "description": "MRI Eagle is a technology solution catering to real estate firms, offering efficiency and cost-saving benefits.",
+    "dom": [
+      "link[href*='cdn.eaglesoftware.com.au']"
+    ],
+    "icon": "MRISoftware.svg",
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "\\.eaglesoftware\\.com\\.au"
+    ],
+    "website": "https://www.mrisoftware.com/au/products/eagle"
+  },
+  "MRW": {
+    "cats": [
+      99
+    ],
+    "description": "MRW is a Spanish courier company specialised in express national and international shipping services.",
+    "icon": "MRW.png",
+    "requiresCategory": 6,
+    "text": "\\bMRW\\b",
+    "website": "https://www.mrw.es"
+  },
+  "MSAAQ": {
+    "cats": [
+      6
+    ],
+    "description": "MSAAQ is a platform that allows users to create, sell, and manage their products or services from a single location.",
+    "icon": "MSAAQ.svg",
+    "meta": {
+      "generator": "msaaq\\.com"
+    },
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://msaaq.com"
+  },
+  "MSHOP": {
+    "cats": [
+      6
+    ],
+    "description": "MSHOP is an all-in-one ecommerce platform.",
+    "icon": "MSHOP.png",
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "scriptSrc": "static\\.hotishop\\.com/",
+    "website": "https://hotishop.com"
+  },
+  "MTCaptcha": {
+    "cats": [
+      16
+    ],
+    "description": "MTCaptcha is a captcha service that is GDPR and WCAG compliant, providing the confidence of privacy and accessibility.",
+    "icon": "MTCaptcha.png",
+    "js": {
+      "mtcaptcha.getVerifiedToken": "",
+      "mtcaptchaConfig.sitekey": ""
+    },
+    "pricing": [
+      "freemium",
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "scriptSrc": "service(?:2)?\\.mtcaptcha\\.com/",
+    "website": "https://www.mtcaptcha.com"
+  },
+  "MUI": {
+    "cats": [
+      66
+    ],
+    "css": "\\.MuiPaper-root",
+    "description": "MUI(formerly Material UI) is a simple and customisable component library to build faster, beautiful, and more accessible React applications.",
+    "dom": "style[data-meta='MuiPaper'], div.MuiBox-root, div.MuiPaper-root, style[data-meta='MuiButton']",
+    "icon": "MUI.svg",
+    "implies": "React",
+    "oss": true,
+    "pricing": [
+      "freemium",
+      "payg"
+    ],
+    "saas": true,
+    "website": "https://mui.com"
+  },
+  "MVD Studio": {
+    "cats": [
+      1,
+      6
+    ],
+    "description": "MVD Studio is a Laravel-based platform built by MVD Studio (Uruguay) for e-commerce stores and bespoke web applications.",
+    "headers": {
+      "X-Built-By": "MVD Studio",
+      "X-Generator": "MVD Studio",
+      "X-Powered-By": "MVD Studio"
+    },
+    "icon": "MVD Studio.svg",
+    "implies": [
+      "Laravel",
+      "PHP"
+    ],
+    "meta": {
+      "generator": "MVD Studio"
+    },
+    "website": "https://mvdstudio.com.uy"
+  },
   "Maatoo": {
     "cats": [
       32
@@ -200,6 +554,18 @@
     "saas": true,
     "website": "https://magemail.co"
   },
+  "MageWorx Search Autocomplete": {
+    "cats": [
+      29
+    ],
+    "description": "MageWorx Search Autocomplete extension offers an AJAX-based popup window that displays and updates relevant search results while a customer forms his or her query.",
+    "dom": "link[href*='MageWorx_SearchSuiteAutocomplete']",
+    "icon": "MageWorx.svg",
+    "oss": true,
+    "requires": "Magento",
+    "scriptSrc": "MageWorx_SearchSuiteAutocomplete",
+    "website": "https://github.com/mageworx/search-suite-autocomplete"
+  },
   "Magento": {
     "cats": [
       6
@@ -258,18 +624,6 @@
     },
     "oss": true,
     "website": "https://github.com/magewirephp/magewire"
-  },
-  "MageWorx Search Autocomplete": {
-    "cats": [
-      29
-    ],
-    "description": "MageWorx Search Autocomplete extension offers an AJAX-based popup window that displays and updates relevant search results while a customer forms his or her query.",
-    "dom": "link[href*='MageWorx_SearchSuiteAutocomplete']",
-    "icon": "MageWorx.svg",
-    "oss": true,
-    "requires": "Magento",
-    "scriptSrc": "MageWorx_SearchSuiteAutocomplete",
-    "website": "https://github.com/mageworx/search-suite-autocomplete"
   },
   "Magic UI": {
     "cats": [
@@ -504,18 +858,6 @@
     ],
     "website": "https://mahocommerce.com"
   },
-  "Mailcheck": {
-    "cats": [
-      59
-    ],
-    "description": "Mailcheck is a JavaScript library designed to address the issue of misspelled email addresses during user input.",
-    "icon": "Mailcheck.png",
-    "oss": true,
-    "scriptSrc": [
-      "mailcheck(?:\\.min)?\\.js(?:\\?v(?:er)?=(\\d+\\.\\d+\\.\\d+))?\\;version:\\1"
-    ],
-    "website": "https://github.com/mailcheck/mailcheck"
-  },
   "MailChimp": {
     "cats": [
       32,
@@ -584,23 +926,40 @@
     "scriptSrc": "/wp-content/plugins/mailchimp-for-wp/.+\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1",
     "website": "https://www.mc4wp.com"
   },
-  "Mailercloud": {
+  "MailOptin": {
     "cats": [
-      75,
-      32
+      5,
+      87
     ],
-    "description": "Mailercloud is an email marketing platform that offers tools for creating, sending, and tracking email campaigns, including automation, contact segmentation, and detailed analytics.",
-    "icon": "Mailercloud.svg",
+    "description": "WordPress plugin to create email signup forms that convert visitors into subscribers combined with email automation and newsletter features.",
+    "icon": "MailOptin.png",
+    "js": {
+      "mailoptin_globals": ""
+    },
+    "oss": true,
     "pricing": [
-      "freemium",
-      "payg",
+      "low",
       "recurring"
     ],
-    "saas": true,
-    "scriptSrc": [
-      "\\.mailercloud\\.com/"
+    "requires": [
+      "WordPress"
     ],
-    "website": "https://www.mailercloud.com/"
+    "scriptSrc": [
+      "mailoptin(?:\\.min)?\\.js(?:\\?v(?:er)?=((?:\\d+\\.)+\\d+))?\\;version:\\1"
+    ],
+    "website": "https://mailoptin.io/"
+  },
+  "Mailcheck": {
+    "cats": [
+      59
+    ],
+    "description": "Mailcheck is a JavaScript library designed to address the issue of misspelled email addresses during user input.",
+    "icon": "Mailcheck.png",
+    "oss": true,
+    "scriptSrc": [
+      "mailcheck(?:\\.min)?\\.js(?:\\?v(?:er)?=(\\d+\\.\\d+\\.\\d+))?\\;version:\\1"
+    ],
+    "website": "https://github.com/mailcheck/mailcheck"
   },
   "MailerLite": {
     "cats": [
@@ -621,17 +980,6 @@
     "scriptSrc": "\\.mailerlite\\.com/",
     "website": "https://www.mailerlite.com"
   },
-  "MailerLite plugin": {
-    "cats": [
-      87
-    ],
-    "description": "The official MailerLite signup forms plugin makes it easy to grow your newsletter subscriber list from your WordPress blog or website. The plugin automatically integrates your WordPress form with your MailerLite email marketing account.",
-    "icon": "MailerLite.svg",
-    "implies": "MailerLite",
-    "requires": "WordPress",
-    "scriptSrc": "/wp-content/plugins/woo-mailerlite/.+\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1",
-    "website": "https://ru.wordpress.org/plugins/official-mailerlite-sign-up-forms/"
-  },
   "MailerLite Website Builder": {
     "cats": [
       51
@@ -649,6 +997,35 @@
     "saas": true,
     "scriptSrc": "cdn\\.mailerlite\\.com/moment/moment\\.min\\.js",
     "website": "https://www.mailerlite.com/features/website-builder"
+  },
+  "MailerLite plugin": {
+    "cats": [
+      87
+    ],
+    "description": "The official MailerLite signup forms plugin makes it easy to grow your newsletter subscriber list from your WordPress blog or website. The plugin automatically integrates your WordPress form with your MailerLite email marketing account.",
+    "icon": "MailerLite.svg",
+    "implies": "MailerLite",
+    "requires": "WordPress",
+    "scriptSrc": "/wp-content/plugins/woo-mailerlite/.+\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1",
+    "website": "https://ru.wordpress.org/plugins/official-mailerlite-sign-up-forms/"
+  },
+  "Mailercloud": {
+    "cats": [
+      75,
+      32
+    ],
+    "description": "Mailercloud is an email marketing platform that offers tools for creating, sending, and tracking email campaigns, including automation, contact segmentation, and detailed analytics.",
+    "icon": "Mailercloud.svg",
+    "pricing": [
+      "freemium",
+      "payg",
+      "recurring"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "\\.mailercloud\\.com/"
+    ],
+    "website": "https://www.mailercloud.com/"
   },
   "Mailgun": {
     "cats": [
@@ -732,29 +1109,6 @@
       "app\\.mailocator\\.com"
     ],
     "website": "https://mailocator.com"
-  },
-  "MailOptin": {
-    "cats": [
-      5,
-      87
-    ],
-    "description": "WordPress plugin to create email signup forms that convert visitors into subscribers combined with email automation and newsletter features.",
-    "icon": "MailOptin.png",
-    "js": {
-      "mailoptin_globals": ""
-    },
-    "oss": true,
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "requires": [
-      "WordPress"
-    ],
-    "scriptSrc": [
-      "mailoptin(?:\\.min)?\\.js(?:\\?v(?:er)?=((?:\\d+\\.)+\\d+))?\\;version:\\1"
-    ],
-    "website": "https://mailoptin.io/"
   },
   "Mailshake": {
     "cats": [
@@ -844,22 +1198,6 @@
     ],
     "website": "https://www.maisieai.com"
   },
-  "MAJIN": {
-    "cats": [
-      32
-    ],
-    "description": "MAJIN reads the hearts and minds of each customer using real-world data to automate optimal marketing processes.",
-    "icon": "MAJIN.png",
-    "js": {
-      "ma.Touch": ""
-    },
-    "pricing": [
-      "high",
-      "recurring"
-    ],
-    "saas": true,
-    "website": "https://ma-jin.jp"
-  },
   "Makaira": {
     "cats": [
       108
@@ -903,6 +1241,36 @@
     "scriptSrc": "mk-sense\\.com/aweb\\?license",
     "website": "https://mk-sense.com/"
   },
+  "MakeShop": {
+    "cats": [
+      6
+    ],
+    "description": "MakeShop is a Japanese ecommerce platform.",
+    "dom": "link[href*='gigaplus.makeshop.jp'], img[src*='gigaplus.makeshop.jp']",
+    "icon": "MakeShop.svg",
+    "js": {
+      "MakeShop_TopSearch": "",
+      "makeshop_ga_gtag": ""
+    },
+    "pricing": [
+      "mid",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://www.makeshop.jp"
+  },
+  "MakeShopKorea": {
+    "cats": [
+      6
+    ],
+    "description": "MakeShopKorea is a Korean hosting brand that focuses on building ecommerce stores.",
+    "icon": "MakeShopKorea.png",
+    "js": {
+      "Makeshop": "",
+      "MakeshopLogUniqueId": ""
+    },
+    "website": "https://www.makeshop.co.kr"
+  },
   "Makeplans": {
     "cats": [
       72
@@ -936,36 +1304,6 @@
     ],
     "saas": true,
     "website": "https://www.maker.co"
-  },
-  "MakeShop": {
-    "cats": [
-      6
-    ],
-    "description": "MakeShop is a Japanese ecommerce platform.",
-    "dom": "link[href*='gigaplus.makeshop.jp'], img[src*='gigaplus.makeshop.jp']",
-    "icon": "MakeShop.svg",
-    "js": {
-      "MakeShop_TopSearch": "",
-      "makeshop_ga_gtag": ""
-    },
-    "pricing": [
-      "mid",
-      "recurring"
-    ],
-    "saas": true,
-    "website": "https://www.makeshop.jp"
-  },
-  "MakeShopKorea": {
-    "cats": [
-      6
-    ],
-    "description": "MakeShopKorea is a Korean hosting brand that focuses on building ecommerce stores.",
-    "icon": "MakeShopKorea.png",
-    "js": {
-      "Makeshop": "",
-      "MakeshopLogUniqueId": ""
-    },
-    "website": "https://www.makeshop.co.kr"
   },
   "Makeswift": {
     "cats": [
@@ -1171,6 +1509,88 @@
     "scriptSrc": "\\.manycontacts\\.com",
     "website": "https://www.manycontacts.com"
   },
+  "MapLibre GL JS": {
+    "cats": [
+      35
+    ],
+    "description": "MapLibre GL JS is an open-source library for publishing maps on your websites.",
+    "icon": "MapLibre.svg",
+    "js": {
+      "apex.libVersions.maplibre": "([\\d\\.]+)\\;version:\\1",
+      "maplibregl": "",
+      "rmap2.maplibreglCompare": ""
+    },
+    "oss": true,
+    "scriptSrc": "maplibre-gl@([\\d\\.]+)/dist/maplibre-gl\\.js\\;version:\\1",
+    "website": "https://github.com/maplibre/maplibre-gl-js"
+  },
+  "MapLoco": {
+    "cats": [
+      35
+    ],
+    "description": "MapLoco is a tool that displays website visitor locations on an interactive map for analysis and tracking.",
+    "dom": [
+      "a[href*='m.maploco.com'] > img[src*='www.maploco.com']"
+    ],
+    "icon": "MapLoco.svg",
+    "saas": true,
+    "website": "https://maploco.com"
+  },
+  "MapMyChannel": {
+    "cats": [
+      107
+    ],
+    "description": "MapMyChannel is a cloud-based fulfillment platform that integrates with ecommerce systems to automate inventory, shipping, and order management.",
+    "icon": "MapMyChannel.svg",
+    "pricing": [
+      "freemium",
+      "mid",
+      "recurring"
+    ],
+    "requiresCategory": [
+      6
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "\\.mapmychannel\\.com/"
+    ],
+    "website": "https://www.mapmychannel.com"
+  },
+  "MapPress": {
+    "cats": [
+      5,
+      87
+    ],
+    "description": "MapPress is a WordPress plugin that provides easy integration of interactive maps into WordPress websites.",
+    "dom": [
+      "link[href*='wp-content/plugins/mappress-google-maps-for-wordpress/'], #mappress-leaflet-css, #mappress-css"
+    ],
+    "icon": "MapPress.png",
+    "oss": true,
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "requires": [
+      "WordPress"
+    ],
+    "website": "https://mappresspro.com"
+  },
+  "MapTrack": {
+    "cats": [
+      45
+    ],
+    "description": "MapTack is a platform to audit and manage assets from a single interface.",
+    "icon": "MapTrack.svg",
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "scripts": [
+      "app\\.maptrackpro\\.com"
+    ],
+    "website": "https://maptrack.com"
+  },
   "Mapbox GL JS": {
     "cats": [
       35
@@ -1206,21 +1626,6 @@
     ],
     "website": "https://github.com/mapbox/mapbox.js"
   },
-  "MapLibre GL JS": {
-    "cats": [
-      35
-    ],
-    "description": "MapLibre GL JS is an open-source library for publishing maps on your websites.",
-    "icon": "MapLibre.svg",
-    "js": {
-      "apex.libVersions.maplibre": "([\\d\\.]+)\\;version:\\1",
-      "maplibregl": "",
-      "rmap2.maplibreglCompare": ""
-    },
-    "oss": true,
-    "scriptSrc": "maplibre-gl@([\\d\\.]+)/dist/maplibre-gl\\.js\\;version:\\1",
-    "website": "https://github.com/maplibre/maplibre-gl-js"
-  },
   "Mapline": {
     "cats": [
       35
@@ -1239,18 +1644,6 @@
     "saas": true,
     "website": "https://mapline.com"
   },
-  "MapLoco": {
-    "cats": [
-      35
-    ],
-    "description": "MapLoco is a tool that displays website visitor locations on an interactive map for analysis and tracking.",
-    "dom": [
-      "a[href*='m.maploco.com'] > img[src*='www.maploco.com']"
-    ],
-    "icon": "MapLoco.svg",
-    "saas": true,
-    "website": "https://maploco.com"
-  },
   "Mapme": {
     "cats": [
       35
@@ -1267,26 +1660,6 @@
     ],
     "saas": true,
     "website": "https://mapme.com"
-  },
-  "MapMyChannel": {
-    "cats": [
-      107
-    ],
-    "description": "MapMyChannel is a cloud-based fulfillment platform that integrates with ecommerce systems to automate inventory, shipping, and order management.",
-    "icon": "MapMyChannel.svg",
-    "pricing": [
-      "freemium",
-      "mid",
-      "recurring"
-    ],
-    "requiresCategory": [
-      6
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "\\.mapmychannel\\.com/"
-    ],
-    "website": "https://www.mapmychannel.com"
   },
   "Mapp": {
     "cats": [
@@ -1349,26 +1722,6 @@
     ],
     "website": "https://mapplic.com"
   },
-  "MapPress": {
-    "cats": [
-      5,
-      87
-    ],
-    "description": "MapPress is a WordPress plugin that provides easy integration of interactive maps into WordPress websites.",
-    "dom": [
-      "link[href*='wp-content/plugins/mappress-google-maps-for-wordpress/'], #mappress-leaflet-css, #mappress-css"
-    ],
-    "icon": "MapPress.png",
-    "oss": true,
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "requires": [
-      "WordPress"
-    ],
-    "website": "https://mappresspro.com"
-  },
   "Maptalks": {
     "cats": [
       35
@@ -1400,21 +1753,6 @@
       "api\\.maptiler\\.com"
     ],
     "website": "https://www.maptiler.com"
-  },
-  "MapTrack": {
-    "cats": [
-      45
-    ],
-    "description": "MapTack is a platform to audit and manage assets from a single interface.",
-    "icon": "MapTrack.svg",
-    "pricing": [
-      "poa"
-    ],
-    "saas": true,
-    "scripts": [
-      "app\\.maptrackpro\\.com"
-    ],
-    "website": "https://maptrack.com"
   },
   "Marcando": {
     "cats": [
@@ -1556,6 +1894,27 @@
     ],
     "website": "https://markethero.io"
   },
+  "MarketPlan": {
+    "cats": [
+      10,
+      32
+    ],
+    "description": "MarketPlan is a platform that integrates campaign mapping, simulation, collaboration, and smart analytics, all in one place.",
+    "icon": "MarketPlan.svg",
+    "js": {
+      "marketplan": ""
+    },
+    "pricing": [
+      "freemium",
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "app\\.marketplan\\.io/"
+    ],
+    "website": "https://www.gomarketplan.io"
+  },
   "Marketify": {
     "cats": [
       32
@@ -1624,27 +1983,6 @@
     "saas": true,
     "website": "https://www.marketpath.com"
   },
-  "MarketPlan": {
-    "cats": [
-      10,
-      32
-    ],
-    "description": "MarketPlan is a platform that integrates campaign mapping, simulation, collaboration, and smart analytics, all in one place.",
-    "icon": "MarketPlan.svg",
-    "js": {
-      "marketplan": ""
-    },
-    "pricing": [
-      "freemium",
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "app\\.marketplan\\.io/"
-    ],
-    "website": "https://www.gomarketplan.io"
-  },
   "Marko": {
     "cats": [
       18,
@@ -1695,6 +2033,18 @@
     ],
     "website": "https://www.marsflag.com/en"
   },
+  "MarsX": {
+    "cats": [
+      47
+    ],
+    "description": "MarsX is an AI-powered coding platform designed to develop Software as a Service (SaaS) tools.",
+    "icon": "MarsX.svg",
+    "saas": true,
+    "scriptSrc": [
+      "analytic-api\\.marsx\\.dev/"
+    ],
+    "website": "https://www.marsx.dev"
+  },
   "Marsello": {
     "cats": [
       84
@@ -1730,18 +2080,6 @@
       "app\\.usemarshal\\.co"
     ],
     "website": "https://usemarshal.co"
-  },
-  "MarsX": {
-    "cats": [
-      47
-    ],
-    "description": "MarsX is an AI-powered coding platform designed to develop Software as a Service (SaaS) tools.",
-    "icon": "MarsX.svg",
-    "saas": true,
-    "scriptSrc": [
-      "analytic-api\\.marsx\\.dev/"
-    ],
-    "website": "https://www.marsx.dev"
   },
   "Mashore Method": {
     "cats": [
@@ -1973,17 +2311,6 @@
     "scriptSrc": "([\\d\\.]+)/.*/materialize\\.min\\.js\\;version:\\1",
     "website": "http://materializecss.com"
   },
-  "math.js": {
-    "cats": [
-      59
-    ],
-    "icon": "math.js.png",
-    "js": {
-      "mathjs": ""
-    },
-    "scriptSrc": "math(?:\\.min)?\\.js",
-    "website": "http://mathjs.org"
-  },
   "MathJax": {
     "cats": [
       25
@@ -2051,17 +2378,6 @@
       "MatomoTagManager": ""
     },
     "website": "https://developer.matomo.org/guides/tagmanager/introduction"
-  },
-  "MATORI.NET": {
-    "cats": [
-      64
-    ],
-    "description": "MATORI.NET is a fully managed reverse proxy.",
-    "headers": {
-      "X-Powered-By": "MATORI.NET"
-    },
-    "implies": "OpenResty",
-    "website": "http://matori.net"
   },
   "Mattaki": {
     "cats": [
@@ -2199,6 +2515,37 @@
     "icon": "MaxCDN.png",
     "website": "http://www.maxcdn.com"
   },
+  "MaxMind": {
+    "cats": [
+      79,
+      83
+    ],
+    "description": "MaxMind is a provider of geolocation and online fraud detection tools.",
+    "icon": "MaxMind.png",
+    "pricing": [
+      "freemium",
+      "payg"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "(?:device|js)\\.maxmind\\.com/",
+      "geoip\\.maxmind\\.min\\.js",
+      "geoip-js\\.com/.+/v([\\d\\.]+)/\\;version:\\1"
+    ],
+    "website": "https://www.maxmind.com",
+    "xhr": "\\.maxmind\\.com"
+  },
+  "MaxSite CMS": {
+    "cats": [
+      1
+    ],
+    "icon": "MaxSite CMS.png",
+    "implies": "PHP",
+    "meta": {
+      "generator": "MaxSite CMS"
+    },
+    "website": "http://max-3000.com"
+  },
   "Maxemail": {
     "cats": [
       32
@@ -2242,37 +2589,6 @@
     ],
     "website": "https://www.maxicms.nl"
   },
-  "MaxMind": {
-    "cats": [
-      79,
-      83
-    ],
-    "description": "MaxMind is a provider of geolocation and online fraud detection tools.",
-    "icon": "MaxMind.png",
-    "pricing": [
-      "freemium",
-      "payg"
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "(?:device|js)\\.maxmind\\.com/",
-      "geoip\\.maxmind\\.min\\.js",
-      "geoip-js\\.com/.+/v([\\d\\.]+)/\\;version:\\1"
-    ],
-    "website": "https://www.maxmind.com",
-    "xhr": "\\.maxmind\\.com"
-  },
-  "MaxSite CMS": {
-    "cats": [
-      1
-    ],
-    "icon": "MaxSite CMS.png",
-    "implies": "PHP",
-    "meta": {
-      "generator": "MaxSite CMS"
-    },
-    "website": "http://max-3000.com"
-  },
   "Maxxton": {
     "cats": [
       93
@@ -2299,99 +2615,6 @@
       "\\.mazrica\\.com/"
     ],
     "website": "https://mazrica.com"
-  },
-  "mdBook": {
-    "cats": [
-      4
-    ],
-    "description": "mdBook is a utility to create modern online books from Markdown files.",
-    "icon": "mdBook.svg",
-    "oss": true,
-    "scripts": "localStorage\\.getItem\\('mdbook-(?:sidebar|theme)'\\)",
-    "website": "https://github.com/rust-lang/mdBook"
-  },
-  "MDBootstrap": {
-    "cats": [
-      66
-    ],
-    "description": "MDBootstrap (Material Design for Bootstrap) is a complete UI package that can be integrated with other frameworks such as Angular, React, Vue, etc. It is used to design a fully responsive and mobile-friendly layout using various components, plugins, animation.",
-    "icon": "MDBootstrap.png",
-    "implies": "Bootstrap",
-    "js": {
-      "mdb.ScrollSpy": ""
-    },
-    "oss": true,
-    "scriptSrc": "(?:/mdbootstrap/([\\d\\.]+)/)?js/mdb\\.min\\.js\\;version:\\1",
-    "website": "https://mdbootstrap.com"
-  },
-  "MDBootstrap WP theme": {
-    "cats": [
-      80
-    ],
-    "description": "MDBootstrap WP theme is a WordPress theme built on top of the MDBootstrap front-end UI library. It provides a set of pre-designed layouts, widgets, and components that can be easily customised and integrated into WordPress websites.",
-    "dom": {
-      "link[href*='/wp-content/themes/mdbootstrap']": {
-        "attributes": {
-          "href": "/wp-content/themes/mdbootstrap(?:\\d+)?/.+\\.css(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1"
-        }
-      }
-    },
-    "icon": "MDBootstrap.png",
-    "implies": "MDBootstrap",
-    "requires": "WordPress",
-    "website": "https://mdbgo.com/docs/projects/wordpress/"
-  },
-  "MDirector": {
-    "cats": [
-      32
-    ],
-    "description": "MDirector is an all-in-one digital marketing platform that centralizes email, SMS, and automation tools to manage campaigns and analyze audience engagement.",
-    "icon": "MDirector.svg",
-    "pricing": [
-      "freemium",
-      "low",
-      "recurring"
-    ],
-    "requires": [
-      "WordPress"
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "/wp-content/plugins/mdirector-newsletter/public/js/mdirector-newsletter-public\\.js"
-    ],
-    "scripts": [
-      "app\\.mdirector\\.com"
-    ],
-    "website": "https://www.mdirector.com"
-  },
-  "MDS Brand": {
-    "cats": [
-      53
-    ],
-    "description": "MDS Brand is a provider of website, CRM, vrtual BDC, SEO, PPC, and live chat solutions for Marine, RV, Powersports, and automotive industries.",
-    "dom": "a[href*='mdsbrand.com/']",
-    "icon": "MDS Brand.png",
-    "pricing": [
-      "poa"
-    ],
-    "requires": [
-      "Nginx",
-      "UserWay"
-    ],
-    "website": "https://mdsbrand.com"
-  },
-  "MDUI": {
-    "cats": [
-      66
-    ],
-    "description": "MDUI is a CSS Framework based on material design.",
-    "icon": "MDUI.png",
-    "js": {
-      "_mduiEventId": "",
-      "mdui.Drawer": ""
-    },
-    "oss": true,
-    "website": "https://www.mdui.org"
   },
   "Measured": {
     "cats": [
@@ -2476,26 +2699,6 @@
     },
     "website": "http://www.mediaelementjs.com"
   },
-  "Mediahawk": {
-    "cats": [
-      10
-    ],
-    "description": "Mediahawk is a call analytics software for marketers.",
-    "icon": "Mediahawk.svg",
-    "js": {
-      "_mhct": "",
-      "mhctRequestFiredBeforeComplete": "",
-      "mhctRequestInitial": "",
-      "mhctRequestRunning": ""
-    },
-    "pricing": [
-      "mid",
-      "recurring",
-      "poa"
-    ],
-    "saas": true,
-    "website": "http://mediahawk.co.uk"
-  },
   "MediaPlatform": {
     "cats": [
       103
@@ -2507,21 +2710,6 @@
     },
     "saas": true,
     "website": "https://www.mediaplatform.com"
-  },
-  "Mediavine": {
-    "cats": [
-      36
-    ],
-    "cookies": {
-      "mediavine_session": ""
-    },
-    "description": "Mediavine is a full service ad management platform.",
-    "icon": "Mediavine.svg",
-    "js": {
-      "$mediavine.web": ""
-    },
-    "scriptSrc": "\\.mediavine\\.com/",
-    "website": "https://www.mediavine.com"
   },
   "MediaWiki": {
     "cats": [
@@ -2545,6 +2733,41 @@
       "generator": "^MediaWiki ?(.+)$\\;version:\\1"
     },
     "website": "https://www.mediawiki.org"
+  },
+  "Mediahawk": {
+    "cats": [
+      10
+    ],
+    "description": "Mediahawk is a call analytics software for marketers.",
+    "icon": "Mediahawk.svg",
+    "js": {
+      "_mhct": "",
+      "mhctRequestFiredBeforeComplete": "",
+      "mhctRequestInitial": "",
+      "mhctRequestRunning": ""
+    },
+    "pricing": [
+      "mid",
+      "recurring",
+      "poa"
+    ],
+    "saas": true,
+    "website": "http://mediahawk.co.uk"
+  },
+  "Mediavine": {
+    "cats": [
+      36
+    ],
+    "cookies": {
+      "mediavine_session": ""
+    },
+    "description": "Mediavine is a full service ad management platform.",
+    "icon": "Mediavine.svg",
+    "js": {
+      "$mediavine.web": ""
+    },
+    "scriptSrc": "\\.mediavine\\.com/",
+    "website": "https://www.mediavine.com"
   },
   "Medium": {
     "cats": [
@@ -2754,39 +2977,6 @@
     "saas": true,
     "website": "https://www.meltwater.com"
   },
-  "Membership Toolkit": {
-    "cats": [
-      101
-    ],
-    "description": "Membership Toolkit is a volunteer management platform that organizes scheduling, tracks participation, and streamlines administrative tasks for groups that coordinate community, school, or event-based service activities.",
-    "icon": "MembershipToolkit.svg",
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "scripts": [
-      "\\.membershiptoolkit\\.com"
-    ],
-    "website": "https://membershiptoolkit.com"
-  },
-  "MembershipWorks": {
-    "cats": [
-      53
-    ],
-    "description": "MembershipWorks is a membership software platform that provides tools for managing member records, offering a searchable member directory, and supporting event calendars with integrated registration features.",
-    "icon": "MembershipWorks.svg",
-    "pricing": [
-      "freemium",
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "cdn\\.membershipworks\\.com"
-    ],
-    "website": "https://membershipworks.com"
-  },
   "MemberSpace": {
     "cats": [
       19,
@@ -2829,6 +3019,39 @@
     "scriptSrc": "memberstack\\.js",
     "url": "^https?//.+\\.memberstack\\.io",
     "website": "https://www.memberstack.io"
+  },
+  "Membership Toolkit": {
+    "cats": [
+      101
+    ],
+    "description": "Membership Toolkit is a volunteer management platform that organizes scheduling, tracks participation, and streamlines administrative tasks for groups that coordinate community, school, or event-based service activities.",
+    "icon": "MembershipToolkit.svg",
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "scripts": [
+      "\\.membershiptoolkit\\.com"
+    ],
+    "website": "https://membershiptoolkit.com"
+  },
+  "MembershipWorks": {
+    "cats": [
+      53
+    ],
+    "description": "MembershipWorks is a membership software platform that provides tools for managing member records, offering a searchable member directory, and supporting event calendars with integrated registration features.",
+    "icon": "MembershipWorks.svg",
+    "pricing": [
+      "freemium",
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "cdn\\.membershipworks\\.com"
+    ],
+    "website": "https://membershipworks.com"
   },
   "Mendix": {
     "cats": [
@@ -3208,20 +3431,6 @@
     ],
     "website": "https://www.metikular.ch"
   },
-  "metisMenu": {
-    "cats": [
-      59
-    ],
-    "description": "metisMenu is a collapsible jQuery menu plugin.",
-    "implies": "jQuery",
-    "js": {
-      "MetisMenu": "",
-      "metisMenu": ""
-    },
-    "oss": true,
-    "scriptSrc": "(?:/|\\.)metisMenu(?:js)?(?:\\.min)?\\.js(?:\\?([\\d\\.]+))?\\;version:\\1",
-    "website": "https://github.com/onokumus/metismenu"
-  },
   "Metomic": {
     "cats": [
       67
@@ -3344,25 +3553,6 @@
     ],
     "website": "https://themeisle.com/themes/metrox/"
   },
-  "Metronet Profile Picture": {
-    "cats": [
-      5,
-      87
-    ],
-    "description": "Set a custom profile image for a user using the standard WordPress media upload tool.",
-    "dom": [
-      "link[href*='/wp-content/plugins/metronet-profile-picture/']"
-    ],
-    "icon": "Metronet Profile Picture.png",
-    "oss": true,
-    "requires": [
-      "WordPress"
-    ],
-    "scriptSrc": [
-      "metronet-profile-picture(?:\\/js)?(?:\\/mpp-frontend)?(?:\\.min)?\\.js(?:\\?v(?:er)?=((?:\\d+\\.)+\\d+))?\\;version:\\1"
-    ],
-    "website": "https://wordpress.org/plugins/metronet-profile-picture/"
-  },
   "MetroUI": {
     "cats": [
       66
@@ -3386,6 +3576,25 @@
       "recurring"
     ],
     "website": "https://github.com/olton/Metro-UI-CSS"
+  },
+  "Metronet Profile Picture": {
+    "cats": [
+      5,
+      87
+    ],
+    "description": "Set a custom profile image for a user using the standard WordPress media upload tool.",
+    "dom": [
+      "link[href*='/wp-content/plugins/metronet-profile-picture/']"
+    ],
+    "icon": "Metronet Profile Picture.png",
+    "oss": true,
+    "requires": [
+      "WordPress"
+    ],
+    "scriptSrc": [
+      "metronet-profile-picture(?:\\/js)?(?:\\/mpp-frontend)?(?:\\.min)?\\.js(?:\\?v(?:er)?=((?:\\d+\\.)+\\d+))?\\;version:\\1"
+    ],
+    "website": "https://wordpress.org/plugins/metronet-profile-picture/"
   },
   "Mews": {
     "cats": [
@@ -3441,22 +3650,6 @@
     ],
     "website": "https://www.mezereon.com"
   },
-  "MGID": {
-    "cats": [
-      36
-    ],
-    "description": "MGID is a programmatic advertising platform frequently used by misinformation websites.",
-    "icon": "MGID.png",
-    "js": {
-      "MgSensor.mgqWorker": ""
-    },
-    "pricing": [
-      "payg"
-    ],
-    "saas": true,
-    "scriptSrc": "\\.mgid\\.com/",
-    "website": "https://www.mgid.com"
-  },
   "Mginex": {
     "cats": [
       6
@@ -3471,21 +3664,6 @@
       "api\\.mginex\\.com/"
     ],
     "website": "https://mginex.com"
-  },
-  "MGPanel": {
-    "cats": [
-      1
-    ],
-    "description": "MGPanel has it all, a content management system that gives programmers the freedom to create professional web pages from scratch, also providing their clients with a self-managing platform.",
-    "icon": "MGPanel.png",
-    "implies": "MySQL",
-    "pricing": [
-      "poa"
-    ],
-    "requires": "PHP",
-    "saas": true,
-    "scriptSrc": "\\.mgpanel\\.org/",
-    "website": "https://mgpanel.org"
   },
   "Miappi": {
     "cats": [
@@ -3505,27 +3683,6 @@
       "web\\.miappi\\.com/"
     ],
     "website": "https://miappi.com"
-  },
-  "MICE Operations": {
-    "cats": [
-      5
-    ],
-    "description": "MICE Operations is a software solution tailored for event venues, catering, and hospitality businesses, streamlining operational processes, sales, and client relationship management.",
-    "icon": "MICEOperations.svg",
-    "js": {
-      "miceWidgetSettings": ""
-    },
-    "pricing": [
-      "freemium",
-      "mid",
-      "recurring",
-      "poa"
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "app\\.miceoperations\\.com/widget/widget\\.js\\?ver=([\\d\\.]+)\\;version:\\1"
-    ],
-    "website": "https://www.miceoperations.com"
   },
   "MichiJS": {
     "cats": [
@@ -3560,23 +3717,6 @@
     ],
     "website": "https://mico-inc.com"
   },
-  "microCMS": {
-    "cats": [
-      1
-    ],
-    "description": "microCMS is a Japan-based headless CMS that enables editors and developers to build delicate sites and apps.",
-    "dom": "img[src*='.microcms-assets.io/']",
-    "icon": "microCMS.svg",
-    "pricing": [
-      "freemium",
-      "low",
-      "recurring",
-      "payg"
-    ],
-    "saas": true,
-    "website": "https://microcms.io",
-    "xhr": "\\.microcms\\.io"
-  },
   "Microsoft 365": {
     "cats": [
       30,
@@ -3590,6 +3730,26 @@
     },
     "icon": "Microsoft 365.svg",
     "website": "https://www.microsoft.com/microsoft-365"
+  },
+  "Microsoft ASP.NET": {
+    "cats": [
+      18
+    ],
+    "cookies": {
+      "ASP.NET_SessionId": "",
+      "ASPSESSION": ""
+    },
+    "cpe": "cpe:2.3:a:microsoft:asp.net:*:*:*:*:*:*:*:*",
+    "description": "ASP.NET is an open-source, server-side web-application framework designed for web development to produce dynamic web pages.",
+    "headers": {
+      "X-AspNet-Version": "(.+)\\;version:\\1",
+      "X-Powered-By": "^ASP\\.NET",
+      "set-cookie": "\\.AspNetCore"
+    },
+    "html": "<input[^>]+name=\"__VIEWSTATE",
+    "icon": "Microsoft ASP.NET.svg",
+    "url": "\\.aspx?(?:$|\\?)",
+    "website": "https://www.asp.net"
   },
   "Microsoft Advertising": {
     "cats": [
@@ -3638,26 +3798,6 @@
     ],
     "saas": true,
     "website": "https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview"
-  },
-  "Microsoft ASP.NET": {
-    "cats": [
-      18
-    ],
-    "cookies": {
-      "ASP.NET_SessionId": "",
-      "ASPSESSION": ""
-    },
-    "cpe": "cpe:2.3:a:microsoft:asp.net:*:*:*:*:*:*:*:*",
-    "description": "ASP.NET is an open-source, server-side web-application framework designed for web development to produce dynamic web pages.",
-    "headers": {
-      "X-AspNet-Version": "(.+)\\;version:\\1",
-      "X-Powered-By": "^ASP\\.NET",
-      "set-cookie": "\\.AspNetCore"
-    },
-    "html": "<input[^>]+name=\"__VIEWSTATE",
-    "icon": "Microsoft ASP.NET.svg",
-    "url": "\\.aspx?(?:$|\\?)",
-    "website": "https://www.asp.net"
   },
   "Microsoft Authentication": {
     "cats": [
@@ -3995,22 +4135,6 @@
     "icon": "Milligram.png",
     "website": "https://milligram.io"
   },
-  "Milonic": {
-    "cats": [
-      59
-    ],
-    "description": "Milonic is a platform for developing Dynamic Hypertext Markup Language (DHTML) JavaScript and building dynamic, DHTML-based websites.",
-    "icon": "Milonic.svg",
-    "js": {
-      "milonic.C": ""
-    },
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "website": "https://milonic.com"
-  },
   "MiloTree": {
     "cats": [
       5,
@@ -4035,6 +4159,22 @@
       "cdn001\\.milotree\\.com"
     ],
     "website": "https://milotree.com"
+  },
+  "Milonic": {
+    "cats": [
+      59
+    ],
+    "description": "Milonic is a platform for developing Dynamic Hypertext Markup Language (DHTML) JavaScript and building dynamic, DHTML-based websites.",
+    "icon": "Milonic.svg",
+    "js": {
+      "milonic.C": ""
+    },
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://milonic.com"
   },
   "Milvus": {
     "cats": [
@@ -4072,6 +4212,24 @@
     ],
     "website": "https://www.mimiran.com"
   },
+  "MinMaxify": {
+    "cats": [
+      100
+    ],
+    "description": "MinMaxify is an app that allows Shopify store owners to set minimum and maximum values for customer orders built by Intillium.",
+    "icon": "MinMaxify.png",
+    "implies": "Shopify",
+    "js": {
+      "minMaxify.checkLimits": "",
+      "minMaxify.shop": ""
+    },
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://apps.shopify.com/order-limits-minmaxify"
+  },
   "MindBody": {
     "cats": [
       5,
@@ -4089,24 +4247,6 @@
     "saas": true,
     "scriptSrc": "\\w+\\.healcode\\.com",
     "website": "https://www.mindbodyonline.com"
-  },
-  "Mindbox": {
-    "cats": [
-      32
-    ],
-    "description": "Mindbox is a marketing automation platform.",
-    "icon": "Mindbox.png",
-    "js": {
-      "MindboxEndpointSettings": "",
-      "mindbox": "",
-      "mindboxBatchedModulesInitialized": ""
-    },
-    "pricing": [
-      "payg",
-      "recurring"
-    ],
-    "saas": true,
-    "website": "https://mindbox.ru"
   },
   "MindStudio": {
     "cats": [
@@ -4126,6 +4266,24 @@
     ],
     "saas": true,
     "website": "https://www.mindstudio.ai"
+  },
+  "Mindbox": {
+    "cats": [
+      32
+    ],
+    "description": "Mindbox is a marketing automation platform.",
+    "icon": "Mindbox.png",
+    "js": {
+      "MindboxEndpointSettings": "",
+      "mindbox": "",
+      "mindboxBatchedModulesInitialized": ""
+    },
+    "pricing": [
+      "payg",
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://mindbox.ru"
   },
   "MineLabz donations": {
     "cats": [
@@ -4165,16 +4323,6 @@
     ],
     "website": "https://minerstat.com"
   },
-  "mini_httpd": {
-    "cats": [
-      22
-    ],
-    "headers": {
-      "Server": "mini_httpd(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "mini_httpd.png",
-    "website": "http://acme.com/software/mini_httpd"
-  },
   "MiniBC": {
     "cats": [
       41
@@ -4197,36 +4345,6 @@
       "apps\\.minibc\\.com"
     ],
     "website": "https://www.minibc.com"
-  },
-  "miniCal": {
-    "cats": [
-      1
-    ],
-    "description": "miniCal is an open-source property management system.",
-    "icon": "miniCal.svg",
-    "js": {
-      "miniCal.projectUrl": "app\\.minical\\.io"
-    },
-    "oss": true,
-    "pricing": [
-      "freemium",
-      "poa"
-    ],
-    "website": "https://www.minical.io"
-  },
-  "Miniflat": {
-    "cats": [
-      1
-    ],
-    "description": "Miniflat is an Iranian and Persian content management system developed with flat file technology.",
-    "icon": "Miniflat.svg",
-    "meta": {
-      "generator": "^Miniflat$"
-    },
-    "pricing": [
-      "poa"
-    ],
-    "website": "https://miniflat.ir"
   },
   "MiniOrange Login": {
     "cats": [
@@ -4258,23 +4376,19 @@
     "oss": true,
     "website": "https://github.com/webmin/webmin/blob/master/miniserv.pl"
   },
-  "MinMaxify": {
+  "Miniflat": {
     "cats": [
-      100
+      1
     ],
-    "description": "MinMaxify is an app that allows Shopify store owners to set minimum and maximum values for customer orders built by Intillium.",
-    "icon": "MinMaxify.png",
-    "implies": "Shopify",
-    "js": {
-      "minMaxify.checkLimits": "",
-      "minMaxify.shop": ""
+    "description": "Miniflat is an Iranian and Persian content management system developed with flat file technology.",
+    "icon": "Miniflat.svg",
+    "meta": {
+      "generator": "^Miniflat$"
     },
     "pricing": [
-      "low",
-      "recurring"
+      "poa"
     ],
-    "saas": true,
-    "website": "https://apps.shopify.com/order-limits-minmaxify"
+    "website": "https://miniflat.ir"
   },
   "Mint": {
     "cats": [
@@ -4422,22 +4536,6 @@
     "icon": "Miro.png",
     "saas": true,
     "website": "https://miro.com"
-  },
-  "mirrAR": {
-    "cats": [
-      105
-    ],
-    "description": "mirrAR is a real-time augmented reality platform for retail brands that enables consumers to virtually try on products and experience how it feels to own them before the actual purchase, both in-store and online.",
-    "icon": "mirrAR.png",
-    "js": {
-      "initMirrarUI": "",
-      "loadmirrAR": ""
-    },
-    "pricing": [
-      "poa"
-    ],
-    "saas": true,
-    "website": "https://www.mirrar.com"
   },
   "Mirus": {
     "cats": [
@@ -4626,22 +4724,6 @@
     ],
     "website": "https://mixpanel.com"
   },
-  "MIYN Online Appointment": {
-    "cats": [
-      72
-    ],
-    "description": "MIYN Online Appointment is an advanced cloud-based online appointment scheduling software.",
-    "icon": "MIYN.svg",
-    "js": {
-      "MIYNLive.settings": ""
-    },
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "website": "https://miyn.app/online-appointment"
-  },
   "MizbanCloud": {
     "cats": [
       31
@@ -4668,21 +4750,25 @@
     },
     "website": "http://www.mkdocs.org/"
   },
-  "MNTN": {
+  "MoEngage": {
     "cats": [
-      36,
-      77
+      32,
+      10
     ],
-    "description": "MNTN (formerly SteelHouse) is a marketing technology company that provides a platform for digital advertising, including tools for programmatic advertising, creative management, and campaign optimization.",
-    "icon": "mntn.svg",
+    "description": "MoEngage is an intelligent customer engagement platform for the customer-obsessed marketer.",
+    "icon": "MoEngage.png",
+    "js": {
+      "MOENGAGE_API_KEY": "",
+      "Moengage": "",
+      "downloadMoengage": "",
+      "moengage_object": ""
+    },
     "pricing": [
       "poa"
     ],
     "saas": true,
-    "scriptSrc": [
-      "\\.steelhousemedia\\.com/(?:spx\\?dxver=([\\d.]+))?\\;version:\\1"
-    ],
-    "website": "https://mountain.com"
+    "scriptSrc": "cdn\\.moengage\\.\\w+",
+    "website": "https://www.moengage.com"
   },
   "Moast": {
     "cats": [
@@ -4718,15 +4804,18 @@
     ],
     "website": "https://moat.com/"
   },
-  "mobicred": {
+  "MobX": {
     "cats": [
-      41,
-      91
+      59
     ],
-    "description": "Mobicred is a credit facility that allows you to safely shop online with our participating retailers.",
-    "icon": "Mobicred.png",
-    "scriptSrc": "app\\.mobicredwidget\\.co\\.za",
-    "website": "https://mobicred.co.za/"
+    "icon": "MobX.svg",
+    "js": {
+      "__mobxGlobal": "",
+      "__mobxGlobals": "",
+      "__mobxInstanceCount": ""
+    },
+    "scriptSrc": "(?:/([\\d\\.]+))?/mobx(?:\\.[a-z]+){0,2}\\.js(?:$|\\?)\\;version:\\1",
+    "website": "https://mobx.js.org"
   },
   "Mobify": {
     "cats": [
@@ -4747,17 +4836,6 @@
     ],
     "website": "https://www.mobify.com"
   },
-  "mobile-detect.js": {
-    "cats": [
-      59
-    ],
-    "description": "Mobile-detect.js is a compact JavaScript library designed to detect devices by comparing patterns against a given User-Agent string.",
-    "oss": true,
-    "scriptSrc": [
-      "mobile-detect(?:\\.min)?\\.js(?:\\?ver=((?:\\d+\\.)+\\d+))?\\;version:\\1"
-    ],
-    "website": "https://hgoebl.github.io/mobile-detect.js/doc/MobileDetect.html"
-  },
   "Mobirise": {
     "cats": [
       51
@@ -4771,19 +4849,6 @@
       "generator": "^Mobirise v([\\d.]+)\\;version:\\1"
     },
     "website": "https://mobirise.com"
-  },
-  "MobX": {
-    "cats": [
-      59
-    ],
-    "icon": "MobX.svg",
-    "js": {
-      "__mobxGlobal": "",
-      "__mobxGlobals": "",
-      "__mobxInstanceCount": ""
-    },
-    "scriptSrc": "(?:/([\\d\\.]+))?/mobx(?:\\.[a-z]+){0,2}\\.js(?:$|\\?)\\;version:\\1",
-    "website": "https://mobx.js.org"
   },
   "MochiKit": {
     "cats": [
@@ -4806,151 +4871,6 @@
       "Server": "MochiWeb(?:/([\\d.]+))?\\;version:\\1"
     },
     "website": "https://github.com/mochi/mochiweb"
-  },
-  "mod_auth_pam": {
-    "cats": [
-      33
-    ],
-    "description": "Mod_auth_pam is used to configure ways for authenticating users.",
-    "headers": {
-      "Server": "mod_auth_pam(?:/([\\d\\.]+))?\\;version:\\1"
-    },
-    "icon": "Apache.svg",
-    "implies": "Apache HTTP Server",
-    "website": "http://pam.sourceforge.net/mod_auth_pam"
-  },
-  "mod_dav": {
-    "cats": [
-      33
-    ],
-    "description": "Mod_dav is an Apache module to provide WebDAV capabilities for your Apache web server. It is an open-source module, provided under an Apache-style license.",
-    "headers": {
-      "Server": "\\b(?:mod_)?DAV\\b(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "Apache.svg",
-    "implies": "Apache HTTP Server",
-    "website": "http://webdav.org/mod_dav"
-  },
-  "mod_fastcgi": {
-    "cats": [
-      33
-    ],
-    "description": "Mod_fcgid is a high performance alternative to mod_cgi or mod_cgid, which starts a sufficient number instances of the CGI program to handle concurrent requests, and these programs remain running to handle further incoming requests.",
-    "headers": {
-      "Server": "mod_fastcgi(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "Apache.svg",
-    "implies": "Apache HTTP Server",
-    "website": "http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html"
-  },
-  "mod_jk": {
-    "cats": [
-      33
-    ],
-    "description": "Mod_jk is an Apache module used to connect the Tomcat servlet container with web servers such as Apache, iPlanet, Sun ONE (formerly Netscape) and even IIS using the Apache JServ Protocol. A web server waits for client HTTP requests.",
-    "headers": {
-      "Server": "mod_jk(?:/([\\d\\.]+))?\\;version:\\1"
-    },
-    "icon": "Apache.svg",
-    "implies": [
-      "Apache Tomcat",
-      "Apache HTTP Server"
-    ],
-    "website": "http://tomcat.apache.org/tomcat-3.3-doc/mod_jk-howto.html"
-  },
-  "mod_perl": {
-    "cats": [
-      33
-    ],
-    "cpe": "cpe:2.3:a:apache:mod_perl:*:*:*:*:*:*:*:*",
-    "description": "Mod_perl is an optional module for the Apache HTTP server. It embeds a Perl interpreter into the Apache server. In addition to allowing Apache modules to be written in the Perl programming language, it allows the Apache web server to be dynamically configured by Perl programs.",
-    "headers": {
-      "Server": "mod_perl(?:/([\\d\\.]+))?\\;version:\\1"
-    },
-    "icon": "mod_perl.png",
-    "implies": [
-      "Perl",
-      "Apache HTTP Server"
-    ],
-    "website": "http://perl.apache.org"
-  },
-  "mod_python": {
-    "cats": [
-      33
-    ],
-    "cpe": "cpe:2.3:a:apache:mod_python:*:*:*:*:*:*:*:*",
-    "description": "Mod_python is an Apache HTTP Server module that integrates the Python programming language with the server. It is intended to provide a Python language binding for the Apache HTTP Server. ",
-    "headers": {
-      "Server": "mod_python(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "mod_python.png",
-    "implies": [
-      "Python",
-      "Apache HTTP Server"
-    ],
-    "website": "http://www.modpython.org"
-  },
-  "mod_rack": {
-    "cats": [
-      33
-    ],
-    "description": "Mod_rack is a free web server and application server with support for Ruby, Python and Node.js.",
-    "headers": {
-      "Server": "mod_rack(?:/([\\d.]+))?\\;version:\\1",
-      "X-Powered-By": "mod_rack(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "Phusion Passenger.png",
-    "implies": [
-      "Ruby on Rails\\;confidence:50",
-      "Apache HTTP Server"
-    ],
-    "website": "http://phusionpassenger.com"
-  },
-  "mod_rails": {
-    "cats": [
-      33
-    ],
-    "description": "Mod_rails is a free web server and application server with support for Ruby, Python and Node.js.",
-    "headers": {
-      "Server": "mod_rails(?:/([\\d.]+))?\\;version:\\1",
-      "X-Powered-By": "mod_rails(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "Phusion Passenger.png",
-    "implies": [
-      "Ruby on Rails\\;confidence:50",
-      "Apache HTTP Server"
-    ],
-    "website": "http://phusionpassenger.com"
-  },
-  "mod_ssl": {
-    "cats": [
-      33
-    ],
-    "cpe": "cpe:2.3:a:modssl:mod_ssl:*:*:*:*:*:*:*:*",
-    "description": "mod_ssl is an optional module for the Apache HTTP Server. It provides strong cryptography for the Apache web server via the Secure Sockets Layer (SSL) and Transport Layer Security (TLS) cryptographic protocols by the help of the open-source SSL/TLS toolkit OpenSSL.",
-    "headers": {
-      "Server": "mod_ssl(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "mod_ssl.png",
-    "implies": "Apache HTTP Server",
-    "website": "http://modssl.org"
-  },
-  "mod_wsgi": {
-    "cats": [
-      33
-    ],
-    "cpe": "cpe:2.3:a:modwsgi:mod_wsgi:*:*:*:*:*:*:*:*",
-    "description": "mod_wsgi is an Apache HTTP Server module that provides a WSGI compliant interface for hosting Python based web applications under Apache.",
-    "headers": {
-      "Server": "mod_wsgi(?:/([\\d.]+))?\\;version:\\1",
-      "X-Powered-By": "mod_wsgi(?:/([\\d.]+))?\\;version:\\1"
-    },
-    "icon": "mod_wsgi.png",
-    "implies": [
-      "Python\\;confidence:50",
-      "Apache HTTP Server"
-    ],
-    "website": "https://code.google.com/p/modwsgi"
   },
   "Modal Forms": {
     "cats": [
@@ -5135,59 +5055,6 @@
     "icon": "Modulify.svg",
     "saas": true,
     "website": "https://modulify.ai"
-  },
-  "MODX": {
-    "cats": [
-      1
-    ],
-    "cpe": "cpe:2.3:a:modx:modx_revolution:*:*:*:*:*:*:*:*",
-    "description": "MODX (originally MODx) is an open source content management system and web application framework for publishing content on the World Wide Web and intranets.",
-    "headers": {
-      "X-Powered-By": "^MODX"
-    },
-    "html": [
-      "<a[^>]+>Powered by MODX</a>",
-      "<!-- Modx process time debug info -->",
-      "<(?:link|script)[^>]+assets/snippets/\\;confidence:20",
-      "<form[^>]+id=\"ajaxSearch_form\\;confidence:20",
-      "<input[^>]+id=\"ajaxSearch_input\\;confidence:20"
-    ],
-    "icon": "MODX.svg",
-    "implies": "PHP",
-    "js": {
-      "MODX": "",
-      "MODX_MEDIA_PATH": ""
-    },
-    "meta": {
-      "generator": "MODX[^\\d.]*([\\d.]+)?\\;version:\\1"
-    },
-    "oss": true,
-    "pricing": [
-      "low"
-    ],
-    "saas": true,
-    "scriptSrc": "/assets/components/templates/\\;confidence:50",
-    "website": "https://modx.com/content-management-framework"
-  },
-  "MoEngage": {
-    "cats": [
-      32,
-      10
-    ],
-    "description": "MoEngage is an intelligent customer engagement platform for the customer-obsessed marketer.",
-    "icon": "MoEngage.png",
-    "js": {
-      "MOENGAGE_API_KEY": "",
-      "Moengage": "",
-      "downloadMoengage": "",
-      "moengage_object": ""
-    },
-    "pricing": [
-      "poa"
-    ],
-    "saas": true,
-    "scriptSrc": "cdn\\.moengage\\.\\w+",
-    "website": "https://www.moengage.com"
   },
   "Moguta.CMS": {
     "cats": [
@@ -5739,6 +5606,18 @@
     ],
     "website": "https://www.monto.io"
   },
+  "MooTools": {
+    "cats": [
+      12
+    ],
+    "icon": "MooTools.png",
+    "js": {
+      "MooTools": "",
+      "MooTools.version": "^(.+)$\\;version:\\1"
+    },
+    "scriptSrc": "mootools.*\\.js",
+    "website": "https://mootools.net"
+  },
   "Moodle": {
     "cats": [
       21
@@ -5844,18 +5723,6 @@
       "m3\\.moostik\\.net"
     ],
     "website": "https://moostik.net"
-  },
-  "MooTools": {
-    "cats": [
-      12
-    ],
-    "icon": "MooTools.png",
-    "js": {
-      "MooTools": "",
-      "MooTools.version": "^(.+)$\\;version:\\1"
-    },
-    "scriptSrc": "mootools.*\\.js",
-    "website": "https://mootools.net"
   },
   "Moove GDPR Consent": {
     "cats": [
@@ -6224,22 +6091,6 @@
     ],
     "website": "https://www.movylo.com"
   },
-  "mOxie": {
-    "cats": [
-      59
-    ],
-    "description": "mOxie is a library providing polyfills for XHR2 and File API, ensuring compatibility with older browsers that lack native support.",
-    "js": {
-      "mOxie": "",
-      "moxie": ""
-    },
-    "oss": true,
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "website": "https://github.com/moxiecode/moxie"
-  },
   "Moxie": {
     "cats": [
       5,
@@ -6275,79 +6126,6 @@
     "url": "/mozard/!suite",
     "website": "http://mozard.nl"
   },
-  "mParticle": {
-    "cats": [
-      97
-    ],
-    "description": "mParticle is a mobile-focused event tracking and data ingestion tool.",
-    "icon": "mParticle.svg",
-    "js": {
-      "mParticle": "",
-      "mParticle.config.snippetVersion": "(.+)\\;version:\\1"
-    },
-    "pricing": [
-      "poa"
-    ],
-    "saas": true,
-    "scriptSrc": "\\.mparticle\\.com/",
-    "website": "https://www.mparticle.com"
-  },
-  "MRI Box and Dice": {
-    "cats": [
-      53
-    ],
-    "description": "MRI Box and Dice is a CRM platform designed for real estate agencies, providing tools for managing client relationships, property listings, and transactions.",
-    "icon": "MRISoftware.svg",
-    "saas": true,
-    "scriptSrc": [
-      "assets\\.boxdice\\.com\\.au"
-    ],
-    "website": "https://www.mrisoftware.com/au/products/box-and-dice/"
-  },
-  "MRI Eagle": {
-    "cats": [
-      53
-    ],
-    "description": "MRI Eagle is a technology solution catering to real estate firms, offering efficiency and cost-saving benefits.",
-    "dom": [
-      "link[href*='cdn.eaglesoftware.com.au']"
-    ],
-    "icon": "MRISoftware.svg",
-    "pricing": [
-      "poa"
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "\\.eaglesoftware\\.com\\.au"
-    ],
-    "website": "https://www.mrisoftware.com/au/products/eagle"
-  },
-  "MRW": {
-    "cats": [
-      99
-    ],
-    "description": "MRW is a Spanish courier company specialised in express national and international shipping services.",
-    "icon": "MRW.png",
-    "requiresCategory": 6,
-    "text": "\\bMRW\\b",
-    "website": "https://www.mrw.es"
-  },
-  "MSAAQ": {
-    "cats": [
-      6
-    ],
-    "description": "MSAAQ is a platform that allows users to create, sell, and manage their products or services from a single location.",
-    "icon": "MSAAQ.svg",
-    "meta": {
-      "generator": "msaaq\\.com"
-    },
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "website": "https://msaaq.com"
-  },
   "MsCode.pl": {
     "cats": [
       47
@@ -6363,39 +6141,6 @@
     "oss": true,
     "saas": true,
     "website": "https://mscode.pl"
-  },
-  "MSHOP": {
-    "cats": [
-      6
-    ],
-    "description": "MSHOP is an all-in-one ecommerce platform.",
-    "icon": "MSHOP.png",
-    "pricing": [
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "scriptSrc": "static\\.hotishop\\.com/",
-    "website": "https://hotishop.com"
-  },
-  "MTCaptcha": {
-    "cats": [
-      16
-    ],
-    "description": "MTCaptcha is a captcha service that is GDPR and WCAG compliant, providing the confidence of privacy and accessibility.",
-    "icon": "MTCaptcha.png",
-    "js": {
-      "mtcaptcha.getVerifiedToken": "",
-      "mtcaptchaConfig.sitekey": ""
-    },
-    "pricing": [
-      "freemium",
-      "low",
-      "recurring"
-    ],
-    "saas": true,
-    "scriptSrc": "service(?:2)?\\.mtcaptcha\\.com/",
-    "website": "https://www.mtcaptcha.com"
   },
   "Muchat": {
     "cats": [
@@ -6437,23 +6182,6 @@
       "_content/MudBlazor/MudBlazor\\.min\\.js"
     ],
     "website": "https://mudblazor.com/"
-  },
-  "MUI": {
-    "cats": [
-      66
-    ],
-    "css": "\\.MuiPaper-root",
-    "description": "MUI(formerly Material UI) is a simple and customisable component library to build faster, beautiful, and more accessible React applications.",
-    "dom": "style[data-meta='MuiPaper'], div.MuiBox-root, div.MuiPaper-root, style[data-meta='MuiButton']",
-    "icon": "MUI.svg",
-    "implies": "React",
-    "oss": true,
-    "pricing": [
-      "freemium",
-      "payg"
-    ],
-    "saas": true,
-    "website": "https://mui.com"
   },
   "Mul-Pay": {
     "cats": [
@@ -6615,27 +6343,6 @@
     ],
     "saas": true,
     "website": "https://www.mux.com"
-  },
-  "MVD Studio": {
-    "cats": [
-      1,
-      6
-    ],
-    "description": "MVD Studio is a Laravel-based platform built by MVD Studio (Uruguay) for e-commerce stores and bespoke web applications.",
-    "icon": "MVD Studio.svg",
-    "implies": [
-      "Laravel",
-      "PHP"
-    ],
-    "headers": {
-      "X-Built-By": "MVD Studio",
-      "X-Generator": "MVD Studio",
-      "X-Powered-By": "MVD Studio"
-    },
-    "meta": {
-      "generator": "MVD Studio"
-    },
-    "website": "https://mvdstudio.com.uy"
   },
   "My Agile Privacy": {
     "cats": [
@@ -6799,33 +6506,6 @@
     "website": "https://www.myfonts.com",
     "xhr": "\\.myfonts\\.net/"
   },
-  "Myhkw player": {
-    "cats": [
-      5
-    ],
-    "description": "Myhkw player is a website music player.",
-    "icon": "Myhkw player.png",
-    "js": {
-      "myhk_player_songid": "",
-      "myhkplayerlist": ""
-    },
-    "website": "https://myhkw.cn"
-  },
-  "Myli": {
-    "cats": [
-      90
-    ],
-    "description": "Myli is a platform enhancing customer experience, streamlining reputation management, and facilitating consumer acquisition.",
-    "icon": "Myli.svg",
-    "js": {
-      "myli_push.geolocate": ""
-    },
-    "saas": true,
-    "scriptSrc": [
-      "cdn-app\\.myli\\.io/"
-    ],
-    "website": "https://www.myli.io"
-  },
   "MyLiveChat": {
     "cats": [
       52
@@ -6842,31 +6522,6 @@
     "saas": true,
     "scriptSrc": "mylivechat\\.com/",
     "website": "https://mylivechat.com"
-  },
-  "Myma": {
-    "cats": [
-      52
-    ],
-    "description": "Myma is an AI-powered multi-channel chatbot designed for hotels, enabling automated guest interactions across various communication platforms.",
-    "icon": "Myma.svg",
-    "pricing": [
-      "poa"
-    ],
-    "saas": true,
-    "scriptSrc": [
-      "messenger\\.myma\\.ai/"
-    ],
-    "website": "https://www.myma.ai"
-  },
-  "Mynetcap": {
-    "cats": [
-      1
-    ],
-    "icon": "Mynetcap.png",
-    "meta": {
-      "generator": "Mynetcap"
-    },
-    "website": "http://www.netcap-creation.fr"
   },
   "MyOnlineStore": {
     "cats": [
@@ -6924,18 +6579,14 @@
     ],
     "website": "https://myrest.io/"
   },
-  "Mysitefy": {
+  "MySQL": {
     "cats": [
-      51
+      34
     ],
-    "description": "Mysitefy is a digital platform for B2B enterprises. It provides companies with a closed-loop digital application system from website building to marketing, to customer and order management.",
-    "dom": "img[src*='//cdn.mysitefy.com/']",
-    "icon": "Mysitefy.png",
-    "pricing": [
-      "recurring"
-    ],
-    "saas": true,
-    "website": "https://www.mysitefy.com"
+    "cpe": "cpe:2.3:a:mysql:mysql:*:*:*:*:*:*:*:*",
+    "description": "MySQL is an open-source relational database management system.",
+    "icon": "MySQL.svg",
+    "website": "http://mysql.com"
   },
   "MySiteNow": {
     "cats": [
@@ -6954,15 +6605,6 @@
     "saas": true,
     "website": "https://mysitenow.gr"
   },
-  "MySQL": {
-    "cats": [
-      34
-    ],
-    "cpe": "cpe:2.3:a:mysql:mysql:*:*:*:*:*:*:*:*",
-    "description": "MySQL is an open-source relational database management system.",
-    "icon": "MySQL.svg",
-    "website": "http://mysql.com"
-  },
   "MyStat": {
     "cats": [
       10
@@ -6974,49 +6616,6 @@
       "stat\\.mystat\\.hu"
     ],
     "website": "https://www.mystat.hu"
-  },
-  "MysteryThemes News Portal": {
-    "cats": [
-      80
-    ],
-    "description": "News Portal is the ultimate magazine WordPress theme by MysteryThemes.",
-    "icon": "MysteryThemes.png",
-    "pricing": [
-      "freemium",
-      "onetime"
-    ],
-    "requires": "WordPress",
-    "scriptSrc": "/wp-content/themes/news-portal(?:-pro)?/.+np-custom-scripts\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1",
-    "website": "https://mysterythemes.com/wp-themes/news-portal"
-  },
-  "MysteryThemes News Portal Lite": {
-    "cats": [
-      80
-    ],
-    "description": "News Portal Lite is child theme of News Portal ultimate magazine WordPress theme by MysteryThemes.",
-    "dom": "link[href*='/wp-content/themes/news-portal-lite/']",
-    "excludes": "MysteryThemes News Portal",
-    "icon": "MysteryThemes.png",
-    "pricing": [
-      "freemium",
-      "onetime"
-    ],
-    "requires": "WordPress",
-    "website": "https://mysterythemes.com/wp-themes/news-portal-lite"
-  },
-  "MysteryThemes News Portal Mag": {
-    "cats": [
-      80
-    ],
-    "description": "News Portal Mag is child theme of News Portal ultimate magazine WordPress theme by MysteryThemes.",
-    "dom": "link[href*='/wp-content/themes/news-portal-mag/']",
-    "excludes": "MysteryThemes News Portal",
-    "icon": "MysteryThemes.png",
-    "pricing": [
-      "onetime"
-    ],
-    "requires": "WordPress",
-    "website": "https://mysterythemes.com/wp-themes/news-portal-mag"
   },
   "MyTime": {
     "cats": [
@@ -7097,5 +6696,406 @@
     ],
     "saas": true,
     "website": "https://www.ionos.com"
+  },
+  "Myhkw player": {
+    "cats": [
+      5
+    ],
+    "description": "Myhkw player is a website music player.",
+    "icon": "Myhkw player.png",
+    "js": {
+      "myhk_player_songid": "",
+      "myhkplayerlist": ""
+    },
+    "website": "https://myhkw.cn"
+  },
+  "Myli": {
+    "cats": [
+      90
+    ],
+    "description": "Myli is a platform enhancing customer experience, streamlining reputation management, and facilitating consumer acquisition.",
+    "icon": "Myli.svg",
+    "js": {
+      "myli_push.geolocate": ""
+    },
+    "saas": true,
+    "scriptSrc": [
+      "cdn-app\\.myli\\.io/"
+    ],
+    "website": "https://www.myli.io"
+  },
+  "Myma": {
+    "cats": [
+      52
+    ],
+    "description": "Myma is an AI-powered multi-channel chatbot designed for hotels, enabling automated guest interactions across various communication platforms.",
+    "icon": "Myma.svg",
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": [
+      "messenger\\.myma\\.ai/"
+    ],
+    "website": "https://www.myma.ai"
+  },
+  "Mynetcap": {
+    "cats": [
+      1
+    ],
+    "icon": "Mynetcap.png",
+    "meta": {
+      "generator": "Mynetcap"
+    },
+    "website": "http://www.netcap-creation.fr"
+  },
+  "Mysitefy": {
+    "cats": [
+      51
+    ],
+    "description": "Mysitefy is a digital platform for B2B enterprises. It provides companies with a closed-loop digital application system from website building to marketing, to customer and order management.",
+    "dom": "img[src*='//cdn.mysitefy.com/']",
+    "icon": "Mysitefy.png",
+    "pricing": [
+      "recurring"
+    ],
+    "saas": true,
+    "website": "https://www.mysitefy.com"
+  },
+  "MysteryThemes News Portal": {
+    "cats": [
+      80
+    ],
+    "description": "News Portal is the ultimate magazine WordPress theme by MysteryThemes.",
+    "icon": "MysteryThemes.png",
+    "pricing": [
+      "freemium",
+      "onetime"
+    ],
+    "requires": "WordPress",
+    "scriptSrc": "/wp-content/themes/news-portal(?:-pro)?/.+np-custom-scripts\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1",
+    "website": "https://mysterythemes.com/wp-themes/news-portal"
+  },
+  "MysteryThemes News Portal Lite": {
+    "cats": [
+      80
+    ],
+    "description": "News Portal Lite is child theme of News Portal ultimate magazine WordPress theme by MysteryThemes.",
+    "dom": "link[href*='/wp-content/themes/news-portal-lite/']",
+    "excludes": "MysteryThemes News Portal",
+    "icon": "MysteryThemes.png",
+    "pricing": [
+      "freemium",
+      "onetime"
+    ],
+    "requires": "WordPress",
+    "website": "https://mysterythemes.com/wp-themes/news-portal-lite"
+  },
+  "MysteryThemes News Portal Mag": {
+    "cats": [
+      80
+    ],
+    "description": "News Portal Mag is child theme of News Portal ultimate magazine WordPress theme by MysteryThemes.",
+    "dom": "link[href*='/wp-content/themes/news-portal-mag/']",
+    "excludes": "MysteryThemes News Portal",
+    "icon": "MysteryThemes.png",
+    "pricing": [
+      "onetime"
+    ],
+    "requires": "WordPress",
+    "website": "https://mysterythemes.com/wp-themes/news-portal-mag"
+  },
+  "mOxie": {
+    "cats": [
+      59
+    ],
+    "description": "mOxie is a library providing polyfills for XHR2 and File API, ensuring compatibility with older browsers that lack native support.",
+    "js": {
+      "mOxie": "",
+      "moxie": ""
+    },
+    "oss": true,
+    "pricing": [
+      "low",
+      "recurring"
+    ],
+    "website": "https://github.com/moxiecode/moxie"
+  },
+  "mParticle": {
+    "cats": [
+      97
+    ],
+    "description": "mParticle is a mobile-focused event tracking and data ingestion tool.",
+    "icon": "mParticle.svg",
+    "js": {
+      "mParticle": "",
+      "mParticle.config.snippetVersion": "(.+)\\;version:\\1"
+    },
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "scriptSrc": "\\.mparticle\\.com/",
+    "website": "https://www.mparticle.com"
+  },
+  "math.js": {
+    "cats": [
+      59
+    ],
+    "icon": "math.js.png",
+    "js": {
+      "mathjs": ""
+    },
+    "scriptSrc": "math(?:\\.min)?\\.js",
+    "website": "http://mathjs.org"
+  },
+  "mdBook": {
+    "cats": [
+      4
+    ],
+    "description": "mdBook is a utility to create modern online books from Markdown files.",
+    "icon": "mdBook.svg",
+    "oss": true,
+    "scripts": "localStorage\\.getItem\\('mdbook-(?:sidebar|theme)'\\)",
+    "website": "https://github.com/rust-lang/mdBook"
+  },
+  "metisMenu": {
+    "cats": [
+      59
+    ],
+    "description": "metisMenu is a collapsible jQuery menu plugin.",
+    "implies": "jQuery",
+    "js": {
+      "MetisMenu": "",
+      "metisMenu": ""
+    },
+    "oss": true,
+    "scriptSrc": "(?:/|\\.)metisMenu(?:js)?(?:\\.min)?\\.js(?:\\?([\\d\\.]+))?\\;version:\\1",
+    "website": "https://github.com/onokumus/metismenu"
+  },
+  "microCMS": {
+    "cats": [
+      1
+    ],
+    "description": "microCMS is a Japan-based headless CMS that enables editors and developers to build delicate sites and apps.",
+    "dom": "img[src*='.microcms-assets.io/']",
+    "icon": "microCMS.svg",
+    "pricing": [
+      "freemium",
+      "low",
+      "recurring",
+      "payg"
+    ],
+    "saas": true,
+    "website": "https://microcms.io",
+    "xhr": "\\.microcms\\.io"
+  },
+  "miniCal": {
+    "cats": [
+      1
+    ],
+    "description": "miniCal is an open-source property management system.",
+    "icon": "miniCal.svg",
+    "js": {
+      "miniCal.projectUrl": "app\\.minical\\.io"
+    },
+    "oss": true,
+    "pricing": [
+      "freemium",
+      "poa"
+    ],
+    "website": "https://www.minical.io"
+  },
+  "mini_httpd": {
+    "cats": [
+      22
+    ],
+    "headers": {
+      "Server": "mini_httpd(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "mini_httpd.png",
+    "website": "http://acme.com/software/mini_httpd"
+  },
+  "mirrAR": {
+    "cats": [
+      105
+    ],
+    "description": "mirrAR is a real-time augmented reality platform for retail brands that enables consumers to virtually try on products and experience how it feels to own them before the actual purchase, both in-store and online.",
+    "icon": "mirrAR.png",
+    "js": {
+      "initMirrarUI": "",
+      "loadmirrAR": ""
+    },
+    "pricing": [
+      "poa"
+    ],
+    "saas": true,
+    "website": "https://www.mirrar.com"
+  },
+  "mobicred": {
+    "cats": [
+      41,
+      91
+    ],
+    "description": "Mobicred is a credit facility that allows you to safely shop online with our participating retailers.",
+    "icon": "Mobicred.png",
+    "scriptSrc": "app\\.mobicredwidget\\.co\\.za",
+    "website": "https://mobicred.co.za/"
+  },
+  "mobile-detect.js": {
+    "cats": [
+      59
+    ],
+    "description": "Mobile-detect.js is a compact JavaScript library designed to detect devices by comparing patterns against a given User-Agent string.",
+    "oss": true,
+    "scriptSrc": [
+      "mobile-detect(?:\\.min)?\\.js(?:\\?ver=((?:\\d+\\.)+\\d+))?\\;version:\\1"
+    ],
+    "website": "https://hgoebl.github.io/mobile-detect.js/doc/MobileDetect.html"
+  },
+  "mod_auth_pam": {
+    "cats": [
+      33
+    ],
+    "description": "Mod_auth_pam is used to configure ways for authenticating users.",
+    "headers": {
+      "Server": "mod_auth_pam(?:/([\\d\\.]+))?\\;version:\\1"
+    },
+    "icon": "Apache.svg",
+    "implies": "Apache HTTP Server",
+    "website": "http://pam.sourceforge.net/mod_auth_pam"
+  },
+  "mod_dav": {
+    "cats": [
+      33
+    ],
+    "description": "Mod_dav is an Apache module to provide WebDAV capabilities for your Apache web server. It is an open-source module, provided under an Apache-style license.",
+    "headers": {
+      "Server": "\\b(?:mod_)?DAV\\b(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "Apache.svg",
+    "implies": "Apache HTTP Server",
+    "website": "http://webdav.org/mod_dav"
+  },
+  "mod_fastcgi": {
+    "cats": [
+      33
+    ],
+    "description": "Mod_fcgid is a high performance alternative to mod_cgi or mod_cgid, which starts a sufficient number instances of the CGI program to handle concurrent requests, and these programs remain running to handle further incoming requests.",
+    "headers": {
+      "Server": "mod_fastcgi(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "Apache.svg",
+    "implies": "Apache HTTP Server",
+    "website": "http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html"
+  },
+  "mod_jk": {
+    "cats": [
+      33
+    ],
+    "description": "Mod_jk is an Apache module used to connect the Tomcat servlet container with web servers such as Apache, iPlanet, Sun ONE (formerly Netscape) and even IIS using the Apache JServ Protocol. A web server waits for client HTTP requests.",
+    "headers": {
+      "Server": "mod_jk(?:/([\\d\\.]+))?\\;version:\\1"
+    },
+    "icon": "Apache.svg",
+    "implies": [
+      "Apache Tomcat",
+      "Apache HTTP Server"
+    ],
+    "website": "http://tomcat.apache.org/tomcat-3.3-doc/mod_jk-howto.html"
+  },
+  "mod_perl": {
+    "cats": [
+      33
+    ],
+    "cpe": "cpe:2.3:a:apache:mod_perl:*:*:*:*:*:*:*:*",
+    "description": "Mod_perl is an optional module for the Apache HTTP server. It embeds a Perl interpreter into the Apache server. In addition to allowing Apache modules to be written in the Perl programming language, it allows the Apache web server to be dynamically configured by Perl programs.",
+    "headers": {
+      "Server": "mod_perl(?:/([\\d\\.]+))?\\;version:\\1"
+    },
+    "icon": "mod_perl.png",
+    "implies": [
+      "Perl",
+      "Apache HTTP Server"
+    ],
+    "website": "http://perl.apache.org"
+  },
+  "mod_python": {
+    "cats": [
+      33
+    ],
+    "cpe": "cpe:2.3:a:apache:mod_python:*:*:*:*:*:*:*:*",
+    "description": "Mod_python is an Apache HTTP Server module that integrates the Python programming language with the server. It is intended to provide a Python language binding for the Apache HTTP Server. ",
+    "headers": {
+      "Server": "mod_python(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "mod_python.png",
+    "implies": [
+      "Python",
+      "Apache HTTP Server"
+    ],
+    "website": "http://www.modpython.org"
+  },
+  "mod_rack": {
+    "cats": [
+      33
+    ],
+    "description": "Mod_rack is a free web server and application server with support for Ruby, Python and Node.js.",
+    "headers": {
+      "Server": "mod_rack(?:/([\\d.]+))?\\;version:\\1",
+      "X-Powered-By": "mod_rack(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "Phusion Passenger.png",
+    "implies": [
+      "Ruby on Rails\\;confidence:50",
+      "Apache HTTP Server"
+    ],
+    "website": "http://phusionpassenger.com"
+  },
+  "mod_rails": {
+    "cats": [
+      33
+    ],
+    "description": "Mod_rails is a free web server and application server with support for Ruby, Python and Node.js.",
+    "headers": {
+      "Server": "mod_rails(?:/([\\d.]+))?\\;version:\\1",
+      "X-Powered-By": "mod_rails(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "Phusion Passenger.png",
+    "implies": [
+      "Ruby on Rails\\;confidence:50",
+      "Apache HTTP Server"
+    ],
+    "website": "http://phusionpassenger.com"
+  },
+  "mod_ssl": {
+    "cats": [
+      33
+    ],
+    "cpe": "cpe:2.3:a:modssl:mod_ssl:*:*:*:*:*:*:*:*",
+    "description": "mod_ssl is an optional module for the Apache HTTP Server. It provides strong cryptography for the Apache web server via the Secure Sockets Layer (SSL) and Transport Layer Security (TLS) cryptographic protocols by the help of the open-source SSL/TLS toolkit OpenSSL.",
+    "headers": {
+      "Server": "mod_ssl(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "mod_ssl.png",
+    "implies": "Apache HTTP Server",
+    "website": "http://modssl.org"
+  },
+  "mod_wsgi": {
+    "cats": [
+      33
+    ],
+    "cpe": "cpe:2.3:a:modwsgi:mod_wsgi:*:*:*:*:*:*:*:*",
+    "description": "mod_wsgi is an Apache HTTP Server module that provides a WSGI compliant interface for hosting Python based web applications under Apache.",
+    "headers": {
+      "Server": "mod_wsgi(?:/([\\d.]+))?\\;version:\\1",
+      "X-Powered-By": "mod_wsgi(?:/([\\d.]+))?\\;version:\\1"
+    },
+    "icon": "mod_wsgi.png",
+    "implies": [
+      "Python\\;confidence:50",
+      "Apache HTTP Server"
+    ],
+    "website": "https://code.google.com/p/modwsgi"
   }
 }

@@ -21,24 +21,23 @@ Prismappalyzer identifies technologies on websites, such as CMS, web frameworks,
 ```sh
 git clone <repository-url>
 cd prismappalyzer
-yarn install
-yarn run link
+yarn setup   # yarn install (workspaces) + yarn run link
 ```
+
+The repo root and the CLI are **two packages**. Root `package.json` only has build/lint tools. The CLI (`puppeteer`, `prismappalyzer` binary) lives in [`src/drivers/npm`](src/drivers/npm). Root Yarn **workspaces** install both when you run `yarn install` / `yarn setup`.
 
 ## Install on a server (CLI)
 
-Requires [Node.js](https://nodejs.org) 16+ (Puppeteer will pull Chromium on install).
+Requires [Node.js](https://nodejs.org) 16+. Puppeteer downloads its own Chromium; on Debian/Ubuntu you must also install Chrome’s shared libraries (do **not** rely on Ubuntu’s `chromium-browser` snap stub).
+
+### Bare metal / VM
 
 ```sh
-git clone <repository-url>
+git clone https://github.com/kerimkaraca/prismappalyzer.git
 cd prismappalyzer
-yarn install
-yarn run link
-cd src/drivers/npm
-npm install -g .
+yarn setup
+yarn workspace prismappalyzer link   # registers global `prismappalyzer` → this checkout
 ```
-
-That registers the global command `prismappalyzer`. Then:
 
 ```sh
 prismappalyzer https://example.com
@@ -46,10 +45,79 @@ prismappalyzer https://example.com -P -e
 prismappalyzer --help
 ```
 
-Without a global install you can still run:
+Without a global link (after `yarn setup`):
 
 ```sh
+yarn prismappalyzer https://example.com
+# or:
 node src/drivers/npm/cli.js https://example.com
+```
+
+### Docker (Debian / Ubuntu)
+
+Use Puppeteer’s bundled Chromium. Leave `CHROMIUM_BIN` unset. Do not install Ubuntu’s `chromium` / `chromium-browser` packages (snap stubs).
+
+**Important:** root `yarn install` does **not** install CLI deps (no workspaces on GitHub yet). You must run `npm install` inside `src/drivers/npm` so `puppeteer` is present. Keep `/opt/prismappalyzer` — `npm install -g .` often only symlinks to that tree (`added 1 package` in ~1s means no Chromium download).
+
+```dockerfile
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates \
+      curl \
+      fonts-freefont-ttf \
+      fonts-liberation \
+      git \
+      libasound2 \
+      libatk-bridge2.0-0 \
+      libatk1.0-0 \
+      libcairo2 \
+      libcups2 \
+      libdbus-1-3 \
+      libdrm2 \
+      libgbm1 \
+      libglib2.0-0 \
+      libgtk-3-0 \
+      libnspr4 \
+      libnss3 \
+      libpango-1.0-0 \
+      libx11-6 \
+      libx11-xcb1 \
+      libxcb1 \
+      libxcomposite1 \
+      libxcursor1 \
+      libxdamage1 \
+      libxext6 \
+      libxfixes3 \
+      libxi6 \
+      libxkbcommon0 \
+      libxrandr2 \
+      libxrender1 \
+      libxshmfence1 \
+      libxss1 \
+      libxtst6 \
+      wget \
+      xdg-utils \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && npm i -g wscat@6.0.1 unfurl@0.1.0 yarn \
+    && git clone https://github.com/kerimkaraca/prismappalyzer.git /opt/prismappalyzer \
+    && cd /opt/prismappalyzer \
+    && yarn install \
+    && yarn run link \
+    && cd /opt/prismappalyzer/src/drivers/npm \
+    && npm install \
+    && test -d node_modules/puppeteer \
+    && ln -sfn /opt/prismappalyzer/src/drivers/npm/cli.js /usr/local/bin/prismappalyzer \
+    && chmod +x /opt/prismappalyzer/src/drivers/npm/cli.js /usr/local/bin/prismappalyzer \
+    && prismappalyzer --help >/dev/null \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+Do **not** `rm -rf /opt/prismappalyzer` — the binary points at that checkout.
+
+Then:
+
+```sh
+prismappalyzer https://example.com
 ```
 
 ## Usage

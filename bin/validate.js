@@ -208,3 +208,16 @@ fs.readdirSync(iconPath).forEach((file) => {
     }
   }
 })
+
+// Chrome Web Store rejects packages with paths that differ only by case
+fs.readdirSync(iconPath).reduce((seen, file) => {
+  const key = file.toLowerCase()
+
+  if (seen[key]) {
+    throw new Error(
+      `Icon names differ only by case: ${seen[key]}, ${file} (${iconPath})`
+    )
+  }
+
+  return { ...seen, [key]: file }
+}, {})

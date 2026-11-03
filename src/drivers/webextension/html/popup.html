@@ -14,7 +14,7 @@
   <body class="body__popup">
     <div class="popup">
       <div class="header">
-        <a href="https://www.wappalyzer.com/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer" class="header__link">
+        <a href="https://github.com/kerimkaraca/prismappalyzer" class="header__link">
           <img alt="" class="header__logo header__logo--light" src="../images/logo-purple.svg">
           <img alt="" class="header__logo header__logo--dark" src="../images/logo-white.svg">
         </a>
@@ -47,10 +47,11 @@
 
       <div class="tabs">
         <div class="tab tab--technologies tab--active" data-i18n="tabTechnologies">&nbsp;</div>
-        <div class="tab tab--plus"><span data-i18n="tabPlus">&nbsp;</span></div>
+        <div class="tab tab--automation" data-i18n="tabAutomation">&nbsp;</div>
+        <div class="tab tab--settings" data-i18n="tabSettings">&nbsp;</div>
 
         <div class="plus-download plus-download--hidden">
-          <div class="plus-download__button button">
+          <div class="plus-download__button button" title="Export to CSV">
             <span class="button__link">
               <svg class="button__icon button__icon--left" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
@@ -61,11 +62,23 @@
               </span>
             </span>
           </div>
+
+          <div class="report__button button report__button--hidden" title="Report to the discovery service">
+            <span class="button__link">
+              <svg class="button__icon button__icon--left" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+              </svg>
+
+              <span class="button__text" data-i18n="report">&nbsp;</span>
+            </span>
+          </div>
         </div>
       </div>
 
       <div class="tab-items">
         <div class="tab-item">
+          <div class="report-message report-message--hidden"></div>
+
           <div class="empty empty--hidden">
             <div class="empty__text" data-i18n="noAppsDetected">&nbsp;</div>
 
@@ -117,18 +130,7 @@
           <div class="detections"></div>
 
           <div class="issue">
-            <a href="https://www.wappalyzer.com/technologies/report-an-issue/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer&url=__URL__&version=__VERSION__" data-i18n="issue"></a>
-          </div>
-
-          <div class="terms terms--hidden">
-            <div class="terms__content" data-i18n="termsContent"></div>
-
-            <div class="terms__buttons">
-              <button class="terms__button terms__button--accept" data-i18n="termsAccept">&nbsp;</button>
-              <button class="terms__button terms__button--decline" data-i18n="termsDecline">&nbsp;</button>
-            </div>
-
-            <a class="terms__privacy" href="https://www.wappalyzer.com/privacy/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer" data-i18n="privacyPolicy"></a>
+            <a href="https://github.com/kerimkaraca/prismappalyzer/issues/new?title=Detection+issue+on+__URL__&body=Version:+__VERSION__" data-i18n="issue"></a>
           </div>
 
           <div data-template="category" class="category">
@@ -169,74 +171,84 @@
         </div>
 
         <div class="tab-item tab-item--hidden">
-          <div class="credits credits--hidden">
-            <span data-i18n="creditBalance">&nbsp;</span>
+          <div class="automation-status">
+            <div class="automation-status__state">
+              <span class="automation-status__dot"></span>
+              <span class="automation-status__text">&nbsp;</span>
 
-            <span class="credits__remaining">&nbsp;</span>
-          </div>
+              <div class="spacer"></div>
 
-          <div class="plus-error plus-error--hidden">
-            <div class="plus-error__message">
+              <button type="button" class="automation__toggle button__link">&nbsp;</button>
             </div>
+            <div class="automation-status__message">&nbsp;</div>
+            <div class="automation-status__browsing">&nbsp;</div>
           </div>
 
-          <div class="loading">
-            <svg class="progress" viewBox="20 20 40 40">
-              <circle class="progress__circle"></circle>
-            </svg>
-          </div>
+          <div class="automation">
+            <div class="label" data-i18n="automationSource">&nbsp;</div>
 
-          <div class="panels panels--hidden">
-          </div>
+            <div class="automation__modes">
+              <label class="automation__checkbox">
+                <input class="automation__mode" type="radio" name="automation-mode" value="tasks">
+                <span data-i18n="automationModeTasks">&nbsp;</span>
+              </label>
 
-          <div class="plus-configure plus-configure--hidden">
-            <div class="message">
-              <div class="message__heading">
-                <span data-i18n="plusMessageHeading">&nbsp;</span>
-              </div>
-
-              <p>
-              <span data-i18n="plusMessage">&nbsp;</span>
-              </p>
-
-              <div class="message__button button">
-                <a class="button__link" href="https://www.wappalyzer.com/plus/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer">
-                  <span class="button__text" data-i18n="plusButton">&nbsp;</span>
-
-                  <svg class="button__icon button__icon--right" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
-                  </svg>
-                </a>
-              </div>
+              <label class="automation__checkbox">
+                <input class="automation__mode" type="radio" name="automation-mode" value="urls">
+                <span data-i18n="automationModeUrls">&nbsp;</span>
+              </label>
             </div>
 
-            <form class="plus-configure__form">
-              <div class="control">
-                <span class="label">
-                  <span data-i18n="optionApiKey">&nbsp;</span>
+            <p class="automation__intro automation__intro--tasks" data-i18n="automationIntro">&nbsp;</p>
+            <p class="automation__intro automation__intro--urls" data-i18n="automationIntroUrls">&nbsp;</p>
 
-                  <small class="label__description">
-                    (<a href="https://www.wappalyzer.com/apikey/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer" data-i18n="optionApiKeyDescription"></a>)
-                  </small>
-                </span>
+            <div class="automation__urls">
+              <textarea class="input automation__url-list" rows="4" placeholder="https://www.example.com&#10;example.org" autocomplete="off" spellcheck="false"></textarea>
+              <div class="automation__error automation__error--hidden"></div>
+              <div class="automation__progress">&nbsp;</div>
+            </div>
 
-                <input type="password" class="plus-configure__apikey input" />
-              </div>
+            <label class="automation__checkbox">
+              <input class="automation__report-browsing" type="checkbox">
+              <span data-i18n="automationReportBrowsing">&nbsp;</span>
+            </label>
 
-              <div class="message__button button">
-                <span class="plus-configure__save button__link">
-                  <svg class="button__icon button__icon--left" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
-                  </svg>
+            <div class="label" data-i18n="automationHistory">&nbsp;</div>
 
-                  <span class="button__text" data-i18n="formSave">&nbsp;</span>
-                </span>
-              </div>
-            </form>
+            <div class="automation-history__empty" data-i18n="automationHistoryEmpty">&nbsp;</div>
+
+            <table class="automation-history">
+              <thead>
+                <tr>
+                  <th data-i18n="automationHistoryUrl">&nbsp;</th>
+                  <th data-i18n="automationHistoryFinished">&nbsp;</th>
+                  <th data-i18n="automationHistoryCount">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
+        </div>
 
-          <div class="plus-empty plus-empty--hidden" data-i18n="plusEmpty"></div>
-          <div class="plus-crawl plus-crawl--hidden" data-i18n="plusCrawl"></div>
+        <div class="tab-item tab-item--hidden">
+          <form class="automation settings">
+            <p class="automation__intro" data-i18n="settingsIntro">&nbsp;</p>
+
+            <label class="label" for="settings-service-url" data-i18n="automationServiceUrl">&nbsp;</label>
+            <input class="input settings__service-url" id="settings-service-url" type="text" placeholder="https://api.example.com" autocomplete="off" spellcheck="false">
+
+            <label class="label" for="settings-api-key" data-i18n="automationApiKey">&nbsp;</label>
+            <input class="input settings__api-key" id="settings-api-key" type="password" autocomplete="off" spellcheck="false">
+
+            <label class="label" for="settings-zone" data-i18n="automationZone">&nbsp;</label>
+            <input class="input settings__zone" id="settings-zone" type="text" placeholder="tr" autocomplete="off" spellcheck="false">
+
+            <div class="settings__message settings__message--hidden"></div>
+
+            <div class="automation__buttons">
+              <button type="submit" class="button__link" data-i18n="settingsSave">&nbsp;</button>
+            </div>
+          </form>
         </div>
       </div>
 

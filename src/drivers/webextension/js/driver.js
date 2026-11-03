@@ -10,14 +10,11 @@ const {
   resolve,
   getTechnology,
 } = Wappalyzer
-const { agent, promisify, getOption, setOption, open, globEscape } = Utils
+const { promisify, getOption, setOption, globEscape } = Utils
 
 const expiry = 1000 * 60 * 60 * 48
 
 const maxHostnames = 100
-
-const hostnameIgnoreList =
-  /\b((local|dev(elop(ment)?)?|sandbox|stag(e|ing)?|preprod|production|preview|test(ing)?|[^a-z]demo(shop)?|cache)[.-]|dev\d|localhost|((wappalyzer|google|bing|baidu|microsoft|duckduckgo|facebook|adobe|twitter|reddit|yahoo|wikipedia|amazon|amazonaws|youtube|stackoverflow|github|stackexchange|w3schools|twitch)\.)|(live|office|herokuapp|shopifypreview)\.com|\.local|\.test|\.netlify\.app|web\.archive\.org|zoom\.us|^([0-9.]+|[\d.]+)$|^([a-f0-9:]+:+)+[a-f0-9]+$)/
 
 const xhrDebounce = []
 
@@ -86,31 +83,15 @@ const Driver = {
         }),
         {}
       ),
-      robots: await getOption('robots', {}),
-      ads: [],
     }
 
     const { version } = chrome.runtime.getManifest()
     const previous = await getOption('version')
-    const upgradeMessage = await getOption('upgradeMessage', true)
 
     await setOption('version', version)
 
-    const current = await getOption('version')
-
     if (!previous) {
       await Driver.clearCache()
-
-      if (current) {
-        open(
-          'https://www.wappalyzer.com/installed/?utm_source=installed&utm_medium=extension&utm_campaign=wappalyzer'
-        )
-      }
-    } else if (version !== previous && upgradeMessage) {
-      open(
-        `https://www.wappalyzer.com/upgraded/?utm_source=upgraded&utm_medium=extension&utm_campaign=wappalyzer`,
-        false
-      )
     }
 
     initDone()
@@ -162,7 +143,6 @@ const Driver = {
         delete technologies[name].description
         delete technologies[name].cpe
         delete technologies[name].pricing
-        delete technologies[name].website
       })
 
       setTechnologies(technologies)
@@ -177,21 +157,6 @@ const Driver = {
    */
   getCategories() {
     return Wappalyzer.categories
-  },
-
-  /**
-   * Perform a HTTP POST request
-   * @param {String} url
-   * @param {String} body
-   */
-  post(url, body) {
-    return fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
   },
 
   /**
@@ -550,7 +515,7 @@ const Driver = {
   },
 
   /**
-   * Check if Wappalyzer has been disabled for the domain
+   * Check if Prismappalyzer has been disabled for the domain
    */
   async isDisabledDomain(url) {
     try {
@@ -666,8 +631,6 @@ const Driver = {
 
     await Driver.setIcon(url, resolved)
 
-    await Driver.ping()
-
     cache.hits += incrementHits ? 1 : 0
     cache.language = cache.language || language
 
@@ -730,14 +693,6 @@ const Driver = {
     )
 
     Driver.log({ hostname, technologies: resolved })
-  },
-
-  /**
-   * Callback for onAd listener
-   * @param {Object} ad
-   */
-  onAd(ad) {
-    Driver.cache.ads.push(ad)
   },
 
   /**
@@ -853,99 +808,6 @@ const Driver = {
   },
 
   /**
-   * Fetch the website's robots.txt rules
-   * @param {String} hostname
-   * @param {Boolean} secure
-   */
-  async getRobots(hostname, secure = false) {
-    if (
-      !(await getOption('tracking', true)) ||
-      hostnameIgnoreList.test(hostname)
-    ) {
-      return []
-    }
-
-    if (typeof Driver.cache.robots[hostname] !== 'undefined') {
-      return Driver.cache.robots[hostname]
-    }
-
-    try {
-      Driver.cache.robots[hostname] = await Promise.race([
-        // eslint-disable-next-line no-async-promise-executor
-        new Promise(async (resolve) => {
-          const response = await fetch(
-            `http${secure ? 's' : ''}://${hostname}/robots.txt`
-          )
-
-          if (!response.ok) {
-            Driver.log(`getRobots: ${response.statusText} (${hostname})`)
-
-            resolve('')
-          }
-
-          let agent
-
-          resolve(
-            (await response.text()).split('\n').reduce((disallows, line) => {
-              let matches = /^User-agent:\s*(.+)$/i.exec(line.trim())
-
-              if (matches) {
-                agent = matches[1].toLowerCase()
-              } else if (agent === '*' || agent === 'wappalyzer') {
-                matches = /^Disallow:\s*(.+)$/i.exec(line.trim())
-
-                if (matches) {
-                  disallows.push(matches[1])
-                }
-              }
-
-              return disallows
-            }, [])
-          )
-        }),
-        new Promise((resolve) => setTimeout(() => resolve(''), 5000)),
-      ])
-
-      Driver.cache.robots = Object.keys(Driver.cache.robots)
-        .slice(-50)
-        .reduce(
-          (cache, hostname) => ({
-            ...cache,
-            [hostname]: Driver.cache.robots[hostname],
-          }),
-          {}
-        )
-
-      await setOption('robots', Driver.cache.robots)
-
-      return Driver.cache.robots[hostname]
-    } catch (error) {
-      Driver.error(error)
-    }
-  },
-
-  /**
-   * Check if the website allows indexing of a URL
-   * @param {String} href
-   */
-  async checkRobots(href) {
-    const url = new URL(href)
-
-    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-      throw new Error('Invalid protocol')
-    }
-
-    const robots = await Driver.getRobots(
-      url.hostname,
-      url.protocol === 'https:'
-    )
-
-    if (robots.some((disallowed) => url.pathname.indexOf(disallowed) === 0)) {
-      throw new Error('Disallowed')
-    }
-  },
-
-  /**
    * Clear caches
    */
   async clearCache() {
@@ -954,97 +816,6 @@ const Driver = {
     xhrAnalyzed = {}
 
     await setOption('hostnames', {})
-  },
-
-  /**
-   * Anonymously send identified technologies to wappalyzer.com
-   * This function can be disabled in the extension settings
-   */
-  async ping() {
-    const tracking = await getOption('tracking', true)
-    const termsAccepted =
-      agent === 'chrome' || (await getOption('termsAccepted', false))
-
-    if (tracking && termsAccepted) {
-      const urls = Object.keys(Driver.cache.hostnames).reduce(
-        (urls, hostname) => {
-          if (Object.keys(urls).length >= 25) {
-            return urls
-          }
-
-          // eslint-disable-next-line standard/computed-property-even-spacing
-          const { language, detections, hits, https } =
-            Driver.cache.hostnames[hostname]
-
-          const url = `http${https ? 's' : ''}://${hostname}`
-
-          if (!hostnameIgnoreList.test(hostname) && hits) {
-            urls[url] = urls[url] || {
-              technologies: resolve(detections).reduce(
-                (technologies, { name, confidence, version, rootPath }) => {
-                  if (confidence === 100) {
-                    technologies[name] = {
-                      version,
-                      hits,
-                      rootPath,
-                    }
-                  }
-
-                  return technologies
-                },
-                {}
-              ),
-              meta: {
-                language,
-              },
-            }
-          }
-
-          return urls
-        },
-        {}
-      )
-
-      const count = Object.keys(urls).length
-
-      const lastPing = await getOption('lastPing', Date.now())
-
-      if (
-        count &&
-        ((count >= 25 && lastPing < Date.now() - 1000 * 60 * 60) ||
-          (count >= 5 && lastPing < Date.now() - expiry))
-      ) {
-        await setOption('lastPing', Date.now())
-
-        try {
-          await Driver.post('https://ping.wappalyzer.com/v2/', {
-            version: chrome.runtime.getManifest().version,
-            urls,
-          })
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error(error)
-        }
-
-        Object.keys(Driver.cache.hostnames).forEach((hostname) => {
-          Driver.cache.hostnames[hostname].hits = 0
-        })
-      }
-
-      if (Driver.cache.ads.length > 25) {
-        try {
-          await Driver.post(
-            'https://ad.wappalyzer.com/log/wp/',
-            Driver.cache.ads
-          )
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error(error)
-        }
-
-        Driver.cache.ads = []
-      }
-    }
   },
 }
 
