@@ -3,10 +3,11 @@
 /* globals chrome, Wappalyzer, Utils, Driver, initPromise */
 
 // Background job: pops technology discovery tasks from the Alternative
-// Discovery API, opens each target in a background tab and sends the
-// detected technologies back as findings. Alternatively scans a list of URLs
-// entered in the popup one by one and reports each website's technologies
-// as findings without a task. Optionally also reports the
+// Discovery API, opens each target in a background window and sends the
+// detected technologies back as findings, together with a WEBSITE finding
+// (title, status code, redirects, headers, HTML, screenshot and favicon).
+// Alternatively scans a list of URLs entered in the popup one by one and
+// reports the same for each website as findings without a task. Optionally also reports the
 // technologies of pages the user browses as findings without a task, and
 // lets the popup report the current tab's technologies on demand.
 
@@ -20,12 +21,20 @@ const POLL_MINUTES = 0.5
 // Time allowed for the page to load before collecting results anyway
 const LOAD_TIMEOUT = 60 * 1000
 
+// Time the tab must stay loaded with no requests in flight before it counts
+// as fully loaded, so redirects and late requests are not missed
+const LOAD_QUIET_PERIOD = 2 * 1000
+
+// Requests in flight for longer than this (long-polling, streaming etc.) are
+// no longer waited for
+const LONG_REQUEST_TIMEOUT = 10 * 1000
+
 // Time to wait after the page has loaded so scripts, XHR and JS detections
 // can complete before results are collected
-const SETTLE_DELAY = 30 * 1000
+const SETTLE_DELAY = 10 * 1000
 
 // Same for each website of a URL list
-const URL_SETTLE_DELAY = 20 * 1000
+const URL_SETTLE_DELAY = 10 * 1000
 
 const PROBE_TIMEOUT = 10 * 1000
 
@@ -34,6 +43,15 @@ const REQUEST_TIMEOUT = 30 * 1000
 const TASK_TYPE = 'technology_discovery'
 
 const TOOL = 'prismappalyzer-chrome-extension'
+
+// Size of the window a task or URL is opened in, which is also the
+// screenshot size
+const WINDOW_WIDTH = 1366
+
+const WINDOW_HEIGHT = 768
+
+// Larger favicons are not sent
+const MAX_FAVICON_SIZE = 1024 * 1024
 
 // Number of finished scans kept for the Automation tab
 const HISTORY_SIZE = 20
@@ -340,16 +358,22 @@ const Automation = {
 
     let technologies = []
 
+    let website = null
+
     let matched
 
     if (url) {
-      technologies = await Automation.scan(url, URL_SETTLE_DELAY, onTab)
+      ;({ technologies, website } = await Automation.scan(
+        url,
+        URL_SETTLE_DELAY,
+        onTab
+      ))
     } else {
       Driver.log(`Not accessible: ${value}`, 'automation')
     }
 
-    // Nothing to report without technologies: there is no task to close
-    if (technologies.length) {
+    // Nothing to report without findings: there is no task to close
+    if (technologies.length || website) {
       await Automation.setStatus({
         state: 'sending',
         message: `${progress} ${technologies.length} technologies for ${value}`,
@@ -357,7 +381,8 @@ const Automation = {
       ;({ matched } = await Automation.sendWebsite(
         config,
         new URL(url).origin,
-        technologies
+        technologies,
+        website
       ))
     }
 
@@ -473,23 +498,35 @@ const Automation = {
 
     let technologies = []
 
-    if (url) {
-      technologies = await Automation.scan(url, SETTLE_DELAY, (tabId) => {
-        current.tabId = tabId
+    let website = null
 
-        return automationPromisify(chrome.storage.local, 'set', {
-          automationTask: current,
-        })
-      })
+    if (url) {
+      ;({ technologies, website } = await Automation.scan(
+        url,
+        SETTLE_DELAY,
+        (tabId) => {
+          current.tabId = tabId
+
+          return automationPromisify(chrome.storage.local, 'set', {
+            automationTask: current,
+          })
+        }
+      ))
     } else {
       Driver.log(`Not accessible: ${task.v}`, 'automation')
     }
 
-    const findings = technologies.length
-      ? technologies.map((technology) =>
-          Automation.getFinding(task, 'TECH', Automation.getProps(technology))
-        )
-      : [Automation.getFinding(task, 'NO_FINDING')]
+    const findings = technologies.map((technology) =>
+      Automation.getFinding(task, 'TECH', Automation.getProps(technology))
+    )
+
+    if (website) {
+      findings.push(Automation.getFinding(task, 'WEBSITE', website))
+    }
+
+    if (!findings.length) {
+      findings.push(Automation.getFinding(task, 'NO_FINDING'))
+    }
 
     await Automation.setStatus({
       state: 'sending',
@@ -553,7 +590,8 @@ const Automation = {
   },
 
   /**
-   * Open a URL in a background tab and return the detected technologies
+   * Open a URL in its own window and return the detected technologies and
+   * the website's props (title, status code, screenshot, HTML etc.)
    * @param {String} url
    * @param {Number} settleDelay
    * @param {Function} onTab called with the tab's ID once it is opened
@@ -566,21 +604,28 @@ const Automation = {
       (_hostname) => delete Driver.cache.hostnames[_hostname]
     )
 
+    // Started before the tab is opened so its first response is not missed
+    const responses = Automation.watchResponses()
+
     let tab
 
     try {
+      // The tab is active in its own window so it can be captured without
+      // switching the user's tabs
+      const { tabs } = await automationPromisify(chrome.windows, 'create', {
+        url,
+        focused: false,
+        width: WINDOW_WIDTH,
+        height: WINDOW_HEIGHT,
+      })
+
+      ;[tab] = tabs
+    } catch (error) {
+      // E.g. unfocused windows are not supported
       tab = await automationPromisify(chrome.tabs, 'create', {
         url,
         active: false,
       })
-    } catch (error) {
-      // No browser window is open
-      const { tabs } = await automationPromisify(chrome.windows, 'create', {
-        url,
-        focused: false,
-      })
-
-      ;[tab] = tabs
     }
 
     scanTabId = tab.id
@@ -607,14 +652,243 @@ const Automation = {
         Driver.cache.hostnames[finalHostname] ||
         Driver.cache.hostnames[hostname]
 
-      return (
+      const technologies = (
         cache && cache.detections ? Wappalyzer.resolve(cache.detections) : []
       ).filter(({ confidence }) => confidence >= 50)
+
+      // Collected last so the page had as much time as possible to render
+      const website = await Automation.getWebsite(
+        tab.id,
+        url,
+        responses.get(tab.id)
+      ).catch((error) => {
+        Driver.error(error, 'automation')
+
+        return null
+      })
+
+      return { technologies, website }
     } finally {
+      responses.stop()
+
       scanTabId = null
 
       chrome.tabs.remove(tab.id, () => chrome.runtime.lastError)
     }
+  },
+
+  /**
+   * Record the last main frame response of each tab, i.e. the response after
+   * redirects
+   */
+  watchResponses() {
+    const responses = {}
+
+    const onCompleted = ({ tabId, url, statusCode, responseHeaders }) => {
+      responses[tabId] = { url, statusCode, responseHeaders }
+    }
+
+    const extraInfoSpec = ['responseHeaders']
+
+    // Chrome leaves out headers such as Set-Cookie without it
+    if (
+      chrome.webRequest.OnCompletedOptions &&
+      chrome.webRequest.OnCompletedOptions.EXTRA_HEADERS
+    ) {
+      extraInfoSpec.push(chrome.webRequest.OnCompletedOptions.EXTRA_HEADERS)
+    }
+
+    chrome.webRequest.onCompleted.addListener(
+      onCompleted,
+      { urls: ['http://*/*', 'https://*/*'], types: ['main_frame'] },
+      extraInfoSpec
+    )
+
+    return {
+      get: (tabId) => responses[tabId] || null,
+      stop: () => chrome.webRequest.onCompleted.removeListener(onCompleted),
+    }
+  },
+
+  /**
+   * Website props of a scanned tab. Null if no response was received.
+   * @param {Number} tabId
+   * @param {String} initialUrl
+   * @param {Object} response
+   */
+  async getWebsite(tabId, initialUrl, response) {
+    if (!response) {
+      return null
+    }
+
+    const tab = await automationPromisify(chrome.tabs, 'get', tabId)
+
+    // Includes redirects done by scripts, unless an error page is shown
+    const redirectedUrl = /^https?:/.test(tab.url || '')
+      ? tab.url
+      : response.url
+
+    const { protocol, port, origin } = new URL(redirectedUrl)
+
+    const screenshot = await Automation.getScreenshot(tab)
+
+    const {
+      title = '',
+      content = '',
+      favicons = [],
+    } = (await Automation.getPage(tabId)) || {}
+
+    const favicon = await Automation.getFavicon([
+      ...favicons,
+      tab.favIconUrl,
+      `${origin}/favicon.ico`,
+    ])
+
+    const headers = (response.responseHeaders || []).reduce(
+      (headers, { name, value, binaryValue }) => {
+        name = name.toLowerCase()
+
+        value = (value || binaryValue || '').toString()
+
+        headers[name] =
+          headers[name] !== undefined ? `${headers[name]}\n${value}` : value
+
+        return headers
+      },
+      {}
+    )
+
+    return {
+      title: title.trim(),
+      status_code: response.statusCode,
+      initial_url: initialUrl,
+      redirected_url: redirectedUrl,
+      protocol: protocol.replace(/:$/, ''),
+      port: port || (protocol === 'https:' ? '443' : '80'),
+      content_size: new TextEncoder().encode(content).length,
+      screenshot,
+      content,
+      favicon: favicon.data,
+      favicon_url: favicon.url,
+      headers: JSON.stringify(headers),
+    }
+  },
+
+  /**
+   * JPEG screenshot of a tab as a data URL, empty if it cannot be taken
+   * @param {Object} tab
+   */
+  async getScreenshot({ active, windowId }) {
+    // Only the active tab of a window can be captured
+    if (!active) {
+      return ''
+    }
+
+    try {
+      return await automationPromisify(
+        chrome.tabs,
+        'captureVisibleTab',
+        windowId,
+        { format: 'jpeg', quality: 80 }
+      )
+    } catch (error) {
+      Driver.error(error, 'automation')
+
+      return ''
+    }
+  },
+
+  /**
+   * Title, rendered HTML and favicon links of a tab's page
+   * @param {Number} tabId
+   */
+  async getPage(tabId) {
+    const func = () => ({
+      title: document.title,
+      content: document.documentElement
+        ? `${
+            document.doctype
+              ? new XMLSerializer().serializeToString(document.doctype)
+              : ''
+          }${document.documentElement.outerHTML}`
+        : '',
+      favicons: Array.from(
+        document.querySelectorAll('link[rel~="icon" i][href]')
+      ).map(({ href }) => href),
+    })
+
+    try {
+      if (chrome.scripting) {
+        const [{ result }] = await chrome.scripting.executeScript({
+          target: { tabId },
+          func,
+        })
+
+        return result
+      }
+
+      // Manifest v2
+      const [result] = await automationPromisify(
+        chrome.tabs,
+        'executeScript',
+        tabId,
+        { code: `(${func})()` }
+      )
+
+      return result
+    } catch (error) {
+      Driver.error(error, 'automation')
+
+      return null
+    }
+  },
+
+  /**
+   * Download the first available favicon as a data URL
+   * @param {Array} urls candidates in order of preference
+   */
+  async getFavicon(urls) {
+    for (const url of [...new Set(urls)]) {
+      if (!/^(https?|data):/.test(url || '')) {
+        continue
+      }
+
+      try {
+        const response = await fetch(url, {
+          signal: AbortSignal.timeout(PROBE_TIMEOUT),
+        })
+
+        const type = (response.headers.get('Content-Type') || '').split(';')[0]
+
+        // Error pages are often served for missing favicons
+        if (!response.ok || /^text\/html/i.test(type)) {
+          continue
+        }
+
+        const bytes = new Uint8Array(await response.arrayBuffer())
+
+        if (!bytes.length || bytes.length > MAX_FAVICON_SIZE) {
+          continue
+        }
+
+        let binary = ''
+
+        for (let index = 0; index < bytes.length; index += 0x8000) {
+          binary += String.fromCharCode(
+            ...bytes.subarray(index, index + 0x8000)
+          )
+        }
+
+        return {
+          url: url.startsWith('data:') ? undefined : url,
+          data: `data:${type || 'image/x-icon'};base64,${btoa(binary)}`,
+        }
+      } catch (error) {
+        // Try the next one
+      }
+    }
+
+    return {}
   },
 
   /**
@@ -782,25 +1056,29 @@ const Automation = {
   },
 
   /**
-   * Send a website's technologies as findings without a task. The API matches
-   * them to websites in the ASM database by origin.
+   * Send a website's technologies, and optionally its website props, as
+   * findings without a task. The API matches them to websites in the ASM
+   * database by origin.
    * @param {Object} config
    * @param {String} origin
    * @param {Array} technologies
+   * @param {Object} website
    */
-  async sendWebsite(config, origin, technologies) {
+  async sendWebsite(config, origin, technologies, website) {
+    const task = { iat: 'WEBSITE', v: origin, ji: null, ri: null }
+
     const findings = technologies.map((technology) => {
       const props = Automation.getProps(technology)
 
       // Only the origin is sent, not the paths visited
       delete props.detectionUrl
 
-      return Automation.getFinding(
-        { iat: 'WEBSITE', v: origin, ji: null, ri: null },
-        'TECH',
-        props
-      )
+      return Automation.getFinding(task, 'TECH', props)
     })
+
+    if (website) {
+      findings.push(Automation.getFinding(task, 'WEBSITE', website))
+    }
 
     const json = await Automation.send(config, findings)
 
@@ -810,29 +1088,104 @@ const Automation = {
     return { matched: !unmatched.includes(origin) }
   },
 
+  /**
+   * Wait until the tab is fully loaded: its loading spinner is gone, no
+   * request of the tab is in flight and both stay that way for a while, so
+   * redirects (JS, meta refresh) and late requests are waited for as well
+   * @param {Number} tabId
+   */
   waitForLoad(tabId) {
     return new Promise((resolve) => {
+      // Whether the tab's status is complete, i.e. the spinner is gone
+      let complete = false
+
+      // Requests of the tab in flight, mapped to the timer that stops
+      // waiting for them
+      const pending = new Map()
+
+      let quietTimeout
+
+      const filter = { urls: ['http://*/*', 'https://*/*'], tabId }
+
       const done = () => {
         clearTimeout(timeout)
+        clearTimeout(quietTimeout)
+
+        pending.forEach((requestTimeout) => clearTimeout(requestTimeout))
 
         chrome.tabs.onUpdated.removeListener(onUpdated)
+        chrome.webRequest.onBeforeRequest.removeListener(onBeforeRequest)
+        chrome.webRequest.onCompleted.removeListener(onRequestEnd)
+        chrome.webRequest.onErrorOccurred.removeListener(onRequestEnd)
 
         resolve()
       }
 
-      const onUpdated = (id, { status }) => {
-        if (id === tabId && status === 'complete') {
-          done()
+      // Restarts the quiet period whenever the tab loads or requests again
+      const check = () => {
+        clearTimeout(quietTimeout)
+
+        if (complete && !pending.size) {
+          quietTimeout = setTimeout(done, LOAD_QUIET_PERIOD)
         }
+      }
+
+      const onUpdated = (id, { status }) => {
+        if (id === tabId && status) {
+          complete = status === 'complete'
+
+          check()
+        }
+      }
+
+      const onBeforeRequest = ({ requestId }) => {
+        clearTimeout(pending.get(requestId))
+
+        // Long-polling, streaming etc. requests never finish
+        pending.set(
+          requestId,
+          setTimeout(() => {
+            pending.delete(requestId)
+
+            check()
+          }, LONG_REQUEST_TIMEOUT)
+        )
+
+        check()
+      }
+
+      const onRequestEnd = ({ requestId }) => {
+        clearTimeout(pending.get(requestId))
+
+        pending.delete(requestId)
+
+        check()
       }
 
       const timeout = setTimeout(done, LOAD_TIMEOUT)
 
       chrome.tabs.onUpdated.addListener(onUpdated)
+      chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, filter)
+      chrome.webRequest.onCompleted.addListener(onRequestEnd, filter)
+      chrome.webRequest.onErrorOccurred.addListener(onRequestEnd, filter)
 
       chrome.tabs.get(tabId, (tab) => {
-        if (chrome.runtime.lastError || (tab && tab.status === 'complete')) {
+        if (chrome.runtime.lastError || !tab) {
           done()
+
+          return
+        }
+
+        // A new tab can briefly be complete on about:blank before the URL
+        // starts loading
+        if (
+          tab.status === 'complete' &&
+          !tab.pendingUrl &&
+          /^https?:/.test(tab.url || '')
+        ) {
+          complete = true
+
+          check()
         }
       })
     })

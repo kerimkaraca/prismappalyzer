@@ -64,11 +64,13 @@
   "permissions": [
     "alarms",
     "cookies",
+    "scripting",
     "storage",
     "tabs",
     "webRequest"
   ],
   "host_permissions": [
+    "<all_urls>",
     "http://*/*",
     "https://*/*"
   ],

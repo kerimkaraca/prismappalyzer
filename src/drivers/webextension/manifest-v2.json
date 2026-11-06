@@ -62,6 +62,7 @@
     "storage",
     "tabs",
     "webRequest",
+    "<all_urls>",
     "http://*/*",
     "https://*/*"
   ],
