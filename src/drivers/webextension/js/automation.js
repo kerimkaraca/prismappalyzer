@@ -7,7 +7,8 @@
 // detected technologies back as findings, together with a WEBSITE finding
 // (title, status code, redirects, headers, HTML, screenshot and favicon).
 // Alternatively scans a list of URLs entered in the popup one by one and
-// reports the same for each website as findings without a task. Optionally also reports the
+// reports each website's technologies as findings without a task (the API
+// only accepts WEBSITE findings for a task). Optionally also reports the
 // technologies of pages the user browses as findings without a task, and
 // lets the popup report the current tab's technologies on demand.
 
@@ -352,22 +353,17 @@ const Automation = {
 
     let technologies = []
 
-    let website = null
-
     let matched
 
     if (url) {
-      ;({ technologies, website } = await Automation.scan(
-        url,
-        URL_SETTLE_DELAY,
-        onTab
-      ))
+      // Website props are not sent: the API only accepts them for a task
+      ;({ technologies } = await Automation.scan(url, URL_SETTLE_DELAY, onTab))
     } else {
       Driver.log(`Not accessible: ${value}`, 'automation')
     }
 
-    // Nothing to report without findings: there is no task to close
-    if (technologies.length || website) {
+    // Nothing to report without technologies: there is no task to close
+    if (technologies.length) {
       await Automation.setStatus({
         state: 'sending',
         message: `${progress} ${technologies.length} technologies for ${value}`,
@@ -375,8 +371,7 @@ const Automation = {
       ;({ matched } = await Automation.sendWebsite(
         config,
         new URL(url).origin,
-        technologies,
-        website
+        technologies
       ))
     }
 
@@ -1047,15 +1042,13 @@ const Automation = {
   },
 
   /**
-   * Send a website's technologies, and optionally its website props, as
-   * findings without a task. The API matches them to websites in the ASM
+   * Send a website's technologies as findings without a task. The API matches them to websites in the ASM
    * database by origin.
    * @param {Object} config
    * @param {String} origin
    * @param {Array} technologies
-   * @param {Object} website
    */
-  async sendWebsite(config, origin, technologies, website) {
+  async sendWebsite(config, origin, technologies) {
     const task = { iat: 'WEBSITE', v: origin, ji: null, ri: null }
 
     const findings = technologies.map((technology) => {
@@ -1066,10 +1059,6 @@ const Automation = {
 
       return Automation.getFinding(task, 'TECH', props)
     })
-
-    if (website) {
-      findings.push(Automation.getFinding(task, 'WEBSITE', website))
-    }
 
     const json = await Automation.send(config, findings)
 
