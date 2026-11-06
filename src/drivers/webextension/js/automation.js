@@ -3,7 +3,7 @@
 /* globals chrome, Wappalyzer, Utils, Driver, initPromise */
 
 // Background job: pops technology discovery tasks from the Alternative
-// Discovery API, opens each target in a background window and sends the
+// Discovery API, opens each target in a background tab and sends the
 // detected technologies back as findings, together with a WEBSITE finding
 // (title, status code, redirects, headers, HTML, screenshot and favicon).
 // Alternatively scans a list of URLs entered in the popup one by one and
@@ -43,12 +43,6 @@ const REQUEST_TIMEOUT = 30 * 1000
 const TASK_TYPE = 'technology_discovery'
 
 const TOOL = 'prismappalyzer-chrome-extension'
-
-// Size of the window a task or URL is opened in, which is also the
-// screenshot size
-const WINDOW_WIDTH = 1366
-
-const WINDOW_HEIGHT = 768
 
 // Larger favicons are not sent
 const MAX_FAVICON_SIZE = 1024 * 1024
@@ -590,7 +584,7 @@ const Automation = {
   },
 
   /**
-   * Open a URL in its own window and return the detected technologies and
+   * Open a URL in a background tab and return the detected technologies and
    * the website's props (title, status code, screenshot, HTML etc.)
    * @param {String} url
    * @param {Number} settleDelay
@@ -610,22 +604,19 @@ const Automation = {
     let tab
 
     try {
-      // The tab is active in its own window so it can be captured without
-      // switching the user's tabs
-      const { tabs } = await automationPromisify(chrome.windows, 'create', {
-        url,
-        focused: false,
-        width: WINDOW_WIDTH,
-        height: WINDOW_HEIGHT,
-      })
-
-      ;[tab] = tabs
-    } catch (error) {
-      // E.g. unfocused windows are not supported
+      // A background tab so the user is not disturbed
       tab = await automationPromisify(chrome.tabs, 'create', {
         url,
         active: false,
       })
+    } catch (error) {
+      // No browser window is open
+      const { tabs } = await automationPromisify(chrome.windows, 'create', {
+        url,
+        focused: false,
+      })
+
+      ;[tab] = tabs
     }
 
     scanTabId = tab.id
